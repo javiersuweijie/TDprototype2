@@ -15,7 +15,7 @@
 {
     [super onEnter];
     MenuBar* menu = [[MenuBar alloc]init];
-    [menu setPosition:ccp(50,50)];
     [self addChild:menu];
+
 }
 @end

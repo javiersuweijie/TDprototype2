@@ -10,13 +10,12 @@
 
 
 @implementation MenuBar
-CCMenu* menu;
+
 BOOL extended;
 CCMenuItem* root;
 
--(void)onEnter
+-(id)init
 {
-    [super onEnter];
     root = [CCMenuItemImage itemWithNormalImage:@"Icon.png"
                                   selectedImage: @"Icon.png"
                                          target:self
@@ -57,21 +56,40 @@ CCMenuItem* root;
     
     NSArray* menuArray = [[NSArray alloc]initWithObjects:menuItem6,menuItem5,menuItem4,menuItem3,menuItem2,menuItem1,root,nil];
     
-    menu = [[CCMenu alloc]initWithArray:menuArray];
-    [menu setPosition:ccp(0,0)];
-        //        NSLog(NSStringFromCGPoint(menu.position));
-    [self addChild:menu];
+    return [super initWithArray:menuArray];
+
+}
+
+-(void)onEnter
+{
+    [super onEnter];
+    extended = NO;
+    [self setContentSize:root.contentSize];
+    [self setPosition:ccp(10, 10)];
+    for (id menuitem in self.children) {
+        [menuitem setPosition:ccp(root.contentSize.width/2,root.contentSize.height/2)];
+    }
+    
+    NSLog(@"%@",NSStringFromCGPoint(self.anchorPoint));
+    NSLog(@"%d",self.isTouchEnabled);
+    NSLog(@"%@",NSStringFromCGPoint(self.position));
+    NSLog(@"%@",NSStringFromCGSize(self.contentSize));
+    
     
 }
 -(void) changeState {
+    if ([root numberOfRunningActions]>0) {
+        return;
+    }
     if (extended) {
         extended = NO;
-        for (id menuitem in [menu children]) {
+        for (id menuitem in [self children]) {
             if (menuitem==root) {
-                [menuitem runAction:[CCRotateBy actionWithDuration:0.5 angle:-45]];
+                [menuitem runAction:[CCRotateTo actionWithDuration:0.4 angle:0]];
             }
             else {
-                CCMoveTo *move = [CCMoveTo actionWithDuration:0.5 position:ccp(0,0)];
+                
+                CCMoveTo *move = [CCMoveTo actionWithDuration:0.5 position:ccp(root.contentSize.width/2,root.contentSize.height/2)];
                 id ease = [CCEaseInOut actionWithAction:move rate:3];
                 id moveCallback = [CCCallFunc actionWithTarget:self selector:@selector(setInvisible)];
                 [menuitem runAction:[CCSequence actions:ease, moveCallback, nil]];
@@ -80,13 +98,13 @@ CCMenuItem* root;
     }
     else {
         extended = YES;
-        for (id menuitem in [menu children]) {
+        for (id menuitem in [self children]) {
             if (menuitem==root) {
-                [menuitem runAction:[CCRotateBy actionWithDuration:0.5 angle:45]];
+                [menuitem runAction:[CCRotateTo actionWithDuration:0.4 angle:45]];
             }
             else {
                 [menuitem setVisible:YES];
-                CGPoint endPoint = ccp(([[menu children] indexOfObject:menuitem]+1)*40+20,0);
+                CGPoint endPoint = ccp(([[self children] indexOfObject:menuitem]+1)*40+20,0);
                 CCMoveBy *move = [CCMoveBy actionWithDuration:0.5 position:endPoint];
                 id ease = [CCEaseInOut actionWithAction:move rate:3];
                 [menuitem runAction:ease];
@@ -96,7 +114,7 @@ CCMenuItem* root;
     }
 }
 -(void) setInvisible {
-    for (id menuitem in [menu children]) {
+    for (id menuitem in [self children]) {
         if (menuitem!=root) {
             [menuitem setVisible:NO];
         }
