@@ -12,4 +12,16 @@
 
 @interface IsometricOperator : NSObject
 
++(void)init;
+
++(CGPoint)coordTransform:(CGPoint)point;
+
++(CGPoint)coordInvTransform:(CGPoint)point;
+
++(CGPoint)nearestPoint:(CGPoint)point;
+
++(CGPoint)gridNumber:(CGPoint)nPoint;
+
++(CGPoint)gridToCoord:(CGPoint)grid;
+
 @end

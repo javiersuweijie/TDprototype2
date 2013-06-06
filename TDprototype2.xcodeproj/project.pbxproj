@@ -140,6 +140,7 @@
 		7DE16A6A175F7A9C0095142F /* MenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A69175F7A9C0095142F /* MenuBar.m */; };
 		7DE16A6D175F81910095142F /* CCNode+SFGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A6C175F81900095142F /* CCNode+SFGestureRecognizers.m */; };
 		7DE16A73176056800095142F /* CustomMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A72176056800095142F /* CustomMenu.m */; };
+		7DE16A75176081C10095142F /* blueboxT.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A74176081C10095142F /* blueboxT.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -419,6 +420,7 @@
 		7DE16A6C175F81900095142F /* CCNode+SFGestureRecognizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+SFGestureRecognizers.m"; sourceTree = "<group>"; };
 		7DE16A71176056800095142F /* CustomMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenu.h; sourceTree = "<group>"; };
 		7DE16A72176056800095142F /* CustomMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenu.m; sourceTree = "<group>"; };
+		7DE16A74176081C10095142F /* blueboxT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueboxT.png; path = Resources/Blocks/blueboxT.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -510,6 +512,7 @@
 				7DE168CC175F6DEF0095142F /* Default-Landscape~ipad.png */,
 				7DE168CE175F6DEF0095142F /* fps_images.png */,
 				7DE168D0175F6DEF0095142F /* fps_images-hd.png */,
+				7DE16A74176081C10095142F /* blueboxT.png */,
 				7DE168D2175F6DEF0095142F /* fps_images-ipadhd.png */,
 				7DE168D4175F6DF00095142F /* Icon-72.png */,
 				7DE168D6175F6DF00095142F /* Icon-Small-50.png */,
@@ -954,6 +957,7 @@
 				7DE168DF175F6DF00095142F /* Icon@2x.png in Resources */,
 				7DE168E2175F6DF00095142F /* iTunesArtwork in Resources */,
 				7DE16A20175F6DF20095142F /* ChangeLog in Resources */,
+				7DE16A75176081C10095142F /* blueboxT.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
