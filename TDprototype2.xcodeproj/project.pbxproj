@@ -141,6 +141,9 @@
 		7DE16A6D175F81910095142F /* CCNode+SFGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A6C175F81900095142F /* CCNode+SFGestureRecognizers.m */; };
 		7DE16A73176056800095142F /* CustomMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A72176056800095142F /* CustomMenu.m */; };
 		7DE16A75176081C10095142F /* blueboxT.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A74176081C10095142F /* blueboxT.png */; };
+		7DE16A771760EA910095142F /* bluebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A761760EA910095142F /* bluebox.png */; };
+		7DE16A7A176187840095142F /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A79176187840095142F /* Structure.m */; };
+		7DE16A7E17618CE90095142F /* BasicBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A7D17618CE90095142F /* BasicBlock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -421,6 +424,11 @@
 		7DE16A71176056800095142F /* CustomMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenu.h; sourceTree = "<group>"; };
 		7DE16A72176056800095142F /* CustomMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenu.m; sourceTree = "<group>"; };
 		7DE16A74176081C10095142F /* blueboxT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueboxT.png; path = Resources/Blocks/blueboxT.png; sourceTree = "<group>"; };
+		7DE16A761760EA910095142F /* bluebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluebox.png; sourceTree = "<group>"; };
+		7DE16A78176187840095142F /* Structure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Structure.h; sourceTree = "<group>"; };
+		7DE16A79176187840095142F /* Structure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Structure.m; sourceTree = "<group>"; };
+		7DE16A7C17618CE90095142F /* BasicBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicBlock.h; sourceTree = "<group>"; };
+		7DE16A7D17618CE90095142F /* BasicBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicBlock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -513,6 +521,7 @@
 				7DE168CE175F6DEF0095142F /* fps_images.png */,
 				7DE168D0175F6DEF0095142F /* fps_images-hd.png */,
 				7DE16A74176081C10095142F /* blueboxT.png */,
+				7DE16A761760EA910095142F /* bluebox.png */,
 				7DE168D2175F6DEF0095142F /* fps_images-ipadhd.png */,
 				7DE168D4175F6DF00095142F /* Icon-72.png */,
 				7DE168D6175F6DF00095142F /* Icon-Small-50.png */,
@@ -872,6 +881,10 @@
 		7DE16A5E175F78C40095142F /* Towers */ = {
 			isa = PBXGroup;
 			children = (
+				7DE16A78176187840095142F /* Structure.h */,
+				7DE16A79176187840095142F /* Structure.m */,
+				7DE16A7C17618CE90095142F /* BasicBlock.h */,
+				7DE16A7D17618CE90095142F /* BasicBlock.m */,
 			);
 			name = Towers;
 			sourceTree = "<group>";
@@ -958,6 +971,7 @@
 				7DE168E2175F6DF00095142F /* iTunesArtwork in Resources */,
 				7DE16A20175F6DF20095142F /* ChangeLog in Resources */,
 				7DE16A75176081C10095142F /* blueboxT.png in Resources */,
+				7DE16A771760EA910095142F /* bluebox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,6 +1093,8 @@
 				7DE16A6A175F7A9C0095142F /* MenuBar.m in Sources */,
 				7DE16A6D175F81910095142F /* CCNode+SFGestureRecognizers.m in Sources */,
 				7DE16A73176056800095142F /* CustomMenu.m in Sources */,
+				7DE16A7A176187840095142F /* Structure.m in Sources */,
+				7DE16A7E17618CE90095142F /* BasicBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
