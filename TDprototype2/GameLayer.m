@@ -8,14 +8,16 @@
 
 #import "GameLayer.h"
 #import "IsometricOperator.h"
-@interface GameLayer ()
-@property (nonatomic)CGSize winSize;
+#import "BasicBlock.h"
+
+@interface GameLayer () {
+    CGSize winSize;
+}
+
 @end
 
 @implementation GameLayer
-
-@synthesize winSize;
-
+static NSMutableArray* filledList;
 -(void)onEnter
 {
     [super onEnter];
@@ -35,8 +37,22 @@
     [self addGestureRecognizer:panGestureRecognizer];
     [panGestureRecognizer release];
     self.isTouchEnabled = YES;
+    filledList = [[NSMutableArray alloc]init];
     
     [IsometricOperator init];
+    
+    CGPoint p=ccp(200, 200);
+    NSLog(@"%@",NSStringFromCGPoint(p));
+    p=[IsometricOperator nearestPoint:p];
+    NSLog(@"%@",NSStringFromCGPoint(p));
+    p=[IsometricOperator gridNumber:p];
+    NSLog(@"%@",NSStringFromCGPoint(p));
+    p=[IsometricOperator gridToCoord:p];
+    NSLog(@"%@",NSStringFromCGPoint(p));
+    p=[IsometricOperator gridNumber:p];
+    NSLog(@"%@",NSStringFromCGPoint(p));
+    p=[IsometricOperator gridToCoord:p];
+    NSLog(@"%@",NSStringFromCGPoint(p));
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -45,10 +61,16 @@
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
-    CCSprite* sprite = [[CCSprite alloc]initWithFile:(@"blueboxT.png")];
-    [sprite setPosition:touchLocation];
-    [sprite setScale:0.5];
-    [self addChild:sprite];
+    
+    if ([GameLayer isValid:touchLocation]) {
+        Structure* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+        [sprite setAnchorPoint:ccp(0.5, 0)];
+        [sprite setPosition:touchLocation];
+        [self addChild:sprite z:-sprite.position.y tag:123];
+        [filledList addObject:sprite];
+        [sprite release];
+    }
+
 }
 
 -(void)handlePinchGesture:(UIPinchGestureRecognizer*) gesture
@@ -65,12 +87,10 @@
         
         CGPoint mid = ccpMidpoint(touch1, touch2);
         mid=[self convertToNodeSpace:mid];
-//        self.anchorPoint = ccp(mid.x/self.contentSize.height, mid.y/self.contentSize.width);
         float scale = gesture.scale;
         if ((scale>1 && self.scale>5.0)||(scale<1 && self.scale<0.8));
         else {
             self.scale *= scale;
-            NSLog(@"%f,%f",self.scale,scale);
         }
     gesture.scale = 1;
     }
@@ -84,7 +104,18 @@
     [aPanGestureRecognizer setTranslation:CGPointZero inView:aPanGestureRecognizer.view];
     
     node.position = ccpAdd(node.position, translation);
-    //    NSLog(@"%@",NSStringFromCGPoint(node.position));
+}
+
++(BOOL)isValid:(CGPoint)point
+{
+    CGPoint touchGrid = [IsometricOperator gridNumber:point];
+    for (Structure* structure in filledList) {
+        if (CGPointEqualToPoint(touchGrid, structure.gridPosition)) {
+            NSLog(@"This is a filled space");
+            return NO;
+        }
+    }
+    return YES;
 }
 
 @end

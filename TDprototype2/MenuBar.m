@@ -7,7 +7,7 @@
 //
 
 #import "MenuBar.h"
-
+#import "GameLayer.h"
 
 @implementation MenuBar
 
@@ -64,17 +64,18 @@ CCMenuItem* root;
 {
     [super onEnter];
     extended = NO;
-    [self setContentSize:root.contentSize];
+    [self setContentSize:CGSizeMake(480., root.contentSize.height)];
+//    [self setContentSize:root.contentSize];
     [self setPosition:ccp(10, 10)];
     for (id menuitem in self.children) {
         [menuitem setPosition:ccp(root.contentSize.width/2,root.contentSize.height/2)];
     }
-    
-    NSLog(@"%@",NSStringFromCGPoint(self.anchorPoint));
-    NSLog(@"%d",self.isTouchEnabled);
-    NSLog(@"%@",NSStringFromCGPoint(self.position));
-    NSLog(@"%@",NSStringFromCGSize(self.contentSize));
-    
+//    
+//    NSLog(@"%@",NSStringFromCGPoint(self.anchorPoint));
+//    NSLog(@"%d",self.isTouchEnabled);
+//    NSLog(@"%@",NSStringFromCGPoint(self.position));
+//    NSLog(@"%@",NSStringFromCGSize(self.contentSize));
+//    
     
 }
 -(void) changeState {
@@ -83,6 +84,7 @@ CCMenuItem* root;
     }
     if (extended) {
         extended = NO;
+        [self setContentSize:root.contentSize];
         for (id menuitem in [self children]) {
             if (menuitem==root) {
                 [menuitem runAction:[CCRotateTo actionWithDuration:0.4 angle:0]];
@@ -98,6 +100,8 @@ CCMenuItem* root;
     }
     else {
         extended = YES;
+        [self setContentSize:CGSizeMake(480., root.contentSize.height)];
+        NSLog(@"%@",NSStringFromCGSize(self.contentSize));
         for (id menuitem in [self children]) {
             if (menuitem==root) {
                 [menuitem runAction:[CCRotateTo actionWithDuration:0.4 angle:45]];
@@ -121,6 +125,7 @@ CCMenuItem* root;
     }
 }
 -(void) doRedAction{
+    [GameLayer updateList];
     NSLog(@"red is pressed");
 }
 -(void) doBlueAction{
