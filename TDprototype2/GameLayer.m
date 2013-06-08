@@ -45,7 +45,6 @@ static CCLayer* unitAndBoxLayer;
     [IsometricOperator init];
     unitAndBoxLayer = [CCLayer node];
     [self addChild:unitAndBoxLayer];
-    [self showGridNumber];
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -176,19 +175,11 @@ static CCLayer* unitAndBoxLayer;
 
 +(void)testSP
 {
+    
     testPerson* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(200, 200)]];
     [unitAndBoxLayer addChild:person];
 }
 
--(void)showGridNumber {
-    for (int i=0;i<10;i++) {
-        for (int j=0;j<10;j++) {
-            CCLabelTTF* label = [[CCLabelTTF alloc]initWithString:NSStringFromCGPoint(ccp(i,j)) fontName:@"Helvetica" fontSize:5];
-            label.position = [IsometricOperator gridToCoord:ccp(i,j)];
-            [self addChild:label];
-        }
-    }
-}
 
 
 @end

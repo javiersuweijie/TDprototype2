@@ -21,9 +21,13 @@
 
 @implementation Unit
 @synthesize speed,hp;
--(void)onEnter
+
+-(id)init
 {
-    self.speed = 30;
+    if (self = [super init]){
+        self.speed = 30;
+    }
+    return self;
 }
 
 -(NSMutableArray*)moveToward:(CGPoint)target
@@ -100,9 +104,7 @@
 {
 	// Here we use the Manhattan method, which calculates the total number of step moved horizontally and vertically to reach the
 	// final desired step from the current step, ignoring any obstacles that may be in the way
-    //    NSLog(@"%@       %@",NSStringFromCGPoint(fromGrid),NSStringFromCGPoint(toGrid));
-    //    NSLog(@"%i",abs(toGrid.x - fromGrid.x) + abs(toGrid.y - fromGrid.y));
-	return 10*max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
+	return 11*max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
 }
 
 - (int)costToMoveFromStep:(ShortestPathStep *)fromStep toAdjacentStep:(ShortestPathStep *)toStep
