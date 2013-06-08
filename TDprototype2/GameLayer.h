@@ -16,4 +16,7 @@
 +(BOOL)isValidGrid:(CGPoint)grid;
 +(NSArray*)walkableAdjGrid:(CGPoint)grid;
 +(void)testSP;
++(void)placeBlueTile;
++(void)placeFireTower;
++(NSMutableArray*)getUnitArray;
 @end

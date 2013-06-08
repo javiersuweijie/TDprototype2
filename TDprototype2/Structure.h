@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "GameLayer.h"
+#import "Unit.h"
 
 @interface Structure : CCSprite <UIGestureRecognizerDelegate> {
     

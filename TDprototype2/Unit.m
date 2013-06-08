@@ -30,6 +30,22 @@
     return self;
 }
 
+-(void)onEnter
+{
+    [super onEnter];
+    [self schedule:@selector(updateZ:)];
+}
+
+-(void)updateZ:(ccTime)dt
+{
+    [parent_ reorderChild:self z:-self.position.y];
+    if (self.hp<0) {
+        [[GameLayer getUnitArray] removeObject:self];
+        [self removeFromParentAndCleanup:YES];
+
+    }
+}
+
 -(NSMutableArray*)moveToward:(CGPoint)target
 {
     CGPoint toGrid = [IsometricOperator gridNumber:target];

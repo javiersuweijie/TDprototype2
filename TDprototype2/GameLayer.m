@@ -10,6 +10,7 @@
 #import "IsometricOperator.h"
 #import "BasicBlock.h"
 #import "testPerson.h"
+#import "FireTower.h"
 
 @interface GameLayer () {
     CGSize winSize;
@@ -20,7 +21,9 @@
 
 @implementation GameLayer
 static NSMutableArray* filledList;
+static NSMutableArray* unitList;
 static CCLayer* unitAndBoxLayer;
+static int i;
 -(void)onEnter
 {
     [super onEnter];
@@ -41,10 +44,11 @@ static CCLayer* unitAndBoxLayer;
     [panGestureRecognizer release];
     self.isTouchEnabled = YES;
     filledList = [[NSMutableArray alloc]init];
-    
+    unitList = [[NSMutableArray alloc]init];
     [IsometricOperator init];
     unitAndBoxLayer = [CCLayer node];
     [self addChild:unitAndBoxLayer];
+    i=2;
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -53,14 +57,6 @@ static CCLayer* unitAndBoxLayer;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
-    
-    if ([GameLayer isValid:touchLocation]) {
-        BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
-        NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
-        [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
-        [filledList addObject:sprite];
-    }
-
 }
 
 -(void)handlePinchGesture:(UIPinchGestureRecognizer*) gesture
@@ -175,11 +171,36 @@ static CCLayer* unitAndBoxLayer;
 
 +(void)testSP
 {
-    
     testPerson* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(200, 200)]];
     [unitAndBoxLayer addChild:person];
+    [unitList addObject:person];
 }
 
++(void)placeBlueTile
+{
+    CGPoint touchLocation = ccp(i,5);
+    touchLocation = [IsometricOperator gridToCoord:touchLocation];
+    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+    NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
+    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+    [filledList addObject:sprite];
+    i++;
+}
 
++(void)placeFireTower
+{
+    CGPoint touchLocation = ccp(i,5);
+    touchLocation = [IsometricOperator gridToCoord:touchLocation];
+    FireTower* sprite = [[FireTower alloc] initWithPosition:touchLocation];
+    NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
+    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+    [filledList addObject:sprite];
+    i++;
+}
+
++(NSMutableArray*)getUnitArray
+{
+    return unitList;
+}
 
 @end

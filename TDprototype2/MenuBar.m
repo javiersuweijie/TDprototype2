@@ -20,17 +20,17 @@ CCMenuItem* root;
                                   selectedImage: @"Icon.png"
                                          target:self
                                        selector:@selector(changeState)];
-    CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
+    CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"ball.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
                                                               selector:@selector(doRedAction)];
     
-    CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
+    CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"bluebox.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
                                                               selector:@selector(doBlueAction)];
     
-    CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
+    CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"redbox.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
                                                               selector:@selector(doSaveAction)];
@@ -64,8 +64,7 @@ CCMenuItem* root;
 {
     [super onEnter];
     extended = NO;
-    [self setContentSize:CGSizeMake(480., root.contentSize.height)];
-//    [self setContentSize:root.contentSize];
+    [self setContentSize:CGSizeMake(root.contentSize.width, 320)];
     [self setPosition:ccp(10, 10)];
     for (id menuitem in self.children) {
         [menuitem setPosition:ccp(root.contentSize.width/2,root.contentSize.height/2)];
@@ -84,7 +83,6 @@ CCMenuItem* root;
     }
     if (extended) {
         extended = NO;
-        [self setContentSize:root.contentSize];
         for (id menuitem in [self children]) {
             if (menuitem==root) {
                 [menuitem runAction:[CCRotateTo actionWithDuration:0.4 angle:0]];
@@ -100,7 +98,6 @@ CCMenuItem* root;
     }
     else {
         extended = YES;
-        [self setContentSize:CGSizeMake(480., root.contentSize.height)];
         NSLog(@"%@",NSStringFromCGSize(self.contentSize));
         for (id menuitem in [self children]) {
             if (menuitem==root) {
@@ -108,7 +105,7 @@ CCMenuItem* root;
             }
             else {
                 [menuitem setVisible:YES];
-                CGPoint endPoint = ccp(([[self children] indexOfObject:menuitem]+1)*40+20,0);
+                CGPoint endPoint = ccp(0,([[self children] indexOfObject:menuitem]+1)*40+20);
                 CCMoveBy *move = [CCMoveBy actionWithDuration:0.5 position:endPoint];
                 id ease = [CCEaseInOut actionWithAction:move rate:3];
                 [menuitem runAction:ease];
@@ -129,12 +126,14 @@ CCMenuItem* root;
     NSLog(@"red is pressed");
 }
 -(void) doBlueAction{
+    [GameLayer placeBlueTile];
     NSLog(@"blue is pressed");
 }
 -(void) doLoadAction{
     NSLog(@"load is pressed");
 }
 -(void) doSaveAction{
+    [GameLayer placeFireTower];
     NSLog(@"save is pressed");
 }
 

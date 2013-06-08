@@ -149,6 +149,10 @@
 		7DE16A881762D9B90095142F /* testPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A871762D9B90095142F /* testPerson.m */; };
 		7DE16A8A1762DAE20095142F /* redbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A891762DAE20095142F /* redbox.png */; };
 		7DE16A8C1762F2E50095142F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A8B1762F2E50095142F /* ball.png */; };
+		7DE16A8E176321F20095142F /* downarrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A8D176321F20095142F /* downarrows.png */; };
+		7DE16A921763252C0095142F /* arrowAI.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A911763252C0095142F /* arrowAI.png */; };
+		7DE16A95176327EB0095142F /* FireTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A94176327EB0095142F /* FireTower.m */; };
+		7DE16A97176373270095142F /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A96176373270095142F /* fire.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -442,6 +446,11 @@
 		7DE16A871762D9B90095142F /* testPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testPerson.m; sourceTree = "<group>"; };
 		7DE16A891762DAE20095142F /* redbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redbox.png; sourceTree = "<group>"; };
 		7DE16A8B1762F2E50095142F /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
+		7DE16A8D176321F20095142F /* downarrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrows.png; sourceTree = "<group>"; };
+		7DE16A911763252C0095142F /* arrowAI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowAI.png; sourceTree = "<group>"; };
+		7DE16A93176327EA0095142F /* FireTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireTower.h; sourceTree = "<group>"; };
+		7DE16A94176327EB0095142F /* FireTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FireTower.m; sourceTree = "<group>"; };
+		7DE16A96176373270095142F /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -529,6 +538,9 @@
 		7DE168C9175F6DEF0095142F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7DE16A8D176321F20095142F /* downarrows.png */,
+				7DE16A96176373270095142F /* fire.png */,
+				7DE16A911763252C0095142F /* arrowAI.png */,
 				7DE168CA175F6DEF0095142F /* Default.png */,
 				7DE168CC175F6DEF0095142F /* Default-Landscape~ipad.png */,
 				7DE16A8B1762F2E50095142F /* ball.png */,
@@ -900,6 +912,8 @@
 				7DE16A79176187840095142F /* Structure.m */,
 				7DE16A7C17618CE90095142F /* BasicBlock.h */,
 				7DE16A7D17618CE90095142F /* BasicBlock.m */,
+				7DE16A93176327EA0095142F /* FireTower.h */,
+				7DE16A94176327EB0095142F /* FireTower.m */,
 			);
 			name = Towers;
 			sourceTree = "<group>";
@@ -995,6 +1009,9 @@
 				7DE16A771760EA910095142F /* bluebox.png in Resources */,
 				7DE16A8A1762DAE20095142F /* redbox.png in Resources */,
 				7DE16A8C1762F2E50095142F /* ball.png in Resources */,
+				7DE16A8E176321F20095142F /* downarrows.png in Resources */,
+				7DE16A921763252C0095142F /* arrowAI.png in Resources */,
+				7DE16A97176373270095142F /* fire.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1121,6 +1138,7 @@
 				7DE16A821762D7250095142F /* Unit.m in Sources */,
 				7DE16A851762D80C0095142F /* ShortestPathStep.m in Sources */,
 				7DE16A881762D9B90095142F /* testPerson.m in Sources */,
+				7DE16A95176327EB0095142F /* FireTower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

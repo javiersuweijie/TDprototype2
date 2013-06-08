@@ -8,7 +8,7 @@
 
 #import "Structure.h"
 #import "IsometricOperator.h"
-#import "GameLayer.h"
+
 
 @interface Structure () {
     NSString* name;
@@ -16,11 +16,13 @@
     BOOL canBeMoved;
     BOOL isSelected;
     UIGestureRecognizer* pan;
+    CCSprite* downArrows;
 }
 @end
 
 @implementation Structure
 @synthesize gridPosition;
+
 -(void)onEnter
 {
     [super onEnter];
@@ -31,11 +33,16 @@
     
     pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     [self addGestureRecognizer:pan];
-    [pan setEnabled:NO];
+    [pan setEnabled:YES];
     pan.delegate = self;
     
+    downArrows = [CCSprite spriteWithFile:@"arrowAI.png"];
+    [downArrows setAnchorPoint:ccp(0, 0.5)];
+    [downArrows setPosition:ccp(0, self.contentSize.height/2)];
+    [self addChild:downArrows];
+    [self setOpacity:100];
     self.isTouchEnabled = YES;
-    isSelected = NO;
+    isSelected = YES;
     tempPosition = self.position;
 }
 
@@ -44,11 +51,13 @@
     if (canBeMoved) {
         if (isSelected) {
             [self setOpacity:255];
+            [downArrows setVisible:NO];
             isSelected = NO;
             [pan setEnabled:NO];
         }
         else {
             [self setOpacity:100];
+            [downArrows setVisible:YES];
             isSelected = YES;
             [pan setEnabled:YES];
         }
