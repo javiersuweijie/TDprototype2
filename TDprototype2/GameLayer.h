@@ -13,4 +13,7 @@
     
 }
 +(BOOL)isValid:(CGPoint)point;
++(BOOL)isValidGrid:(CGPoint)grid;
++(NSArray*)walkableAdjGrid:(CGPoint)grid;
++(void)testSP;
 @end

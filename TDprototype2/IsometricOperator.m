@@ -14,7 +14,7 @@ static kmMat4 rotate;
 static kmMat4 translate;
 static kmMat4 transform;
 static kmMat4 invTransform;
-static int tileHeight;
+static float tileHeight;
 
 +(void)init
 {
@@ -24,8 +24,9 @@ static int tileHeight;
     kmMat4RotationZ(&rotate, CC_DEGREES_TO_RADIANS(-45));
     kmMat4Multiply(&transform, &scale, &rotate);
     kmMat4Inverse(&invTransform, &transform);
-    
-    tileHeight = 32;
+    tileHeight = [[CCDirector sharedDirector]winSize].width/15;
+    NSLog(@"%f",[[CCDirector sharedDirector]winSize].width);
+    NSLog(@"%f",tileHeight);
 }
 
 +(CGPoint)coordTransform:(CGPoint)point {
@@ -51,19 +52,19 @@ static int tileHeight;
     int x = xypoint.x;
     int y = xypoint.y;
     //NEEDS TO TEST
-    if (x%tileHeight==0 && y%tileHeight==0) {
+    if (x%(int)tileHeight==0 && y%(int)tileHeight==0) {
         return [IsometricOperator coordTransform:ccp(x,y)];
     }
     
     else {
         x = xypoint.x/tileHeight;
         y = xypoint.y/tileHeight;
-        x-=1;
         x*=tileHeight;
         y*=tileHeight;
         return [IsometricOperator coordTransform:ccp(x+tileHeight,y)];
     }
 }
+
 
 +(CGPoint)gridNumber:(CGPoint)nPoint{
     CGPoint xypoint = [IsometricOperator coordInvTransform:nPoint];

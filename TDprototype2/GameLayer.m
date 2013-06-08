@@ -9,16 +9,18 @@
 #import "GameLayer.h"
 #import "IsometricOperator.h"
 #import "BasicBlock.h"
+#import "testPerson.h"
 
 @interface GameLayer () {
     CGSize winSize;
-    CCLayer* unitAndBoxLayer;
+    
 }
 
 @end
 
 @implementation GameLayer
 static NSMutableArray* filledList;
+static CCLayer* unitAndBoxLayer;
 -(void)onEnter
 {
     [super onEnter];
@@ -43,6 +45,7 @@ static NSMutableArray* filledList;
     [IsometricOperator init];
     unitAndBoxLayer = [CCLayer node];
     [self addChild:unitAndBoxLayer];
+    [self showGridNumber];
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -54,6 +57,7 @@ static NSMutableArray* filledList;
     
     if ([GameLayer isValid:touchLocation]) {
         BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+        NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
         [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
         [filledList addObject:sprite];
     }
@@ -96,18 +100,17 @@ static NSMutableArray* filledList;
 +(BOOL)isValid:(CGPoint)point
 {
     CGPoint touchGrid = [IsometricOperator gridNumber:point];
-    for (Structure* structure in filledList) {
-        if (CGPointEqualToPoint(touchGrid, structure.gridPosition)) {
-            return NO;
-        }
-    }
-    return YES;
+    return [GameLayer isValidGrid:touchGrid];
 }
 
 +(BOOL)isValidGrid:(CGPoint)grid
 {
-    CGPoint point = [IsometricOperator gridToCoord:grid];
-    return [GameLayer isValid:point];
+    for (Structure* structure in filledList) {
+        if (CGPointEqualToPoint(grid, structure.gridPosition)) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 +(NSArray*)walkableAdjGrid:(CGPoint)grid
@@ -116,14 +119,14 @@ static NSMutableArray* filledList;
     
     // Top
 	CGPoint top = ccp(grid.x,grid.y+1);
-	if ([GameLayer isValid:top])
+	if ([GameLayer isValidGrid:top])
     {
 		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
         
     }
     // Bottom
     CGPoint bottom = ccp(grid.x,grid.y-1);
-    if ([GameLayer isValid:bottom])
+    if ([GameLayer isValidGrid:bottom])
     {
         [tmpArray addObject:[NSValue valueWithCGPoint:bottom]];
         
@@ -169,6 +172,22 @@ static NSMutableArray* filledList;
     
 	return [NSArray arrayWithArray:tmpArray];
     
+}
+
++(void)testSP
+{
+    testPerson* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(200, 200)]];
+    [unitAndBoxLayer addChild:person];
+}
+
+-(void)showGridNumber {
+    for (int i=0;i<10;i++) {
+        for (int j=0;j<10;j++) {
+            CCLabelTTF* label = [[CCLabelTTF alloc]initWithString:NSStringFromCGPoint(ccp(i,j)) fontName:@"Helvetica" fontSize:5];
+            label.position = [IsometricOperator gridToCoord:ccp(i,j)];
+            [self addChild:label];
+        }
+    }
 }
 
 

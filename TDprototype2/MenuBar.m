@@ -125,7 +125,7 @@ CCMenuItem* root;
     }
 }
 -(void) doRedAction{
-    [GameLayer updateList];
+    [GameLayer testSP];
     NSLog(@"red is pressed");
 }
 -(void) doBlueAction{
