@@ -17,6 +17,7 @@
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
         [self setName:@"basicbluebox"];
+        [self setCanBeMoved:YES];
     }
     return self;
 

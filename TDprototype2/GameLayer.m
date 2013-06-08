@@ -12,6 +12,7 @@
 
 @interface GameLayer () {
     CGSize winSize;
+    CCLayer* unitAndBoxLayer;
 }
 
 @end
@@ -40,19 +41,8 @@ static NSMutableArray* filledList;
     filledList = [[NSMutableArray alloc]init];
     
     [IsometricOperator init];
-    
-    CGPoint p=ccp(200, 200);
-    NSLog(@"%@",NSStringFromCGPoint(p));
-    p=[IsometricOperator nearestPoint:p];
-    NSLog(@"%@",NSStringFromCGPoint(p));
-    p=[IsometricOperator gridNumber:p];
-    NSLog(@"%@",NSStringFromCGPoint(p));
-    p=[IsometricOperator gridToCoord:p];
-    NSLog(@"%@",NSStringFromCGPoint(p));
-    p=[IsometricOperator gridNumber:p];
-    NSLog(@"%@",NSStringFromCGPoint(p));
-    p=[IsometricOperator gridToCoord:p];
-    NSLog(@"%@",NSStringFromCGPoint(p));
+    unitAndBoxLayer = [CCLayer node];
+    [self addChild:unitAndBoxLayer];
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -63,12 +53,9 @@ static NSMutableArray* filledList;
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
     
     if ([GameLayer isValid:touchLocation]) {
-        Structure* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
-        [sprite setAnchorPoint:ccp(0.5, 0)];
-        [sprite setPosition:touchLocation];
-        [self addChild:sprite z:-sprite.position.y tag:123];
+        BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+        [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
         [filledList addObject:sprite];
-        [sprite release];
     }
 
 }
@@ -111,11 +98,78 @@ static NSMutableArray* filledList;
     CGPoint touchGrid = [IsometricOperator gridNumber:point];
     for (Structure* structure in filledList) {
         if (CGPointEqualToPoint(touchGrid, structure.gridPosition)) {
-            NSLog(@"This is a filled space");
             return NO;
         }
     }
     return YES;
 }
+
++(BOOL)isValidGrid:(CGPoint)grid
+{
+    CGPoint point = [IsometricOperator gridToCoord:grid];
+    return [GameLayer isValid:point];
+}
+
++(NSArray*)walkableAdjGrid:(CGPoint)grid
+{
+    NSMutableArray* tmpArray = [NSMutableArray arrayWithCapacity:8];
+    
+    // Top
+	CGPoint top = ccp(grid.x,grid.y+1);
+	if ([GameLayer isValid:top])
+    {
+		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
+        
+    }
+    // Bottom
+    CGPoint bottom = ccp(grid.x,grid.y-1);
+    if ([GameLayer isValid:bottom])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:bottom]];
+        
+    }
+	// Left
+    CGPoint left = ccp(grid.x-1,grid.y);
+    if ([GameLayer isValidGrid:left])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:left]];
+        if ([GameLayer isValidGrid:top]) {
+            CGPoint topleft = ccp(grid.x-1,grid.y+1);
+            if ([GameLayer isValidGrid:topleft]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:topleft]];
+            }
+        }
+        if ([GameLayer isValidGrid:bottom]) {
+            CGPoint bottomleft = ccp(grid.x-1,grid.y-1);
+            if ([GameLayer isValidGrid:bottomleft]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:bottomleft]];
+            }
+        }
+    }
+    
+	// Right
+    CGPoint right = ccp(grid.x+1,grid.y);
+    if ([GameLayer isValidGrid:right])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:right]];
+        if ([GameLayer isValidGrid:top]) {
+            CGPoint topright = ccp(grid.x+1,grid.y+1);
+            if ([GameLayer isValidGrid:topright]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:topright]];
+            }
+        }
+        if ([GameLayer isValidGrid:bottom]) {
+            CGPoint bottomright = ccp(grid.x+1,grid.y-1);
+            if ([GameLayer isValidGrid:bottomright]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:bottomright]];
+            }
+        }
+    }
+    
+    
+	return [NSArray arrayWithArray:tmpArray];
+    
+}
+
 
 @end

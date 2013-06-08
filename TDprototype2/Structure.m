@@ -8,12 +8,14 @@
 
 #import "Structure.h"
 #import "IsometricOperator.h"
+#import "GameLayer.h"
 
 @interface Structure () {
     NSString* name;
     CGPoint tempPosition; //used for snapping to grid
     BOOL canBeMoved;
     BOOL isSelected;
+    UIGestureRecognizer* pan;
 }
 @end
 
@@ -21,15 +23,16 @@
 @synthesize gridPosition;
 -(void)onEnter
 {
+    [super onEnter];
+    
     UIGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
-    [tapGestureRecognizer release];
     
-    UIGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    panGestureRecognizer.delegate = self;
-    [self addGestureRecognizer:panGestureRecognizer];
-    [panGestureRecognizer release];
+    pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    [self addGestureRecognizer:pan];
+    [pan setEnabled:NO];
+    pan.delegate = self;
     
     self.isTouchEnabled = YES;
     isSelected = NO;
@@ -38,14 +41,19 @@
 
 -(void)handleTapGesture:(UITapGestureRecognizer*)gesture
 {
-    if (isSelected) {
-        [self setOpacity:255];
-        isSelected = NO;
+    if (canBeMoved) {
+        if (isSelected) {
+            [self setOpacity:255];
+            isSelected = NO;
+            [pan setEnabled:NO];
+        }
+        else {
+            [self setOpacity:100];
+            isSelected = YES;
+            [pan setEnabled:YES];
+        }
     }
-    else {
-        [self setOpacity:100];
-        isSelected = YES;
-    }
+    else return;
 }
 
 -(void)handlePanGesture:(UIPanGestureRecognizer*)gesture
@@ -55,13 +63,12 @@
         translation.y *= -1;
         [gesture setTranslation:CGPointZero inView:gesture.view];
         tempPosition = ccpAdd(tempPosition, translation);
-        if (!CGPointEqualToPoint([IsometricOperator nearestPoint:tempPosition],self.position)) {
-            [self setPosition:[IsometricOperator nearestPoint:tempPosition]];
-            [[self parent] reorderChild:self z:-self.position.y];
-        }
-        if(gesture.state == UIGestureRecognizerStateEnded)
-        {
-            NSLog(@"dragging has ended");
+        CGPoint newPoint = [IsometricOperator nearestPoint:tempPosition];
+        if (!CGPointEqualToPoint(newPoint,self.position)) {
+            if ([GameLayer isValid:newPoint]) {
+                [self setPosition:newPoint];
+                [[self parent] reorderChild:self z:-self.position.y];
+            }
         }
     }
     
@@ -84,5 +91,10 @@
 -(void)setName:(NSString*)n
 {
     name = n;
+}
+
+-(void)setCanBeMoved:(BOOL)b
+{
+    canBeMoved = b;
 }
 @end

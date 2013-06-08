@@ -14,5 +14,5 @@
 }
 @property (nonatomic) CGPoint gridPosition;
 -(void)setName:(NSString*)n;
-
+-(void)setCanBeMoved:(BOOL)b;
 @end
