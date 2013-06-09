@@ -33,10 +33,10 @@
 -(void)onEnter
 {
     [super onEnter];
-    [self schedule:@selector(updateZ:)];
+    [self scheduleUpdateWithPriority:-10];
 }
 
--(void)updateZ:(ccTime)dt
+-(void)update:(ccTime)dt
 {
     [parent_ reorderChild:self z:-self.position.y];
     if (self.hp<0) {
@@ -61,9 +61,6 @@
     [self insertInOpenSteps:[[ShortestPathStep alloc]initWithPosition:fromGrid]];
     ShortestPathStep* currentStep;
     do {
-        if ([spOpenSteps count]>3) {
-            //            NSLog(@"%@,%@,%@",[[spOpenSteps objectAtIndex:0] description],[[spOpenSteps objectAtIndex:1] description],[[spOpenSteps objectAtIndex:2]description]);
-        }
         currentStep=[spOpenSteps objectAtIndex:0];
         [spOpenSteps removeObjectAtIndex:0];
         numberOfSteps++;
@@ -120,14 +117,12 @@
 {
 	// Here we use the Manhattan method, which calculates the total number of step moved horizontally and vertically to reach the
 	// final desired step from the current step, ignoring any obstacles that may be in the way
-	return 11*max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
+	return 7.5*max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
 }
 
 - (int)costToMoveFromStep:(ShortestPathStep *)fromStep toAdjacentStep:(ShortestPathStep *)toStep
 {
-	// Because we can't move diagonally and because terrain is just walkable or unwalkable the cost is always the same.
-	// But it have to be different if we can move diagonally and/or if there is swamps, hills, etc...
-	return ((fromStep.position.x != toStep.position.x) && (fromStep.position.y != toStep.position.y)) ? 20 : 10;
+	return ((fromStep.position.x != toStep.position.x) && (fromStep.position.y != toStep.position.y)) ? 15 : 10;
 }
 
 - (NSMutableArray*)constructPathAndStartAnimationFromStep:(ShortestPathStep *)step
