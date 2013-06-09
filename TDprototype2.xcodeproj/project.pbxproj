@@ -141,7 +141,6 @@
 		7DE16A75176081C10095142F /* blueboxT.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A74176081C10095142F /* blueboxT.png */; };
 		7DE16A771760EA910095142F /* bluebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A761760EA910095142F /* bluebox.png */; };
 		7DE16A8A1762DAE20095142F /* redbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A891762DAE20095142F /* redbox.png */; };
-		7DE16A8C1762F2E50095142F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A8B1762F2E50095142F /* ball.png */; };
 		7DE16A8E176321F20095142F /* downarrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A8D176321F20095142F /* downarrows.png */; };
 		7DE16A921763252C0095142F /* arrowAI.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A911763252C0095142F /* arrowAI.png */; };
 		7DE16A97176373270095142F /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A96176373270095142F /* fire.png */; };
@@ -154,6 +153,9 @@
 		7DE16AAF176387370095142F /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AAC176387370095142F /* Structure.m */; };
 		7DE16AB41763877B0095142F /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AB3176387680095142F /* MenuLayer.m */; };
 		7DE16AB7176387D70095142F /* MenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AB6176387D70095142F /* MenuBar.m */; };
+		7DE16AB91763A0820095142F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16AB81763A0820095142F /* ball.png */; };
+		7DE16ABE1764E2420095142F /* WorldTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16ABD1764E2420095142F /* WorldTree.m */; };
+		7DE16AC01764E3BB0095142F /* worldtree.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16ABF1764E3BB0095142F /* worldtree.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -432,7 +434,6 @@
 		7DE16A74176081C10095142F /* blueboxT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueboxT.png; path = Resources/Blocks/blueboxT.png; sourceTree = "<group>"; };
 		7DE16A761760EA910095142F /* bluebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluebox.png; sourceTree = "<group>"; };
 		7DE16A891762DAE20095142F /* redbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redbox.png; sourceTree = "<group>"; };
-		7DE16A8B1762F2E50095142F /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
 		7DE16A8D176321F20095142F /* downarrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrows.png; sourceTree = "<group>"; };
 		7DE16A911763252C0095142F /* arrowAI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowAI.png; sourceTree = "<group>"; };
 		7DE16A96176373270095142F /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
@@ -454,6 +455,10 @@
 		7DE16AB3176387680095142F /* MenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuLayer.m; sourceTree = "<group>"; };
 		7DE16AB5176387D70095142F /* MenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuBar.h; path = UI/MenuBar.h; sourceTree = "<group>"; };
 		7DE16AB6176387D70095142F /* MenuBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuBar.m; path = UI/MenuBar.m; sourceTree = "<group>"; };
+		7DE16AB81763A0820095142F /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ball.png; path = "../../../Desktop/Pixel Art/ball.png"; sourceTree = "<group>"; };
+		7DE16ABC1764E2410095142F /* WorldTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldTree.h; sourceTree = "<group>"; };
+		7DE16ABD1764E2420095142F /* WorldTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldTree.m; sourceTree = "<group>"; };
+		7DE16ABF1764E3BB0095142F /* worldtree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = worldtree.png; path = "../../../Desktop/Pixel Art/worldtree.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,12 +548,13 @@
 		7DE168C9175F6DEF0095142F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7DE16AB81763A0820095142F /* ball.png */,
+				7DE16ABF1764E3BB0095142F /* worldtree.png */,
 				7DE16A8D176321F20095142F /* downarrows.png */,
 				7DE16A96176373270095142F /* fire.png */,
 				7DE16A911763252C0095142F /* arrowAI.png */,
 				7DE168CA175F6DEF0095142F /* Default.png */,
 				7DE168CC175F6DEF0095142F /* Default-Landscape~ipad.png */,
-				7DE16A8B1762F2E50095142F /* ball.png */,
 				7DE168CE175F6DEF0095142F /* fps_images.png */,
 				7DE16A891762DAE20095142F /* redbox.png */,
 				7DE168D0175F6DEF0095142F /* fps_images-hd.png */,
@@ -913,12 +919,14 @@
 		7DE16A5E175F78C40095142F /* Towers */ = {
 			isa = PBXGroup;
 			children = (
+				7DE16AAB176387370095142F /* Structure.h */,
+				7DE16AAC176387370095142F /* Structure.m */,
 				7DE16AA7176387370095142F /* BasicBlock.h */,
 				7DE16AA8176387370095142F /* BasicBlock.m */,
 				7DE16AA9176387370095142F /* FireTower.h */,
 				7DE16AAA176387370095142F /* FireTower.m */,
-				7DE16AAB176387370095142F /* Structure.h */,
-				7DE16AAC176387370095142F /* Structure.m */,
+				7DE16ABC1764E2410095142F /* WorldTree.h */,
+				7DE16ABD1764E2420095142F /* WorldTree.m */,
 			);
 			name = Towers;
 			sourceTree = "<group>";
@@ -1013,10 +1021,11 @@
 				7DE16A75176081C10095142F /* blueboxT.png in Resources */,
 				7DE16A771760EA910095142F /* bluebox.png in Resources */,
 				7DE16A8A1762DAE20095142F /* redbox.png in Resources */,
-				7DE16A8C1762F2E50095142F /* ball.png in Resources */,
 				7DE16A8E176321F20095142F /* downarrows.png in Resources */,
 				7DE16A921763252C0095142F /* arrowAI.png in Resources */,
 				7DE16A97176373270095142F /* fire.png in Resources */,
+				7DE16AB91763A0820095142F /* ball.png in Resources */,
+				7DE16AC01764E3BB0095142F /* worldtree.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,6 +1154,7 @@
 				7DE16AAF176387370095142F /* Structure.m in Sources */,
 				7DE16AB41763877B0095142F /* MenuLayer.m in Sources */,
 				7DE16AB7176387D70095142F /* MenuBar.m in Sources */,
+				7DE16ABE1764E2420095142F /* WorldTree.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

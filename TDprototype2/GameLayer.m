@@ -11,6 +11,7 @@
 #import "BasicBlock.h"
 #import "testPerson.h"
 #import "FireTower.h"
+#import "WorldTree.h"
 
 @interface GameLayer () {
     CGSize winSize;
@@ -49,6 +50,9 @@ static int i;
     unitAndBoxLayer = [CCLayer node];
     [self addChild:unitAndBoxLayer];
     i=2;
+    
+    WorldTree* tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(200, 200)]];
+    [unitAndBoxLayer addChild:tree];
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
