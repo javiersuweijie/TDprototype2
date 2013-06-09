@@ -21,25 +21,25 @@ Unit* unit;
         [self setPosition:point];
         [self setName:@"firetower"];
         [self setCanBeMoved:YES];
-        array = [GameLayer getUnitArray];
-        [super onEnter];
-        emitter=[[CCParticleFire alloc]init];
-        [emitter stopSystem];
-        emitter.position = ccp(self.contentSize.width/2,self.contentSize.height/2);
-        emitter.posVar = ccp(0,0);
-        emitter.startSize = 5;
-        emitter.totalParticles = 50;
-        emitter.life = 1;
-        emitter.speed = 20;
-        emitter.positionType = kCCPositionTypeGrouped;
-        [self addChild:emitter];
-        [self schedule:@selector(updateAngle:)];
     }
     return self;
 }
 
 -(void)onEnter
 {
+    [super onEnter];
+    array = [GameLayer getUnitArray];
+    emitter=[[CCParticleFire alloc]init];
+    [emitter stopSystem];
+    emitter.position = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    emitter.posVar = ccp(0,0);
+    emitter.startSize = 5;
+    emitter.totalParticles = 50;
+    emitter.life = 1;
+    emitter.speed = 20;
+    emitter.positionType = kCCPositionTypeGrouped;
+    [self addChild:emitter];
+    [self schedule:@selector(updateAngle:)];
     unit=nil;
 }
 
