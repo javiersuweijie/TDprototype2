@@ -22,6 +22,7 @@ int coolDown;
 BOOL isShooting;
 CGPoint currentPoint;
 CGPoint prevPoint;
+float airTime; //air time of the projectile
 
 -(id)initWithPosition:(CGPoint)point
 {
@@ -44,6 +45,7 @@ CGPoint prevPoint;
     array = [GameLayer getUnitArray];
     coolDown = 0;
     isShooting = NO;
+    airTime = 0.5;
 }
 
 -(void)update:(ccTime)dt
@@ -81,14 +83,14 @@ CGPoint prevPoint;
         coolDown=k_cooldown;
         [projectile setScale:0.5];
         CGPoint mid = ccpMidpoint(ccp(0,0), ccpSub(unit.position,self.position));
-        CGPoint end = ccpAdd(ccpMult(ccpSub(currentPoint, prevPoint),unit.speed*0.75),ccpSub(unit.position,self.position));
+        CGPoint end = ccpAdd(ccpMult(ccpSub(currentPoint, prevPoint),unit.speed*airTime),ccpSub(unit.position,self.position));
         end = ccp(end.x+unit.contentSize.width/2, end.y);
         ccBezierConfig benzier1;
         benzier1.controlPoint_1 = ccp(mid.x,mid.y+100);
         benzier1.controlPoint_2 = ccp(mid.x,mid.y+100);
         benzier1.endPosition = end;
         id moveCallback = [CCCallFunc actionWithTarget:self selector:@selector(setInvisible)];
-        id action = [CCBezierTo actionWithDuration:0.75 bezier:benzier1];
+        id action = [CCBezierTo actionWithDuration:airTime bezier:benzier1];
         if (ccpDistance(prevPoint, currentPoint)>1) {
             return;
         }
