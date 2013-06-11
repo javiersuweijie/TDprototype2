@@ -130,6 +130,7 @@ CCMenuItem* root;
     NSLog(@"blue is pressed");
 }
 -(void) doLoadAction{
+    [GameLayer placeCanon];
     NSLog(@"load is pressed");
 }
 -(void) doSaveAction{

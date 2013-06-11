@@ -156,6 +156,7 @@
 		7DE16AB91763A0820095142F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16AB81763A0820095142F /* ball.png */; };
 		7DE16ABE1764E2420095142F /* WorldTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16ABD1764E2420095142F /* WorldTree.m */; };
 		7DE16AC01764E3BB0095142F /* worldtree.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16ABF1764E3BB0095142F /* worldtree.png */; };
+		7DE16AC6176626300095142F /* CanonTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AC51766262F0095142F /* CanonTower.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -459,6 +460,8 @@
 		7DE16ABC1764E2410095142F /* WorldTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldTree.h; sourceTree = "<group>"; };
 		7DE16ABD1764E2420095142F /* WorldTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldTree.m; sourceTree = "<group>"; };
 		7DE16ABF1764E3BB0095142F /* worldtree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = worldtree.png; path = "../../../Desktop/Pixel Art/worldtree.png"; sourceTree = "<group>"; };
+		7DE16AC41766262E0095142F /* CanonTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanonTower.h; path = Unit/CanonTower.h; sourceTree = "<group>"; };
+		7DE16AC51766262F0095142F /* CanonTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CanonTower.m; path = Unit/CanonTower.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -927,6 +930,8 @@
 				7DE16AAA176387370095142F /* FireTower.m */,
 				7DE16ABC1764E2410095142F /* WorldTree.h */,
 				7DE16ABD1764E2420095142F /* WorldTree.m */,
+				7DE16AC41766262E0095142F /* CanonTower.h */,
+				7DE16AC51766262F0095142F /* CanonTower.m */,
 			);
 			name = Towers;
 			sourceTree = "<group>";
@@ -1155,6 +1160,7 @@
 				7DE16AB41763877B0095142F /* MenuLayer.m in Sources */,
 				7DE16AB7176387D70095142F /* MenuBar.m in Sources */,
 				7DE16ABE1764E2420095142F /* WorldTree.m in Sources */,
+				7DE16AC6176626300095142F /* CanonTower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

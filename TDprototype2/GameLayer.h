@@ -18,5 +18,6 @@
 +(void)testSP;
 +(void)placeBlueTile;
 +(void)placeFireTower;
++(void)placeCanon;
 +(NSMutableArray*)getUnitArray;
 @end

@@ -39,11 +39,11 @@ Unit* unit;
     emitter.speed = 20;
     emitter.positionType = kCCPositionTypeGrouped;
     [self addChild:emitter];
-    [self schedule:@selector(updateAngle:)];
+    [self scheduleUpdate];
     unit=nil;
 }
 
--(void)updateAngle:(ccTime)dt
+-(void)update:(ccTime)dt
 {
     if ([array count]>0) {
         for (Unit* unitt in array) {
@@ -65,7 +65,6 @@ Unit* unit;
         [emitter stopSystem];
         unit=nil;
     }
-    
 }
 @end
 

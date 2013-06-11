@@ -12,6 +12,7 @@
 #import "testPerson.h"
 #import "FireTower.h"
 #import "WorldTree.h"
+#import "CanonTower.h"
 
 @interface GameLayer () {
     CGSize winSize;
@@ -200,6 +201,16 @@ static int i;
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
     i++;
+}
+
++(void)placeCanon
+{
+    CGPoint touchLocation = ccp(i,5);
+    touchLocation = [IsometricOperator gridToCoord:touchLocation];
+    CanonTower* sprite = [[CanonTower alloc] initWithPosition:touchLocation];
+    NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
+    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+    [filledList addObject:sprite];
 }
 
 +(NSMutableArray*)getUnitArray
