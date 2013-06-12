@@ -14,5 +14,6 @@
 }
 @property float speed;
 @property int hp;
+@property float speedMultiplier;
 -(NSMutableArray*)moveToward:(CGPoint)target;
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -160,6 +161,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D57482417676E4600BAE638 /* IceBeamTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IceBeamTower.h; path = Structure/IceBeamTower.h; sourceTree = "<group>"; };
+		7D57482517676E4600BAE638 /* IceBeamTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IceBeamTower.m; path = Structure/IceBeamTower.m; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -932,6 +935,8 @@
 				7DE16ABD1764E2420095142F /* WorldTree.m */,
 				7DE16AC41766262E0095142F /* CanonTower.h */,
 				7DE16AC51766262F0095142F /* CanonTower.m */,
+				7D57482417676E4600BAE638 /* IceBeamTower.h */,
+				7D57482517676E4600BAE638 /* IceBeamTower.m */,
 			);
 			name = Towers;
 			sourceTree = "<group>";
@@ -1161,6 +1166,7 @@
 				7DE16AB7176387D70095142F /* MenuBar.m in Sources */,
 				7DE16ABE1764E2420095142F /* WorldTree.m in Sources */,
 				7DE16AC6176626300095142F /* CanonTower.m in Sources */,
+				7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

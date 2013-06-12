@@ -20,7 +20,7 @@
 @end
 
 @implementation Unit
-@synthesize speed,hp;
+@synthesize speed,hp,speedMultiplier;
 
 -(id)init
 {
@@ -34,6 +34,7 @@
 {
     [super onEnter];
     [self scheduleUpdateWithPriority:-10];
+    self.speedMultiplier = 1;
 }
 
 -(void)update:(ccTime)dt
@@ -166,11 +167,11 @@
     
 	id moveAction = [CCMoveTo actionWithDuration:timetaken position:s];
 	id moveCallback = [CCCallFunc actionWithTarget:self selector:@selector(popStepAndAnimate)]; // set the method itself as the callback
-    
+    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, moveCallback, nil] speed:speedMultiplier];
 	// Remove the step
 	[shortestPath removeObjectAtIndex:0];
     //    [self runAction:[self animate:s.position]];
-	[self runAction:[CCSequence actions:moveAction, moveCallback, nil]];
+	[self runAction:speeding];
 }
 
 - (void)cancelStep

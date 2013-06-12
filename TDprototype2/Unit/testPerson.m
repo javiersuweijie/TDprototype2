@@ -15,6 +15,7 @@
 {
     if (self = [super initWithFile:@"ball.png"]) {
         self.speed = 50;
+        self.speedMultiplier = 1;
         self.hp = 200;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
