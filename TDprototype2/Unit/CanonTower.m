@@ -86,28 +86,25 @@ float airTime; //air time of the projectile
         CGPoint end = ccpAdd(ccpMult(ccpSub(currentPoint, prevPoint),unit.speed*airTime),ccpSub(unit.position,self.position));
         end = ccp(end.x+unit.contentSize.width/2, end.y);
         ccBezierConfig benzier1;
-        benzier1.controlPoint_1 = ccp(mid.x,mid.y+100);
+        benzier1.controlPoint_1 = ccp(mid.x,mid.y+100);//should be based on how far the unit is from the tower
         benzier1.controlPoint_2 = ccp(mid.x,mid.y+100);
         benzier1.endPosition = end;
         id moveCallback = [CCCallFunc actionWithTarget:self selector:@selector(setInvisible)];
         id action = [CCBezierTo actionWithDuration:airTime bezier:benzier1];
-        if (ccpDistance(prevPoint, currentPoint)>1) {
+        if (ccpDistance(prevPoint, currentPoint)>2) {
             return;
         }
         [self addChild:projectile];
         [projectile runAction:[CCSequence actions:action,moveCallback, nil]];
-//    unit.hp--;
+        
     }
     prevPoint = currentPoint;
 }
 
 -(void)setInvisible
 {
-    NSLog(@"projectile:%@",NSStringFromCGPoint(ccpAdd(projectile.position,self.position)));
-    
     if ([array count]>0) {
         for (Unit* unitt in array) {
-            NSLog(@"%@",NSStringFromCGPoint(unitt.position));
             if (ccpDistance(ccpAdd(projectile.position,self.position),unitt.position)<35) {
                 NSLog(@"hit");
                 unitt.hp -= 100;
