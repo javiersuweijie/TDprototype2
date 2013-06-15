@@ -13,6 +13,7 @@
 #import "FireTower.h"
 #import "WorldTree.h"
 #import "CanonTower.h"
+#import "IceBeamTower.h"
 
 @interface GameLayer () {
     CGSize winSize;
@@ -213,6 +214,15 @@ static int i;
     [filledList addObject:sprite];
 }
 
++(void)placeIce
+{
+    CGPoint touchLocation = ccp(i,5);
+    touchLocation = [IsometricOperator gridToCoord:touchLocation];
+    IceBeamTower* sprite = [[IceBeamTower alloc] initWithPosition:touchLocation];
+    NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
+    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+    [filledList addObject:sprite];
+}
 +(NSMutableArray*)getUnitArray
 {
     return unitList;

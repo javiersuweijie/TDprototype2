@@ -23,30 +23,30 @@ CCMenuItem* root;
     CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"ball.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
-                                                              selector:@selector(doRedAction)];
+                                                              selector:@selector(do1Action)];
     
     CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"bluebox.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
-                                                              selector:@selector(doBlueAction)];
+                                                              selector:@selector(do2Action)];
     
     CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"redbox.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
-                                                              selector:@selector(doSaveAction)];
+                                                              selector:@selector(do3Action)];
     
     CCMenuItemImage * menuItem4 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
-                                                              selector:@selector(doLoadAction)];
+                                                              selector:@selector(do4Action)];
     CCMenuItemImage * menuItem5 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
-                                                              selector:@selector(doLoadAction)];
+                                                              selector:@selector(do5Action)];
     CCMenuItemImage * menuItem6 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
-                                                              selector:@selector(doLoadAction)];
+                                                              selector:@selector(do6Action)];
     [menuItem1 setVisible:NO];
     [menuItem2 setVisible:NO];
     [menuItem3 setVisible:NO];
@@ -121,21 +121,23 @@ CCMenuItem* root;
         }
     }
 }
--(void) doRedAction{
+-(void) do1Action{
     [GameLayer testSP];
-    NSLog(@"red is pressed");
 }
--(void) doBlueAction{
+-(void) do2Action{
     [GameLayer placeBlueTile];
-    NSLog(@"blue is pressed");
 }
--(void) doLoadAction{
-    [GameLayer placeCanon];
-    NSLog(@"load is pressed");
+-(void) do3Action{
+    [GameLayer placeFireTower];    
 }
--(void) doSaveAction{
-    [GameLayer placeFireTower];
-    NSLog(@"save is pressed");
-}
+-(void) do4Action{
 
+    [GameLayer placeCanon];
+}
+-(void) do5Action{
+    [GameLayer placeIce];
+}
+-(void) do6Action{
+    [GameLayer placeFireTower];
+}
 @end

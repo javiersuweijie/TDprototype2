@@ -27,7 +27,6 @@
 {
     [super onEnter];
     winSize = [[CCDirector sharedDirector] winSize];
-    
     //Init user interface
     UILayer* userinterface = [UILayer node];
     [self addChild:userinterface z:10];

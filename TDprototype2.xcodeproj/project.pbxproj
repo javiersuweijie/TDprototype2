@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
+		7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -163,6 +164,8 @@
 /* Begin PBXFileReference section */
 		7D57482417676E4600BAE638 /* IceBeamTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IceBeamTower.h; path = Structure/IceBeamTower.h; sourceTree = "<group>"; };
 		7D57482517676E4600BAE638 /* IceBeamTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IceBeamTower.m; path = Structure/IceBeamTower.m; sourceTree = "<group>"; };
+		7D57482B176B72DA00BAE638 /* ParticlesIceBeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticlesIceBeam.h; path = Structure/Particles/ParticlesIceBeam.h; sourceTree = "<group>"; };
+		7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParticlesIceBeam.m; path = Structure/Particles/ParticlesIceBeam.m; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -487,6 +490,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D574827176B727E00BAE638 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				7D57482B176B72DA00BAE638 /* ParticlesIceBeam.h */,
+				7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
 		7DE168AA175F6DEF0095142F = {
 			isa = PBXGroup;
 			children = (
@@ -937,6 +949,7 @@
 				7DE16AC51766262F0095142F /* CanonTower.m */,
 				7D57482417676E4600BAE638 /* IceBeamTower.h */,
 				7D57482517676E4600BAE638 /* IceBeamTower.m */,
+				7D574827176B727E00BAE638 /* Particles */,
 			);
 			name = Towers;
 			sourceTree = "<group>";
@@ -1167,6 +1180,7 @@
 				7DE16ABE1764E2420095142F /* WorldTree.m in Sources */,
 				7DE16AC6176626300095142F /* CanonTower.m in Sources */,
 				7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */,
+				7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

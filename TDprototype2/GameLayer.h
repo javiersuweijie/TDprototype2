@@ -20,4 +20,5 @@
 +(void)placeFireTower;
 +(void)placeCanon;
 +(NSMutableArray*)getUnitArray;
++(void)placeIce;
 @end

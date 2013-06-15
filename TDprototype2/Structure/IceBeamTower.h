@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Structure.h"
+#import "ParticlesIceBeam.h"
 
 @interface IceBeamTower : Structure {
     
 }
+@property (nonatomic,retain) ParticlesIceBeam* emitter;
+
+-(id)initWithPosition:(CGPoint)point;
 
 @end
