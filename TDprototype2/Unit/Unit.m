@@ -118,12 +118,14 @@
 {
 	// Here we use the Manhattan method, which calculates the total number of step moved horizontally and vertically to reach the
 	// final desired step from the current step, ignoring any obstacles that may be in the way
-	return 7.5*max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
+    toCoord = [IsometricOperator coordInvTransform:toCoord];
+    fromCoord = [IsometricOperator coordInvTransform:fromCoord];
+	return 10*max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
 }
 
 - (int)costToMoveFromStep:(ShortestPathStep *)fromStep toAdjacentStep:(ShortestPathStep *)toStep
 {
-	return ((fromStep.position.x != toStep.position.x) && (fromStep.position.y != toStep.position.y)) ? 15 : 10;
+	return ((fromStep.position.x != toStep.position.x) && (fromStep.position.y != toStep.position.y)) ? 10 : 10;
 }
 
 - (NSMutableArray*)constructPathAndStartAnimationFromStep:(ShortestPathStep *)step
