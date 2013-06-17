@@ -14,7 +14,8 @@
 @interface Structure : CCSprite <UIGestureRecognizerDelegate> {
     
 }
-@property (nonatomic) CGPoint gridPosition;
+@property (nonatomic,strong) NSArray* gridPosition;
 -(void)setName:(NSString*)n;
 -(void)setCanBeMoved:(BOOL)b;
+-(void)setSize:(CGSize)size;
 @end

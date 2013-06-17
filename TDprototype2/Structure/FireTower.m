@@ -18,9 +18,11 @@ Unit* unit;
 {
     if ([super initWithFile:[NSString stringWithFormat:@"redbox.png"]]) {
         [self setAnchorPoint:ccp(0.5,0)];
+        [self setSize:CGSizeMake(1, 1)];
         [self setPosition:point];
         [self setName:@"firetower"];
         [self setCanBeMoved:YES];
+        
     }
     return self;
 }

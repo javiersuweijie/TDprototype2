@@ -55,6 +55,7 @@ static int i;
     
     WorldTree* tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(200, 200)]];
     [unitAndBoxLayer addChild:tree];
+//    [filledList addObject:tree]; //commented out else units cant find path
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -107,8 +108,11 @@ static int i;
 +(BOOL)isValidGrid:(CGPoint)grid
 {
     for (Structure* structure in filledList) {
-        if (CGPointEqualToPoint(grid, structure.gridPosition)) {
-            return NO;
+        for (NSValue* value in structure.gridPosition) {
+            if (CGPointEqualToPoint(grid, [value CGPointValue])) {
+                return NO;
+            }
+        
         }
     }
     return YES;
@@ -187,7 +191,6 @@ static int i;
     CGPoint touchLocation = ccp(i,5);
     touchLocation = [IsometricOperator gridToCoord:touchLocation];
     BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
-    NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
     i++;
@@ -198,7 +201,6 @@ static int i;
     CGPoint touchLocation = ccp(i,5);
     touchLocation = [IsometricOperator gridToCoord:touchLocation];
     FireTower* sprite = [[FireTower alloc] initWithPosition:touchLocation];
-    NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
     i++;
@@ -209,7 +211,6 @@ static int i;
     CGPoint touchLocation = ccp(i,5);
     touchLocation = [IsometricOperator gridToCoord:touchLocation];
     CanonTower* sprite = [[CanonTower alloc] initWithPosition:touchLocation];
-    NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
 }
@@ -219,7 +220,6 @@ static int i;
     CGPoint touchLocation = ccp(i,5);
     touchLocation = [IsometricOperator gridToCoord:touchLocation];
     IceBeamTower* sprite = [[IceBeamTower alloc] initWithPosition:touchLocation];
-    NSLog(@"%@",NSStringFromCGPoint(sprite.gridPosition));
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
 }

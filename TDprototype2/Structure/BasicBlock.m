@@ -16,6 +16,7 @@
     if ([super initWithFile:[NSString stringWithFormat:@"bluebox.png"]]) {
         [self setAnchorPoint:ccp(0.5,0)];
         [self setColor:ccWHITE];
+        [self setSize:CGSizeMake(1, 1)];
         [self setPosition:point];
         [self setName:@"basicbluebox"];
         [self setCanBeMoved:YES];
@@ -24,4 +25,11 @@
 
 }
 
+-(void)onEnter
+{
+    [super onEnter];
+    for (NSValue *value in self.gridPosition) {
+        NSLog(@"%@",NSStringFromCGPoint([value CGPointValue]));
+    }
+}
 @end

@@ -17,11 +17,13 @@
     BOOL isSelected;
     UIGestureRecognizer* pan;
     CCSprite* downArrows;
+    CGSize structureSize;
 }
 @end
 
 @implementation Structure
 @synthesize gridPosition;
+
 
 -(void)onEnter
 {
@@ -92,7 +94,15 @@
 -(void)setPosition:(CGPoint)position
 {
     [super setPosition:position];
-    self.gridPosition = [IsometricOperator gridNumber:self.position];
+    CGPoint baseGrid = [IsometricOperator gridNumber:self.position];
+    NSMutableArray* tempArray = [[NSMutableArray alloc]init];
+    for (int h = 0; h < structureSize.height; h++) {
+        for (int w = 0; w < structureSize.width; w++) {
+            
+            [tempArray addObject:[NSValue valueWithCGPoint:ccp(baseGrid.x-w,baseGrid.y+h)]];
+        }
+    }
+    self.gridPosition = [tempArray copy];
 }
 
 -(NSString*)description
@@ -109,4 +119,10 @@
 {
     canBeMoved = b;
 }
+
+-(void)setSize:(CGSize)size
+{
+    structureSize = size;
+}
+
 @end
