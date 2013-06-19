@@ -16,7 +16,7 @@
 #import "IceBeamTower.h"
 
 @interface GameLayer () {
-    CGSize winSize;
+
     
 }
 
@@ -27,6 +27,7 @@ static NSMutableArray* filledList;
 static NSMutableArray* unitList;
 static CCLayer* unitAndBoxLayer;
 static int i;
+static CGSize winSize;
 -(void)onEnter
 {
     [super onEnter];
@@ -56,6 +57,8 @@ static int i;
     WorldTree* tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(160, 200)]];
     [unitAndBoxLayer addChild:tree];
     [filledList addObject:tree]; //commented out else units cant find path
+    
+    winSize = [[CCDirector sharedDirector] winSize];
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -188,18 +191,17 @@ static int i;
 
 +(void)placeBlueTile
 {
-    CGPoint touchLocation = ccp(i,5);
-    touchLocation = [IsometricOperator gridToCoord:touchLocation];
+    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
+    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
-    i++;
 }
 
 +(void)placeFireTower
 {
-    CGPoint touchLocation = ccp(i,5);
-    touchLocation = [IsometricOperator gridToCoord:touchLocation];
+    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
+    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     FireTower* sprite = [[FireTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
@@ -208,8 +210,8 @@ static int i;
 
 +(void)placeCanon
 {
-    CGPoint touchLocation = ccp(i,5);
-    touchLocation = [IsometricOperator gridToCoord:touchLocation];
+    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
+    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     CanonTower* sprite = [[CanonTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
@@ -217,8 +219,8 @@ static int i;
 
 +(void)placeIce
 {
-    CGPoint touchLocation = ccp(i,5);
-    touchLocation = [IsometricOperator gridToCoord:touchLocation];
+    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
+    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     IceBeamTower* sprite = [[IceBeamTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
