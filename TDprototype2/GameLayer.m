@@ -53,9 +53,9 @@ static int i;
     [self addChild:unitAndBoxLayer];
     i=2;
     
-    WorldTree* tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(200, 200)]];
+    WorldTree* tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(160, 200)]];
     [unitAndBoxLayer addChild:tree];
-//    [filledList addObject:tree]; //commented out else units cant find path
+    [filledList addObject:tree]; //commented out else units cant find path
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture

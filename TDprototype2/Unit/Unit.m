@@ -65,7 +65,7 @@
         currentStep=[spOpenSteps objectAtIndex:0];
         [spOpenSteps removeObjectAtIndex:0];
         numberOfSteps++;
-        //        NSLog(@"NoS:%d Target:%@ Point:%@ gScore:%d, hScore:%d",numberOfSteps,NSStringFromCGPoint(toGrid),NSStringFromCGPoint(currentStep.position),currentStep.gScore,currentStep.hScore);
+
         CGPoint currentGrid = currentStep.position;
         [spClosedSteps addObject:currentStep];
         [spOpenSteps removeAllObjects];
@@ -74,7 +74,7 @@
             NSLog(@"foundPath");
             spOpenSteps = nil;
             spClosedSteps = nil;
-            //            NSLog(@"%@",[currentStep description]);
+
             return [self constructPathAndStartAnimationFromStep:currentStep];
             break;
         }
@@ -83,14 +83,22 @@
             NSArray* array = [GameLayer walkableAdjGrid:currentGrid];
             for (NSValue* x in array) {
                 ShortestPathStep* adjStep = [[ShortestPathStep alloc]initWithPosition:[x CGPointValue]];
-                if ([spClosedSteps containsObject:adjStep]) {
-                    adjStep = nil;
-                    continue;
-                }
                 adjStep.hScore = [self computeHScoreFromCoord:adjStep.position toCoord:toGrid];
                 adjStep.gScore = currentStep.gScore + [self costToMoveFromStep:currentStep toAdjacentStep:adjStep];
+                for (ShortestPathStep* neighbour in [spOpenSteps copy]) {
+                    if (adjStep.gScore < neighbour.gScore) {
+                        [spOpenSteps removeObject:neighbour];
+                    }
+                }
+                for (ShortestPathStep* neighbour in [spClosedSteps copy]) {
+                    if (adjStep.gScore < neighbour.gScore) {
+                        [spClosedSteps removeObject:neighbour];
+                    }
+                }
+                if (![spClosedSteps containsObject:adjStep]&&![spOpenSteps containsObject:adjStep]) {
                 adjStep.parent = currentStep;
                 [self insertInOpenSteps:adjStep];
+                }
                 adjStep=nil;
             }
             array=nil;
@@ -120,12 +128,14 @@
 	// final desired step from the current step, ignoring any obstacles that may be in the way
     toCoord = [IsometricOperator coordInvTransform:toCoord];
     fromCoord = [IsometricOperator coordInvTransform:fromCoord];
-	return 10*max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
+    int score = max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
+//    NSLog(@"%d",score);
+	return score;
 }
 
 - (int)costToMoveFromStep:(ShortestPathStep *)fromStep toAdjacentStep:(ShortestPathStep *)toStep
 {
-	return ((fromStep.position.x != toStep.position.x) && (fromStep.position.y != toStep.position.y)) ? 10 : 10;
+	return 1;
 }
 
 - (NSMutableArray*)constructPathAndStartAnimationFromStep:(ShortestPathStep *)step
