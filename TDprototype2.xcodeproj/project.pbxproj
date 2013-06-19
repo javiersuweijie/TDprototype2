@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D3C32391771F09000F052B4 /* HpBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32381771F09000F052B4 /* HpBar.m */; };
 		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
 		7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
@@ -162,6 +163,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D3C32371771F09000F052B4 /* HpBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HpBar.h; sourceTree = "<group>"; };
+		7D3C32381771F09000F052B4 /* HpBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HpBar.m; sourceTree = "<group>"; };
 		7D57482417676E4600BAE638 /* IceBeamTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IceBeamTower.h; path = Structure/IceBeamTower.h; sourceTree = "<group>"; };
 		7D57482517676E4600BAE638 /* IceBeamTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IceBeamTower.m; path = Structure/IceBeamTower.m; sourceTree = "<group>"; };
 		7D57482B176B72DA00BAE638 /* ParticlesIceBeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticlesIceBeam.h; path = Structure/Particles/ParticlesIceBeam.h; sourceTree = "<group>"; };
@@ -963,6 +966,8 @@
 				7DE16AA11763871C0095142F /* testPerson.m */,
 				7DE16AA21763871C0095142F /* Unit.h */,
 				7DE16AA31763871C0095142F /* Unit.m */,
+				7D3C32371771F09000F052B4 /* HpBar.h */,
+				7D3C32381771F09000F052B4 /* HpBar.m */,
 			);
 			name = Units;
 			sourceTree = "<group>";
@@ -1181,6 +1186,7 @@
 				7DE16AC6176626300095142F /* CanonTower.m in Sources */,
 				7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */,
 				7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */,
+				7D3C32391771F09000F052B4 /* HpBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

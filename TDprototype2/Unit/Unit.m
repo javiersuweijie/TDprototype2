@@ -10,6 +10,8 @@
 #import "ShortestPathStep.h"
 #import "IsometricOperator.h"
 #import "GameLayer.h"
+#import "HpBar.h"
+
 
 @interface Unit () {
     NSMutableArray *spClosedSteps;
@@ -35,6 +37,8 @@
     [super onEnter];
     [self scheduleUpdateWithPriority:-10];
     self.speedMultiplier = 1;
+    HpBar* hpBar = [[HpBar alloc]initWithChar:self];
+    [self addChild:hpBar];
 }
 
 -(void)update:(ccTime)dt
