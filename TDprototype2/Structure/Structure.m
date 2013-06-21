@@ -24,7 +24,6 @@
 @implementation Structure
 @synthesize gridPosition;
 
-
 -(void)onEnter
 {
     [super onEnter];

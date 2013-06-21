@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D3C32391771F09000F052B4 /* HpBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32381771F09000F052B4 /* HpBar.m */; };
+		7D3C323E1774927D00F052B4 /* StartMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C323D1774927D00F052B4 /* StartMenu.m */; };
 		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
 		7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
@@ -165,6 +166,8 @@
 /* Begin PBXFileReference section */
 		7D3C32371771F09000F052B4 /* HpBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HpBar.h; sourceTree = "<group>"; };
 		7D3C32381771F09000F052B4 /* HpBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HpBar.m; sourceTree = "<group>"; };
+		7D3C323C1774927D00F052B4 /* StartMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartMenu.h; sourceTree = "<group>"; };
+		7D3C323D1774927D00F052B4 /* StartMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartMenu.m; sourceTree = "<group>"; };
 		7D57482417676E4600BAE638 /* IceBeamTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IceBeamTower.h; path = Structure/IceBeamTower.h; sourceTree = "<group>"; };
 		7D57482517676E4600BAE638 /* IceBeamTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IceBeamTower.m; path = Structure/IceBeamTower.m; sourceTree = "<group>"; };
 		7D57482B176B72DA00BAE638 /* ParticlesIceBeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticlesIceBeam.h; path = Structure/Particles/ParticlesIceBeam.h; sourceTree = "<group>"; };
@@ -493,6 +496,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D3C323B1774926600F052B4 /* Start Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7D3C323C1774927D00F052B4 /* StartMenu.h */,
+				7D3C323D1774927D00F052B4 /* StartMenu.m */,
+			);
+			name = "Start Menu";
+			sourceTree = "<group>";
+		};
 		7D574827176B727E00BAE638 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
@@ -556,6 +568,7 @@
 				7DE16A65175F794F0095142F /* GameScene.m */,
 				7DE16AB2176387630095142F /* MenuLayer.h */,
 				7DE16AB3176387680095142F /* MenuLayer.m */,
+				7D3C323B1774926600F052B4 /* Start Menu */,
 				7DE16A67175F7A7F0095142F /* UI */,
 				7DE16A60175F78DA0095142F /* Units */,
 				7DE16A5E175F78C40095142F /* Towers */,
@@ -1187,6 +1200,7 @@
 				7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */,
 				7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */,
 				7D3C32391771F09000F052B4 /* HpBar.m in Sources */,
+				7D3C323E1774927D00F052B4 /* StartMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,11 +1257,13 @@
 				GCC_PREFIX_HEADER = TDprototype2/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"TDprototype2/libs/kazmath/include\"";
 				INFOPLIST_FILE = TDprototype2/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1262,12 +1278,14 @@
 				GCC_PREFIX_HEADER = TDprototype2/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"TDprototype2/libs/kazmath/include\"";
 				INFOPLIST_FILE = TDprototype2/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5F4DFFE1-26D1-4B19-8C5B-7B03B59D982B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0CB16D07-0E62-46B7-9E4D-692BA74DEF8D";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
