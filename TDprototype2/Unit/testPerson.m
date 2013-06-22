@@ -13,9 +13,10 @@
 
 -(id)initWithPosition:(CGPoint)point moveTo:(CGPoint)pointTo
 {
-    if (self = [super initWithFile:@"ball.png"]) {
+    if (self = [super initWithFile:@"whiteball.png"]) {
         self.speed = 50;
         self.speedMultiplier = 1;
+        self.color = ccc3(255, 0, 0);
         self.hp = 200;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
