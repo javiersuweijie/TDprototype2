@@ -13,9 +13,10 @@
 
 BOOL extended;
 CCMenuItem* root;
-
+id game_layer;
 -(id)init
 {
+
     root = [CCMenuItemImage itemWithNormalImage:@"Icon.png"
                                   selectedImage: @"Icon.png"
                                          target:self
@@ -63,6 +64,7 @@ CCMenuItem* root;
 -(void)onEnter
 {
     [super onEnter];
+    game_layer= [[[self parent]parent] getChildByTag:1];
     extended = NO;
     [self setContentSize:CGSizeMake(root.contentSize.width, 320)];
     [self setPosition:ccp(10, 10)];
@@ -77,7 +79,8 @@ CCMenuItem* root;
 //    
     
 }
--(void) changeState {
+-(void) changeState
+{
     if ([root numberOfRunningActions]>0) {
         return;
     }
@@ -114,30 +117,35 @@ CCMenuItem* root;
         
     }
 }
--(void) setInvisible {
+-(void) setInvisible
+{
     for (id menuitem in [self children]) {
         if (menuitem!=root) {
             [menuitem setVisible:NO];
         }
     }
 }
--(void) do1Action{
-    [GameLayer testSP];
+-(void) do1Action
+{
+    [game_layer testSP];
 }
--(void) do2Action{
-    [GameLayer placeBlueTile];
+-(void) do2Action
+{
+    [game_layer placeBlueTile];
 }
--(void) do3Action{
-    [GameLayer placeFireTower];    
+-(void) do3Action
+{
+    [game_layer placeFireTower];
 }
--(void) do4Action{
-
-    [GameLayer placeCanon];
+-(void) do4Action
+{
+    [game_layer placeCanon];
 }
--(void) do5Action{
-    [GameLayer placeIce];
+-(void) do5Action
+{
+    [game_layer placeIce];
 }
 -(void) do6Action{
-    [GameLayer placeFireTower];
+    
 }
 @end

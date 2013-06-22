@@ -27,12 +27,13 @@
 {
     [super onEnter];
     winSize = [[CCDirector sharedDirector] winSize];
-    //Init user interface
-    UILayer* userinterface = [UILayer node];
-    [self addChild:userinterface z:10];
     
     //init game layer
     GameLayer* gameLayer = [GameLayer node];
-    [self addChild:gameLayer z:5];
+    [self addChild:gameLayer z:5 tag:1];
+    
+    //Init user interface
+    UILayer* userinterface = [UILayer node];
+    [self addChild:userinterface z:10];
 }
 @end

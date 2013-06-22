@@ -26,7 +26,6 @@
 static NSMutableArray* filledList;
 static NSMutableArray* unitList;
 static CCLayer* unitAndBoxLayer;
-static int i;
 static CGSize winSize;
 -(void)onEnter
 {
@@ -46,13 +45,14 @@ static CGSize winSize;
     panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:panGestureRecognizer];
     [panGestureRecognizer release];
+    
     self.isTouchEnabled = YES;
+    
     filledList = [[NSMutableArray alloc]init];
     unitList = [[NSMutableArray alloc]init];
     [IsometricOperator init];
     unitAndBoxLayer = [CCLayer node];
     [self addChild:unitAndBoxLayer];
-    i=2;
     
     WorldTree* tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(160, 200)]];
     [unitAndBoxLayer addChild:tree];
@@ -92,7 +92,7 @@ static CGSize winSize;
     }
 }
 
-- (void)handlePanGesture:(UIPanGestureRecognizer*)aPanGestureRecognizer
+-(void)handlePanGesture:(UIPanGestureRecognizer*)aPanGestureRecognizer
 {
     CCNode *node = aPanGestureRecognizer.node;
     CGPoint translation = [aPanGestureRecognizer translationInView:aPanGestureRecognizer.view];
@@ -182,15 +182,15 @@ static CGSize winSize;
     
 }
 
-+(void)testSP
+-(void)testSP
 {
     testPerson* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(200, 200)]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
-+(void)placeBlueTile
-{
+-(void)placeBlueTile
+{    
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
@@ -198,17 +198,16 @@ static CGSize winSize;
     [filledList addObject:sprite];
 }
 
-+(void)placeFireTower
+-(void)placeFireTower
 {
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     FireTower* sprite = [[FireTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
-    i++;
 }
 
-+(void)placeCanon
+-(void)placeCanon
 {
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
@@ -217,7 +216,7 @@ static CGSize winSize;
     [filledList addObject:sprite];
 }
 
-+(void)placeIce
+-(void)placeIce
 {
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];

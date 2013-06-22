@@ -15,10 +15,10 @@
 +(BOOL)isValid:(CGPoint)point;
 +(BOOL)isValidGrid:(CGPoint)grid;
 +(NSArray*)walkableAdjGrid:(CGPoint)grid;
-+(void)testSP;
-+(void)placeBlueTile;
-+(void)placeFireTower;
-+(void)placeCanon;
+-(void)testSP;
+-(void)placeBlueTile;
+-(void)placeFireTower;
+-(void)placeCanon;
+-(void)placeIce;
 +(NSMutableArray*)getUnitArray;
-+(void)placeIce;
 @end
