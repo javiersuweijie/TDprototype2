@@ -30,20 +30,34 @@ id game_layer;
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
                                                               selector:@selector(do2Action)];
+    CCLabelTTF* label2 = [CCLabelTTF labelWithString:@"Basic wall" fontName:@"Helvetica" fontSize:8];
+    [label2 setAnchorPoint:ccp(0,0)];
+    [menuItem2 addChild:label2];
     
     CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"redbox.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
                                                               selector:@selector(do3Action)];
+    CCLabelTTF* label3 = [CCLabelTTF labelWithString:@"Fire Tower" fontName:@"Helvetica" fontSize:8];
+    [label3 setAnchorPoint:ccp(0,0)];
+    [menuItem3 addChild:label3];
     
     CCMenuItemImage * menuItem4 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
                                                               selector:@selector(do4Action)];
+    CCLabelTTF* label4 = [CCLabelTTF labelWithString:@"Canon Tower" fontName:@"Helvetica" fontSize:8];
+    [label4 setAnchorPoint:ccp(0,0)];
+    [menuItem4 addChild:label4];
+    
     CCMenuItemImage * menuItem5 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
                                                               selector:@selector(do5Action)];
+    CCLabelTTF* label5 = [CCLabelTTF labelWithString:@"Ice Tower" fontName:@"Helvetica" fontSize:8];
+    [label5 setAnchorPoint:ccp(0,0)];
+    [menuItem5 addChild:label5];
+    
     CCMenuItemImage * menuItem6 = [CCMenuItemImage itemWithNormalImage:@"Icon-Small.png"
                                                          selectedImage: @"Icon-Small.png"
                                                                 target:self
