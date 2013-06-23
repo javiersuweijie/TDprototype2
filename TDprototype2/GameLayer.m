@@ -27,6 +27,9 @@ static NSMutableArray* filledList;
 static NSMutableArray* unitList;
 static CCLayer* unitAndBoxLayer;
 static CGSize winSize;
+
+BOOL buildingMode = NO;
+CCLayer* buildingLayer;
 -(void)onEnter
 {
     [super onEnter];
@@ -94,12 +97,24 @@ static CGSize winSize;
 
 -(void)handlePanGesture:(UIPanGestureRecognizer*)aPanGestureRecognizer
 {
-    CCNode *node = aPanGestureRecognizer.node;
-    CGPoint translation = [aPanGestureRecognizer translationInView:aPanGestureRecognizer.view];
-    translation.y *= -1;
-    [aPanGestureRecognizer setTranslation:CGPointZero inView:aPanGestureRecognizer.view];
-    
-    node.position = ccpAdd(node.position, translation);
+    if (buildingMode) {
+        CGPoint touch = [aPanGestureRecognizer locationInView:[aPanGestureRecognizer view]];
+        touch = [[CCDirector sharedDirector]convertToGL:touch];
+        touch = [IsometricOperator nearestPoint:touch];
+        if ([GameLayer isValid:touch]) {
+            [self placeBlueTileAt:touch];
+        }
+    }
+    else {
+        CCNode *node = aPanGestureRecognizer.node;
+        CGPoint translation = [aPanGestureRecognizer translationInView:aPanGestureRecognizer.view];
+        translation.y *= -1;
+        [aPanGestureRecognizer setTranslation:CGPointZero inView:aPanGestureRecognizer.view];
+        node.position = ccpAdd(node.position, translation);
+    }
+    if ([aPanGestureRecognizer state]==UIGestureRecognizerStateEnded) {
+        buildingMode = NO;
+    }
 }
 
 +(BOOL)isValid:(CGPoint)point
@@ -189,13 +204,23 @@ static CGSize winSize;
     [unitList addObject:person];
 }
 
--(void)placeBlueTile
-{    
-    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
-    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
-    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+-(void)placeBlueTileAt:(CGPoint)point
+{
+    CGPoint ppoint = [unitAndBoxLayer convertToNodeSpace:point];
+    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:ppoint];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
+}
+-(void)placeBlueTile
+{
+    buildingMode = YES;
+    buildingLayer = [CCLayer node];
+    [self addChild:buildingLayer];
+//    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
+//    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
+//    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+//    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+//    [filledList addObject:sprite];
 }
 
 -(void)placeFireTower
