@@ -37,17 +37,14 @@ CCLayer* buildingLayer;
     UIGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
-    [tapGestureRecognizer release];
     
     UIGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
     pinchGestureRecognizer.delegate = self;
     [self addGestureRecognizer:pinchGestureRecognizer];
-    [pinchGestureRecognizer release];
     
     UIGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:panGestureRecognizer];
-    [panGestureRecognizer release];
     
     self.isTouchEnabled = YES;
     

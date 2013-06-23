@@ -19,7 +19,7 @@
 
 +(id) menuWithArray:(NSArray *)arrayOfItems
 {
-	return [[[self alloc] initWithArray:arrayOfItems] autorelease];
+	return [[self alloc] initWithArray:arrayOfItems];
 }
 
 -(id) initWithArray:(NSArray *)arrayOfItems

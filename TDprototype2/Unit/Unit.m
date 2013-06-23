@@ -93,7 +93,7 @@
             
             // Check if the step isn't already in the closed set
             if ([spClosedSteps containsObject:step]) {
-                [step release]; // Must releasing it to not leaking memory ;-)
+                 // Must releasing it to not leaking memory ;-)
                 continue; // Ignore it
             }
             
@@ -118,11 +118,10 @@
                 [self insertInOpenSteps:step];
                 
                 // Done, now release the step
-                [step release];
             }
             else { // Already in the open list
                 
-                [step release]; // Release the freshly created one
+                 // Release the freshly created one
                 step = [spOpenSteps objectAtIndex:index]; // To retrieve the old one (which has its scores already computed ;-)
                 
                 // Check to see if the G score for that step is lower if we use the current step to get there
@@ -136,7 +135,6 @@
                     // the insert function which is preserving the list ordered by F score
                     
                     // We have to retain it before removing it from the list
-                    [step retain];
                     
                     // Now we can removing it from the list without be afraid that it can be released
                     [spOpenSteps removeObjectAtIndex:index];
@@ -145,7 +143,6 @@
                     [self insertInOpenSteps:step];
                     
                     // Now we can release it because the oredered list retain it
-                    [step release];
                 }
             }
         }

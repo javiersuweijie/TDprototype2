@@ -13,13 +13,13 @@
     CGPoint position;
     int gScore;
     int hScore;
-    ShortestPathStep *parent;
+    ShortestPathStep *__weak parent;
 }
 
 @property (nonatomic,assign)CGPoint position;
 @property (nonatomic,assign)int gScore;
 @property (nonatomic,assign)int hScore;
-@property (nonatomic,assign)ShortestPathStep *parent;
+@property (nonatomic,weak)ShortestPathStep *parent;
 
 -(id)initWithPosition:(CGPoint)pos;
 -(int)fScore;

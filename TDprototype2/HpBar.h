@@ -14,6 +14,6 @@
 }
 @property int totalHp;
 @property int currentHp;
-@property (assign,nonatomic) Unit* p;
+@property (weak,nonatomic) Unit* p;
 -(id)initWithChar:(Unit*)p;
 @end

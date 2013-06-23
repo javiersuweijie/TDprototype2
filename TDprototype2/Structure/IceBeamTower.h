@@ -14,7 +14,7 @@
 @interface IceBeamTower : Structure {
     
 }
-@property (nonatomic,retain) ParticlesIceBeam* emitter;
+@property (nonatomic,strong) ParticlesIceBeam* emitter;
 
 -(id)initWithPosition:(CGPoint)point;
 
