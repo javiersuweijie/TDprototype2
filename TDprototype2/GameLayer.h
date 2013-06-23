@@ -21,4 +21,8 @@
 -(void)placeCanon;
 -(void)placeIce;
 +(NSMutableArray*)getUnitArray;
+
+-(void)spawnFastPaper;
+-(void)spawnSlowThick;
+-(void)spawnFlyingUnit;
 @end

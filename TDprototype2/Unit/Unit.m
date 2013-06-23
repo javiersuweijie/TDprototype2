@@ -50,7 +50,7 @@
 
     }
 }
-#if unitType != Flying
+
 -(NSMutableArray*)moveToward:(CGPoint)target
 {
     NSDate *start = [NSDate date];
@@ -246,19 +246,5 @@
 	}
     return;
 }
-#else
 
--(NSMutableArray*)moveToward:(CGPoint)target
-{
-    float timetaken=ccpDistance(self.position, target)/self.speed;
-	id moveAction = [CCMoveTo actionWithDuration:timetaken position:target];
-    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, nil] speed:speedMultiplier];
-	// Remove the step
-	[shortestPath removeObjectAtIndex:0];
-    //    [self runAction:[self animate:s.position]];
-	[self runAction:speeding];
-    return nil;
-}
-
-#endif
 @end

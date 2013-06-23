@@ -7,6 +7,7 @@
 //
 
 #import "UILayer.h"
+#import "UnitsMenu.h"
 
 @implementation UILayer
 
@@ -16,6 +17,7 @@
     [super onEnter];
     MenuBar* menu = [[MenuBar alloc]init];
     [self addChild:menu];
-
+    UnitsMenu*unitsmenu = [[UnitsMenu alloc]init];
+    [self addChild:unitsmenu];
 }
 @end

@@ -10,20 +10,31 @@
 
 
 @implementation FlyingUnit
+#define UNITTYPE Flying
 
 -(id)initWithPosition:(CGPoint)point moveTo:(CGPoint)pointTo
 {
     if (self = [super initWithFile:@"whiteball.png"]) {
-        self.speed = 20;
+        self.speed = 50;
         self.speedMultiplier = 1;
-        self.color = ccc3(100, 120, 0);
-        self.hp = 1000;
+        self.color = ccc3(100, 100, 120);
+        self.hp = 100;
         self.unitType = Flying;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
         [self moveToward:pointTo];
     }
     return self;
+}
+
+-(NSMutableArray*)moveToward:(CGPoint)target
+{
+    float timetaken=ccpDistance(self.position, target)/self.speed;
+	id moveAction = [CCMoveTo actionWithDuration:timetaken position:target];
+    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, nil] speed:self.speedMultiplier];
+	// Remove the step
+	[self runAction:speeding];
+    return nil;
 }
 
 @end

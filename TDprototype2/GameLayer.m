@@ -16,6 +16,8 @@
 
 #import "testPerson.h"
 #import "FastPaper.h"
+#import "SlowThick.h"
+#import "FlyingUnit.h"
 
 @interface GameLayer () {
 
@@ -198,7 +200,28 @@ CCLayer* buildingLayer;
 
 -(void)testSP
 {
+    Unit* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    [unitAndBoxLayer addChild:person];
+    [unitList addObject:person];
+}
+
+-(void)spawnFastPaper
+{
     Unit* person = [[FastPaper alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    [unitAndBoxLayer addChild:person];
+    [unitList addObject:person];
+}
+
+-(void)spawnSlowThick
+{
+    Unit* person = [[SlowThick alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    [unitAndBoxLayer addChild:person];
+    [unitList addObject:person];
+}
+
+-(void)spawnFlyingUnit
+{
+    Unit* person = [[FlyingUnit alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
@@ -212,14 +235,14 @@ CCLayer* buildingLayer;
 }
 -(void)placeBlueTile
 {
-    buildingMode = YES;
-    buildingLayer = [CCLayer node];
-    [self addChild:buildingLayer];
-//    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
-//    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
-//    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
-//    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
-//    [filledList addObject:sprite];
+//    buildingMode = YES;
+//    buildingLayer = [CCLayer node];
+//    [self addChild:buildingLayer];
+    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
+    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
+    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+    [filledList addObject:sprite];
 }
 
 -(void)placeFireTower

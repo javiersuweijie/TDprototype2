@@ -12,6 +12,7 @@
 		7D3C32451776D77600F052B4 /* FastPaper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32441776D77600F052B4 /* FastPaper.m */; };
 		7D3C32481776D86800F052B4 /* SlowThick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32471776D86800F052B4 /* SlowThick.m */; };
 		7D3C324E1776DD8200F052B4 /* FlyingUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C324D1776DD7E00F052B4 /* FlyingUnit.m */; };
+		7D3C32511776EF7500F052B4 /* UnitsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32501776EF7500F052B4 /* UnitsMenu.m */; };
 		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
 		7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
@@ -177,6 +178,8 @@
 		7D3C32471776D86800F052B4 /* SlowThick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowThick.m; sourceTree = "<group>"; };
 		7D3C324C1776DD7D00F052B4 /* FlyingUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingUnit.h; sourceTree = "<group>"; };
 		7D3C324D1776DD7E00F052B4 /* FlyingUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyingUnit.m; sourceTree = "<group>"; };
+		7D3C324F1776EF7500F052B4 /* UnitsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitsMenu.h; sourceTree = "<group>"; };
+		7D3C32501776EF7500F052B4 /* UnitsMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsMenu.m; sourceTree = "<group>"; };
 		7D57482417676E4600BAE638 /* IceBeamTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IceBeamTower.h; path = Structure/IceBeamTower.h; sourceTree = "<group>"; };
 		7D57482517676E4600BAE638 /* IceBeamTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IceBeamTower.m; path = Structure/IceBeamTower.m; sourceTree = "<group>"; };
 		7D57482B176B72DA00BAE638 /* ParticlesIceBeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticlesIceBeam.h; path = Structure/Particles/ParticlesIceBeam.h; sourceTree = "<group>"; };
@@ -1007,6 +1010,8 @@
 				7DE16A99176386F60095142F /* CustomMenu.m */,
 				7DE16AB5176387D70095142F /* MenuBar.h */,
 				7DE16AB6176387D70095142F /* MenuBar.m */,
+				7D3C324F1776EF7500F052B4 /* UnitsMenu.h */,
+				7D3C32501776EF7500F052B4 /* UnitsMenu.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1219,6 +1224,7 @@
 				7D3C32451776D77600F052B4 /* FastPaper.m in Sources */,
 				7D3C32481776D86800F052B4 /* SlowThick.m in Sources */,
 				7D3C324E1776DD8200F052B4 /* FlyingUnit.m in Sources */,
+				7D3C32511776EF7500F052B4 /* UnitsMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
