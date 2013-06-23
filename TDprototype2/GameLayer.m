@@ -59,7 +59,7 @@ CCLayer* buildingLayer;
     
     WorldTree* tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(160, 200)]];
     [unitAndBoxLayer addChild:tree];
-    [filledList addObject:tree]; //commented out else units cant find path
+//    [filledList addObject:tree]; //commented out else units cant find path
     
     winSize = [[CCDirector sharedDirector] winSize];
 }
@@ -199,7 +199,7 @@ CCLayer* buildingLayer;
 
 -(void)testSP
 {
-    testPerson* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(200, 200)]];
+    testPerson* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }

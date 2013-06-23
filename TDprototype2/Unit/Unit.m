@@ -53,61 +53,105 @@
 
 -(NSMutableArray*)moveToward:(CGPoint)target
 {
+    NSDate *start = [NSDate date];
     CGPoint toGrid = [IsometricOperator gridNumber:target];
     CGPoint fromGrid = [IsometricOperator gridNumber:self.position];
-    
-    if (![GameLayer isValidGrid:toGrid]) {
+    if (![GameLayer isValidGrid:toGrid]) {  //check if destination is valid
         NSLog(@"Not valid point");
         return nil;
     }
     spClosedSteps = [[NSMutableArray alloc]init];
     spOpenSteps = [[NSMutableArray alloc]init];
-    int numberOfSteps=0;
-    [self insertInOpenSteps:[[ShortestPathStep alloc]initWithPosition:fromGrid]];
-    ShortestPathStep* currentStep;
+    [self insertInOpenSteps:[[ShortestPathStep alloc]initWithPosition:fromGrid]]; //add the first step into OPEN
     do {
-        currentStep=[spOpenSteps objectAtIndex:0];
-        [spOpenSteps removeObjectAtIndex:0];
-        numberOfSteps++;
-
-        CGPoint currentGrid = currentStep.position;
+        // Get the lowest F cost step
+        // Because the list is ordered, the first step is always the one with the lowest F cost
+        ShortestPathStep *currentStep = [spOpenSteps objectAtIndex:0];
+        
+        // Add the current step to the closed set
         [spClosedSteps addObject:currentStep];
-        [spOpenSteps removeAllObjects];
         
-        if (CGPointEqualToPoint(currentStep.position,toGrid)) {
-            NSLog(@"foundPath");
-            spOpenSteps = nil;
-            spClosedSteps = nil;
-
-            return [self constructPathAndStartAnimationFromStep:currentStep];
-            break;
+        // Remove it from the open list
+        // Note that if we wanted to first removing from the open list, care should be taken to the memory
+        [spOpenSteps removeObjectAtIndex:0];
+        
+        // If the currentStep is the desired tile coordinate, we are done!
+        if (CGPointEqualToPoint(currentStep.position, toGrid)) {
+            
+            NSLog(@"PATH FOUND : %f",-[start timeIntervalSinceNow]);
+            [self constructPathAndStartAnimationFromStep:currentStep];
+            
+            spOpenSteps = nil; // Set to nil to release unused memory
+            spClosedSteps = nil; // Set to nil to release unused memory
+            
         }
         
-        else {
-            NSArray* array = [GameLayer walkableAdjGrid:currentGrid];
-            for (NSValue* x in array) {
-                ShortestPathStep* adjStep = [[ShortestPathStep alloc]initWithPosition:[x CGPointValue]];
-                adjStep.hScore = [self computeHScoreFromCoord:adjStep.position toCoord:toGrid];
-                adjStep.gScore = currentStep.gScore + [self costToMoveFromStep:currentStep toAdjacentStep:adjStep];
-                for (ShortestPathStep* neighbour in [spOpenSteps copy]) {
-                    if (adjStep.gScore < neighbour.gScore) {
-                        [spOpenSteps removeObject:neighbour];
-                    }
-                }
-                for (ShortestPathStep* neighbour in [spClosedSteps copy]) {
-                    if (adjStep.gScore < neighbour.gScore) {
-                        [spClosedSteps removeObject:neighbour];
-                    }
-                }
-                if (![spClosedSteps containsObject:adjStep]&&![spOpenSteps containsObject:adjStep]) {
-                adjStep.parent = currentStep;
-                [self insertInOpenSteps:adjStep];
-                }
-                adjStep=nil;
+        // Get the adjacent tiles coord of the current step
+        NSArray *adjSteps = [GameLayer walkableAdjGrid:currentStep.position];
+        for (NSValue *v in adjSteps) {
+            ShortestPathStep *step = [[ShortestPathStep alloc] initWithPosition:[v CGPointValue]];
+            
+            // Check if the step isn't already in the closed set
+            if ([spClosedSteps containsObject:step]) {
+                [step release]; // Must releasing it to not leaking memory ;-)
+                continue; // Ignore it
             }
-            array=nil;
+            
+            // Compute the cost from the current step to that step
+            int moveCost = [self costToMoveFromStep:currentStep toAdjacentStep:step];
+            
+            // Check if the step is already in the open list
+            NSUInteger index = [spOpenSteps indexOfObject:step];
+            
+            if (index == NSNotFound) { // Not on the open list, so add it
+                
+                // Set the current step as the parent
+                step.parent = currentStep;
+                
+                // The G score is equal to the parent G score + the cost to move from the parent to it
+                step.gScore = currentStep.gScore + moveCost;
+                
+                // Compute the H score which is the estimated movement cost to move from that step to the desired tile coordinate
+                step.hScore = [self computeHScoreFromCoord:step.position toCoord:toGrid];
+                
+                // Adding it with the function which is preserving the list ordered by F score
+                [self insertInOpenSteps:step];
+                
+                // Done, now release the step
+                [step release];
+            }
+            else { // Already in the open list
+                
+                [step release]; // Release the freshly created one
+                step = [spOpenSteps objectAtIndex:index]; // To retrieve the old one (which has its scores already computed ;-)
+                
+                // Check to see if the G score for that step is lower if we use the current step to get there
+                if ((currentStep.gScore + moveCost) < step.gScore) {
+                    
+                    // The G score is equal to the parent G score + the cost to move from the parent to it
+                    step.gScore = currentStep.gScore + moveCost;
+                    
+                    // Because the G Score has changed, the F score may have changed too
+                    // So to keep the open list ordered we have to remove the step, and re-insert it with
+                    // the insert function which is preserving the list ordered by F score
+                    
+                    // We have to retain it before removing it from the list
+                    [step retain];
+                    
+                    // Now we can removing it from the list without be afraid that it can be released
+                    [spOpenSteps removeObjectAtIndex:index];
+                    
+                    // Re-insert it with the function which is preserving the list ordered by F score
+                    [self insertInOpenSteps:step];
+                    
+                    // Now we can release it because the oredered list retain it
+                    [step release];
+                }
+            }
         }
-    } while (TRUE);
+        
+    } while ([spOpenSteps count] > 0);
+    return nil;
 }
 
 -(void)insertInOpenSteps:(ShortestPathStep *)step
@@ -130,16 +174,22 @@
 {
 	// Here we use the Manhattan method, which calculates the total number of step moved horizontally and vertically to reach the
 	// final desired step from the current step, ignoring any obstacles that may be in the way
+    toCoord = [IsometricOperator gridToCoord:toCoord];
+    fromCoord = [IsometricOperator gridToCoord:fromCoord];
     toCoord = [IsometricOperator coordInvTransform:toCoord];
     fromCoord = [IsometricOperator coordInvTransform:fromCoord];
-    int score = max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
+//    int score = max(abs(toCoord.x - fromCoord.x),abs(toCoord.y - fromCoord.y));
+    int score = (abs(toCoord.x - fromCoord.x)+abs(toCoord.y - fromCoord.y));
 //    NSLog(@"%d",score);
 	return score;
 }
 
 - (int)costToMoveFromStep:(ShortestPathStep *)fromStep toAdjacentStep:(ShortestPathStep *)toStep
 {
-	return 1;
+//    if (fromStep.position.x==toStep.position.x||fromStep.position.y==toStep.position.y) {
+//        return 10;
+//    }
+	return 48;
 }
 
 - (NSMutableArray*)constructPathAndStartAnimationFromStep:(ShortestPathStep *)step
@@ -199,6 +249,5 @@
 	}
     return;
 }
-
 
 @end
