@@ -12,8 +12,15 @@
 @interface Unit : CCSprite {
     
 }
+typedef NS_ENUM(NSInteger, UnitType) {
+    Normal,
+    Invisible,
+    Flying
+};
+
 @property float speed;
 @property int hp;
 @property float speedMultiplier;
+@property UnitType unitType;
 -(NSMutableArray*)moveToward:(CGPoint)target;
 @end

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7D3C32391771F09000F052B4 /* HpBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32381771F09000F052B4 /* HpBar.m */; };
 		7D3C323E1774927D00F052B4 /* StartMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C323D1774927D00F052B4 /* StartMenu.m */; };
+		7D3C32451776D77600F052B4 /* FastPaper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32441776D77600F052B4 /* FastPaper.m */; };
+		7D3C32481776D86800F052B4 /* SlowThick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32471776D86800F052B4 /* SlowThick.m */; };
+		7D3C324E1776DD8200F052B4 /* FlyingUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C324D1776DD7E00F052B4 /* FlyingUnit.m */; };
 		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
 		7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
@@ -168,6 +171,12 @@
 		7D3C32381771F09000F052B4 /* HpBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HpBar.m; sourceTree = "<group>"; };
 		7D3C323C1774927D00F052B4 /* StartMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartMenu.h; sourceTree = "<group>"; };
 		7D3C323D1774927D00F052B4 /* StartMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartMenu.m; sourceTree = "<group>"; };
+		7D3C32431776D77600F052B4 /* FastPaper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastPaper.h; sourceTree = "<group>"; };
+		7D3C32441776D77600F052B4 /* FastPaper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastPaper.m; sourceTree = "<group>"; };
+		7D3C32461776D86800F052B4 /* SlowThick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowThick.h; sourceTree = "<group>"; };
+		7D3C32471776D86800F052B4 /* SlowThick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowThick.m; sourceTree = "<group>"; };
+		7D3C324C1776DD7D00F052B4 /* FlyingUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingUnit.h; sourceTree = "<group>"; };
+		7D3C324D1776DD7E00F052B4 /* FlyingUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyingUnit.m; sourceTree = "<group>"; };
 		7D57482417676E4600BAE638 /* IceBeamTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IceBeamTower.h; path = Structure/IceBeamTower.h; sourceTree = "<group>"; };
 		7D57482517676E4600BAE638 /* IceBeamTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IceBeamTower.m; path = Structure/IceBeamTower.m; sourceTree = "<group>"; };
 		7D57482B176B72DA00BAE638 /* ParticlesIceBeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticlesIceBeam.h; path = Structure/Particles/ParticlesIceBeam.h; sourceTree = "<group>"; };
@@ -981,6 +990,12 @@
 				7DE16AA31763871C0095142F /* Unit.m */,
 				7D3C32371771F09000F052B4 /* HpBar.h */,
 				7D3C32381771F09000F052B4 /* HpBar.m */,
+				7D3C32431776D77600F052B4 /* FastPaper.h */,
+				7D3C32441776D77600F052B4 /* FastPaper.m */,
+				7D3C32461776D86800F052B4 /* SlowThick.h */,
+				7D3C32471776D86800F052B4 /* SlowThick.m */,
+				7D3C324C1776DD7D00F052B4 /* FlyingUnit.h */,
+				7D3C324D1776DD7E00F052B4 /* FlyingUnit.m */,
 			);
 			name = Units;
 			sourceTree = "<group>";
@@ -1201,6 +1216,9 @@
 				7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */,
 				7D3C32391771F09000F052B4 /* HpBar.m in Sources */,
 				7D3C323E1774927D00F052B4 /* StartMenu.m in Sources */,
+				7D3C32451776D77600F052B4 /* FastPaper.m in Sources */,
+				7D3C32481776D86800F052B4 /* SlowThick.m in Sources */,
+				7D3C324E1776DD8200F052B4 /* FlyingUnit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

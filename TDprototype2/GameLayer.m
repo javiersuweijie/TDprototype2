@@ -9,11 +9,13 @@
 #import "GameLayer.h"
 #import "IsometricOperator.h"
 #import "BasicBlock.h"
-#import "testPerson.h"
 #import "FireTower.h"
 #import "WorldTree.h"
 #import "CanonTower.h"
 #import "IceBeamTower.h"
+
+#import "testPerson.h"
+#import "FastPaper.h"
 
 @interface GameLayer () {
 
@@ -196,7 +198,7 @@ CCLayer* buildingLayer;
 
 -(void)testSP
 {
-    testPerson* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    Unit* person = [[FastPaper alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
