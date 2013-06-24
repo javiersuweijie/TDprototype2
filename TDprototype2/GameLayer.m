@@ -34,10 +34,16 @@ static CGSize winSize;
 
 BOOL buildingMode = NO;
 CCLayer* buildingLayer;
+WorldTree* tree;
+CGPoint startPoint;
+CGPoint endPoint;
+CGPoint vert[4];
+CGPoint vert2[4];
 -(void)onEnter
 {
     [super onEnter];
 
+//    self.contentSize = CGSizeApplyAffineTransform([[CCDirector sharedDirector] winSize],CGAffineTransformMakeScale(2, 2));
     UIGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
@@ -57,12 +63,22 @@ CCLayer* buildingLayer;
     [IsometricOperator init];
     unitAndBoxLayer = [CCLayer node];
     [self addChild:unitAndBoxLayer];
-    
-    WorldTree* tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    winSize = [[CCDirector sharedDirector] winSize];    
+    tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(winSize.width/2, winSize.height*1.5)])]];
     [unitAndBoxLayer addChild:tree];
 //    [filledList addObject:tree]; //commented out else units cant find path
     
-    winSize = [[CCDirector sharedDirector] winSize];
+
+
+    vert[0] = ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(0, 0)]);
+    vert[1] = ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(winSize.width, 0)]);
+    vert[2] = ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(winSize.width, winSize.height*1.5)]);
+    vert[3] = ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(0, winSize.height*1.5)]);
+    
+    vert2[0] = ccp(0, 0);
+    vert2[1] = ccp(winSize.width, 0);
+    vert2[2] = ccp(winSize.width, winSize.height);
+    vert2[3] = ccp(0, winSize.height);
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -88,7 +104,7 @@ CCLayer* buildingLayer;
         CGPoint mid = ccpMidpoint(touch1, touch2);
         mid=[self convertToNodeSpace:mid];
         float scale = gesture.scale;
-        if ((scale>1 && self.scale>5.0)||(scale<1 && self.scale<0.8));
+        if ((scale>1 && self.scale>5.0)||(scale<1 && self.scale<1));
         else {
             self.scale *= scale;
         }
@@ -96,14 +112,27 @@ CCLayer* buildingLayer;
     }
 }
 
+-(void)draw {
+    ccDrawPoly(vert, 4, YES);
+//    ccDrawPoly(vert2, 4, YES);
+    if (buildingMode) {
+        ccDrawLine(startPoint, endPoint);
+    }
+}
+
 -(void)handlePanGesture:(UIPanGestureRecognizer*)aPanGestureRecognizer
 {
     if (buildingMode) {
-        CGPoint touch = [aPanGestureRecognizer locationInView:[aPanGestureRecognizer view]];
-        touch = [[CCDirector sharedDirector]convertToGL:touch];
-        touch = [IsometricOperator nearestPoint:touch];
-        if ([GameLayer isValid:touch]) {
-            [self placeBlueTileAt:touch];
+
+        if (aPanGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+            startPoint = [aPanGestureRecognizer locationOfTouch:0 inView:[aPanGestureRecognizer view]];
+            startPoint = [[CCDirector sharedDirector]convertToGL:startPoint];
+            startPoint = [self convertToNodeSpace:startPoint];
+        }
+        if (aPanGestureRecognizer.state == UIGestureRecognizerStateChanged) {
+            endPoint = [aPanGestureRecognizer locationOfTouch:0 inView:[aPanGestureRecognizer view]];
+            endPoint = [[CCDirector sharedDirector]convertToGL:endPoint];
+            endPoint = [self convertToNodeSpace:endPoint];
         }
     }
     else {
@@ -111,10 +140,23 @@ CCLayer* buildingLayer;
         CGPoint translation = [aPanGestureRecognizer translationInView:aPanGestureRecognizer.view];
         translation.y *= -1;
         [aPanGestureRecognizer setTranslation:CGPointZero inView:aPanGestureRecognizer.view];
-        node.position = ccpAdd(node.position, translation);
+        if ([self convertToNodeSpace:CGPointZero].x<0&&translation.x>0) {
+        }
+        else if ([self convertToNodeSpace:CGPointZero].y<0&&translation.y>0) {
+        }
+        else if ([self convertToNodeSpace:ccp(winSize.width, winSize.height)].x>winSize.width&&translation.x<0) {
+        }
+        else if ([self convertToNodeSpace:ccp(winSize.width, winSize.height)].y>winSize.height&&translation.y<0) {
+        }
+        else {
+            node.position = ccpAdd(node.position, translation);
+        }
+
     }
     if ([aPanGestureRecognizer state]==UIGestureRecognizerStateEnded) {
         buildingMode = NO;
+        startPoint = CGPointZero;
+        endPoint = CGPointZero;
     }
 }
 
@@ -200,28 +242,28 @@ CCLayer* buildingLayer;
 
 -(void)testSP
 {
-    Unit* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    Unit* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:tree.position]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnFastPaper
 {
-    Unit* person = [[FastPaper alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    Unit* person = [[FastPaper alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:tree.position]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnSlowThick
 {
-    Unit* person = [[SlowThick alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    Unit* person = [[SlowThick alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:tree.position]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnFlyingUnit
 {
-    Unit* person = [[FlyingUnit alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:ccp(160, 200)]];
+    Unit* person = [[FlyingUnit alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:tree.position]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
@@ -235,14 +277,14 @@ CCLayer* buildingLayer;
 }
 -(void)placeBlueTile
 {
-//    buildingMode = YES;
-//    buildingLayer = [CCLayer node];
-//    [self addChild:buildingLayer];
-    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
-    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
-    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
-    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
-    [filledList addObject:sprite];
+    buildingMode = YES;
+    buildingLayer = [CCLayer node];
+    [self addChild:buildingLayer];
+//    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
+//    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
+//    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+//    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+//    [filledList addObject:sprite];
 }
 
 -(void)placeFireTower
