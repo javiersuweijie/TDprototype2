@@ -142,7 +142,6 @@
 		7DE16A51175F6E370095142F /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A50175F6E370095142F /* GameLayer.m */; };
 		7DE16A54175F73EC0095142F /* IsometricOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A53175F73EC0095142F /* IsometricOperator.m */; };
 		7DE16A5A175F77E30095142F /* UILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A59175F77E30095142F /* UILayer.m */; };
-		7DE16A5D175F78B70095142F /* CharBoxLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A5C175F78B70095142F /* CharBoxLayer.m */; };
 		7DE16A63175F79200095142F /* BackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A62175F791F0095142F /* BackgroundLayer.m */; };
 		7DE16A66175F794F0095142F /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A65175F794F0095142F /* GameScene.m */; };
 		7DE16A6D175F81910095142F /* CCNode+SFGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A6C175F81900095142F /* CCNode+SFGestureRecognizers.m */; };
@@ -448,8 +447,6 @@
 		7DE16A53175F73EC0095142F /* IsometricOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IsometricOperator.m; sourceTree = "<group>"; };
 		7DE16A58175F77E30095142F /* UILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayer.h; sourceTree = "<group>"; };
 		7DE16A59175F77E30095142F /* UILayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILayer.m; sourceTree = "<group>"; };
-		7DE16A5B175F78B70095142F /* CharBoxLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharBoxLayer.h; sourceTree = "<group>"; };
-		7DE16A5C175F78B70095142F /* CharBoxLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharBoxLayer.m; sourceTree = "<group>"; };
 		7DE16A61175F791F0095142F /* BackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundLayer.h; sourceTree = "<group>"; };
 		7DE16A62175F791F0095142F /* BackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundLayer.m; sourceTree = "<group>"; };
 		7DE16A64175F794F0095142F /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -572,8 +569,6 @@
 				7DE16A53175F73EC0095142F /* IsometricOperator.m */,
 				7DE16A58175F77E30095142F /* UILayer.h */,
 				7DE16A59175F77E30095142F /* UILayer.m */,
-				7DE16A5B175F78B70095142F /* CharBoxLayer.h */,
-				7DE16A5C175F78B70095142F /* CharBoxLayer.m */,
 				7DE16A61175F791F0095142F /* BackgroundLayer.h */,
 				7DE16A62175F791F0095142F /* BackgroundLayer.m */,
 				7DE16A64175F794F0095142F /* GameScene.h */,
@@ -1202,7 +1197,6 @@
 				7DE16A51175F6E370095142F /* GameLayer.m in Sources */,
 				7DE16A54175F73EC0095142F /* IsometricOperator.m in Sources */,
 				7DE16A5A175F77E30095142F /* UILayer.m in Sources */,
-				7DE16A5D175F78B70095142F /* CharBoxLayer.m in Sources */,
 				7DE16A63175F79200095142F /* BackgroundLayer.m in Sources */,
 				7DE16A66175F794F0095142F /* GameScene.m in Sources */,
 				7DE16A6D175F81910095142F /* CCNode+SFGestureRecognizers.m in Sources */,
