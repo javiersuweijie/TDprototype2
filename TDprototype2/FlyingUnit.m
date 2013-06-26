@@ -10,7 +10,6 @@
 
 
 @implementation FlyingUnit
-#define UNITTYPE Flying
 
 -(id)initWithPosition:(CGPoint)point moveTo:(CGPoint)pointTo
 {

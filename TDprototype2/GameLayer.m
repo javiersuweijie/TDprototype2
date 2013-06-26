@@ -115,7 +115,7 @@ CGPoint vert2[4];
 -(void)draw {
     ccDrawPoly(vert, 4, YES);
 //    ccDrawPoly(vert2, 4, YES);
-    if (buildingMode) {
+    if (buildingMode && !CGPointEqualToPoint(endPoint, startPoint)) {
         ccDrawLine(startPoint, endPoint);
     }
 }
@@ -128,11 +128,15 @@ CGPoint vert2[4];
             startPoint = [aPanGestureRecognizer locationOfTouch:0 inView:[aPanGestureRecognizer view]];
             startPoint = [[CCDirector sharedDirector]convertToGL:startPoint];
             startPoint = [self convertToNodeSpace:startPoint];
+            endPoint = startPoint;
         }
         if (aPanGestureRecognizer.state == UIGestureRecognizerStateChanged) {
             endPoint = [aPanGestureRecognizer locationOfTouch:0 inView:[aPanGestureRecognizer view]];
             endPoint = [[CCDirector sharedDirector]convertToGL:endPoint];
             endPoint = [self convertToNodeSpace:endPoint];
+            
+            float angle = ccpAngleSigned(startPoint, endPoint);
+            
         }
     }
     else {
