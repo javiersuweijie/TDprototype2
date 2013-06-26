@@ -26,8 +26,8 @@ float airTime; //air time of the projectile
 
 -(id)initWithPosition:(CGPoint)point
 {
-    if ([super initWithFile:[NSString stringWithFormat:@"redbox.png"]]) {
-        [self setColor:ccGREEN];
+    if ([super initWithFile:[NSString stringWithFormat:@"whitebox.png"]]) {
+        [self setColor:ccc3(52, 196, 150)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(1, 1)];
         [self setPosition:point];

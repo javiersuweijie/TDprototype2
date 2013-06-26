@@ -16,6 +16,7 @@
 		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
 		7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */; };
 		7D9C28FD177B1AE00074CF93 /* whiteball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C28FC177B1ADF0074CF93 /* whiteball.png */; };
+		7D9C2901177B3A470074CF93 /* whitebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C2900177B3A470074CF93 /* whitebox.png */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -185,6 +186,7 @@
 		7D57482B176B72DA00BAE638 /* ParticlesIceBeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticlesIceBeam.h; path = Structure/Particles/ParticlesIceBeam.h; sourceTree = "<group>"; };
 		7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParticlesIceBeam.m; path = Structure/Particles/ParticlesIceBeam.m; sourceTree = "<group>"; };
 		7D9C28FC177B1ADF0074CF93 /* whiteball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteball.png; sourceTree = "<group>"; };
+		7D9C2900177B3A470074CF93 /* whitebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitebox.png; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -602,6 +604,7 @@
 				7DE168CE175F6DEF0095142F /* fps_images.png */,
 				7DE16A891762DAE20095142F /* redbox.png */,
 				7DE168D0175F6DEF0095142F /* fps_images-hd.png */,
+				7D9C2900177B3A470074CF93 /* whitebox.png */,
 				7DE16A74176081C10095142F /* blueboxT.png */,
 				7DE16A761760EA910095142F /* bluebox.png */,
 				7DE168D2175F6DEF0095142F /* fps_images-ipadhd.png */,
@@ -1086,6 +1089,7 @@
 				7DE16AB91763A0820095142F /* ball.png in Resources */,
 				7DE16AC01764E3BB0095142F /* worldtree.png in Resources */,
 				7D9C28FD177B1AE00074CF93 /* whiteball.png in Resources */,
+				7D9C2901177B3A470074CF93 /* whitebox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
