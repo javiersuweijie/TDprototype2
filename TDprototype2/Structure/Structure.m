@@ -50,14 +50,19 @@
     }
 }
 
+-(void)unSelect
+{
+    [self setOpacity:255];
+    [downArrows setVisible:NO];
+    isSelected = NO;
+    [pan setEnabled:NO];
+}
+
 -(void)handleTapGesture:(UITapGestureRecognizer*)gesture
 {
     if (canBeMoved) {
         if (isSelected) {
-            [self setOpacity:255];
-            [downArrows setVisible:NO];
-            isSelected = NO;
-            [pan setEnabled:NO];
+            [self unSelect];
         }
         else {
             [self setOpacity:100];
@@ -80,7 +85,6 @@
         if (!CGPointEqualToPoint(newPoint,self.position)) {
             if ([GameLayer isValid:newPoint]) {
                 [self setPosition:newPoint];
-                [[self parent] reorderChild:self z:-self.position.y];
             }
         }
     }
@@ -102,6 +106,7 @@
         }
     }
     self.gridPosition = [tempArray copy];
+    [[self parent] reorderChild:self z:-self.position.y];
 }
 
 -(NSString*)description

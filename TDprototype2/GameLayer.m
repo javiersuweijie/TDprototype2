@@ -31,6 +31,7 @@ static NSMutableArray* filledList;
 static NSMutableArray* unitList;
 static CCLayer* unitAndBoxLayer;
 static CGSize winSize;
+static CGMutablePathRef path;
 
 BOOL buildingMode = NO;
 CCLayer* buildingLayer;
@@ -39,6 +40,9 @@ CGPoint startPoint;
 CGPoint endPoint;
 CGPoint vert[4];
 CGPoint vert2[4];
+NSMutableArray* buildingArray;
+CGContextRef context;
+
 -(void)onEnter
 {
     [super onEnter];
@@ -79,6 +83,16 @@ CGPoint vert2[4];
     vert2[1] = ccp(winSize.width, 0);
     vert2[2] = ccp(winSize.width, winSize.height);
     vert2[3] = ccp(0, winSize.height);
+    
+    context = UIGraphicsGetCurrentContext();
+    path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, vert[0].x, vert[0].y);
+    CGPathAddLineToPoint(path, NULL, vert[1].x, vert[1].y);
+    CGPathAddLineToPoint(path, NULL, vert[2].x, vert[2].y);
+    CGPathAddLineToPoint(path, NULL, vert[3].x, vert[3].y);
+    CGPathCloseSubpath(path);
+    
+    
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -134,9 +148,29 @@ CGPoint vert2[4];
             endPoint = [aPanGestureRecognizer locationOfTouch:0 inView:[aPanGestureRecognizer view]];
             endPoint = [[CCDirector sharedDirector]convertToGL:endPoint];
             endPoint = [self convertToNodeSpace:endPoint];
-            
-            float angle = ccpAngleSigned(startPoint, endPoint);
-            
+            for (id block in [buildingLayer children]) {
+                [filledList removeObject:block];
+            }
+            for (id block in buildingArray) {
+                [block setVisible:NO];
+            }
+            float angle1 =  ccpAngleSigned(ccp(1,0),ccpSub(endPoint,startPoint));
+            int j = 0;
+            for (int dist=0; dist<ccpDistance(startPoint, endPoint); dist+=16) {
+                if (j>19) {
+                    break;
+                }
+                CGPoint place = ccpAdd(startPoint,ccp(dist*cos(angle1), dist*sin(angle1)));
+                place = [IsometricOperator nearestPoint:place];
+                if ([GameLayer isValid:place]) {
+                    Structure* block = buildingArray[j];
+                    [block setPosition:place];
+                    [block setVisible:YES];
+                    [block unSelect];
+                    j++;
+                }
+                
+            }
         }
     }
     else {
@@ -161,6 +195,17 @@ CGPoint vert2[4];
         buildingMode = NO;
         startPoint = CGPointZero;
         endPoint = CGPointZero;
+        for (Structure* block in buildingArray) {
+            [filledList removeObject:block];
+            if (block.visible) {
+                [buildingLayer removeChild:block cleanup:NO];
+                [unitAndBoxLayer addChild:block];
+                [block unSelect];
+                [filledList addObject:block];
+            }
+        }
+        [buildingArray removeAllObjects];
+        [buildingLayer removeAllChildrenWithCleanup:YES];
     }
 }
 
@@ -172,6 +217,9 @@ CGPoint vert2[4];
 
 +(BOOL)isValidGrid:(CGPoint)grid
 {
+    if (!CGPathContainsPoint(path, NULL, [IsometricOperator gridToCoord:grid], NO) ) {
+        return NO;
+    }
     for (Structure* structure in filledList) {
         for (NSValue* value in structure.gridPosition) {
             if (CGPointEqualToPoint(grid, [value CGPointValue])) {
@@ -246,28 +294,28 @@ CGPoint vert2[4];
 
 -(void)testSP
 {
-    Unit* person = [[testPerson alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:tree.position]];
+    Unit* person = [[testPerson alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:tree.position]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnFastPaper
 {
-    Unit* person = [[FastPaper alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:tree.position]];
+    Unit* person = [[FastPaper alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:tree.position]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnSlowThick
 {
-    Unit* person = [[SlowThick alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:tree.position]];
+    Unit* person = [[SlowThick alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:tree.position]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnFlyingUnit
 {
-    Unit* person = [[FlyingUnit alloc]initWithPosition:[IsometricOperator nearestPoint:ccp(2, 4)] moveTo:[IsometricOperator nearestPoint:tree.position]];
+    Unit* person = [[FlyingUnit alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:tree.position]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
@@ -282,8 +330,16 @@ CGPoint vert2[4];
 -(void)placeBlueTile
 {
     buildingMode = YES;
+    buildingArray = [[NSMutableArray alloc]init];
     buildingLayer = [CCLayer node];
     [self addChild:buildingLayer];
+    for (int i= 0;i<20;i++) {
+        id block = [[BasicBlock alloc]initWithPosition:ccp(-100, -100)];
+        [block setVisible:NO];
+        [filledList addObject:block];
+        [buildingArray addObject:block];
+        [buildingLayer addChild:block];
+    }
 //    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
 //    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
 //    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];

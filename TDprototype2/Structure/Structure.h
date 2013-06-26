@@ -18,4 +18,5 @@
 -(void)setName:(NSString*)n;
 -(void)setCanBeMoved:(BOOL)b;
 -(void)setSize:(CGSize)size;
+-(void)unSelect;
 @end
