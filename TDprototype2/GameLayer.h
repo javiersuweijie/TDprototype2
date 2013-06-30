@@ -12,16 +12,22 @@
 @interface GameLayer : CCLayer <UIGestureRecognizerDelegate> {
     
 }
+//check if a coordinate point is valid
 +(BOOL)isValid:(CGPoint)point;
+//check if a grid point is valid
 +(BOOL)isValidGrid:(CGPoint)grid;
+//returns the valid grids around a particular point
 +(NSArray*)walkableAdjGrid:(CGPoint)grid;
--(void)testSP;
+
 -(void)placeBlueTile;
 -(void)placeFireTower;
 -(void)placeCanon;
 -(void)placeIce;
+//returns an array with all the units for target acquiring 
 +(NSMutableArray*)getUnitArray;
++(NSMutableArray*)getFilledArray;
 
+-(void)testSP;
 -(void)spawnFastPaper;
 -(void)spawnSlowThick;
 -(void)spawnFlyingUnit;
