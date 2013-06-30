@@ -10,13 +10,15 @@
 #import "cocos2d.h"
 #import "GameLayer.h"
 #import "Unit.h"
-
+#import "ResourceLabel.h"
 @interface Structure : CCSprite <UIGestureRecognizerDelegate> {
     
 }
 @property (nonatomic,strong) NSArray* gridPosition;
+@property int cost;
 -(void)setName:(NSString*)n;
 -(void)setCanBeMoved:(BOOL)b;
 -(void)setSize:(CGSize)size;
 -(void)unSelect;
++(int)cost;
 @end

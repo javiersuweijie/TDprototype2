@@ -5,6 +5,7 @@
 //  Created by Javiersu on 7/6/13.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+#define mustOverride() @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__] userInfo:nil]
 
 #import "Structure.h"
 #import "IsometricOperator.h"
@@ -22,8 +23,17 @@
 @end
 
 @implementation Structure
-@synthesize gridPosition;
+@synthesize gridPosition,cost;
 
+//-(id)initWithFile:(NSString *)filename {
+//    self=[super initWithFile:filename];
+//    if (![ResourceLabel subtractGoldBy:self.cost]) {
+//        return nil;
+//    }
+//    else {
+//        return self;
+//    }
+//}
 -(void)onEnter
 {
     [super onEnter];
@@ -63,12 +73,14 @@
     if (canBeMoved) {
         if (isSelected) {
             [self unSelect];
+            [[GameLayer getFilledArray]addObject:self];
         }
         else {
             [self setOpacity:100];
             [downArrows setVisible:YES];
             isSelected = YES;
             [pan setEnabled:YES];
+            [[GameLayer getFilledArray]removeObject:self];
         }
     }
     else return;
@@ -83,9 +95,12 @@
         tempPosition = ccpAdd(tempPosition, translation);
         CGPoint newPoint = [IsometricOperator nearestPoint:tempPosition];
         if (!CGPointEqualToPoint(newPoint,self.position)) {
-            if ([GameLayer isValid:newPoint]) {
-                [self setPosition:newPoint];
+            for (NSValue* points in [self createGridPosition:newPoint]) {
+                if (![GameLayer isValidGrid:[points CGPointValue]]) {
+                    return;
+                }
             }
+            [self setPosition:newPoint];
         }
     }
     
@@ -97,7 +112,13 @@
 -(void)setPosition:(CGPoint)position
 {
     [super setPosition:position];
-    CGPoint baseGrid = [IsometricOperator gridNumber:self.position];
+    self.gridPosition = [self createGridPosition:position];
+    [[self parent] reorderChild:self z:[self getZHeight]];
+}
+
+-(NSArray*)createGridPosition:(CGPoint)point
+{
+    CGPoint baseGrid = [IsometricOperator gridNumber:point];
     NSMutableArray* tempArray = [[NSMutableArray alloc]init];
     for (int h = 0; h < structureSize.height; h++) {
         for (int w = 0; w < structureSize.width; w++) {
@@ -105,8 +126,7 @@
             [tempArray addObject:[NSValue valueWithCGPoint:ccp(baseGrid.x-w,baseGrid.y+h)]];
         }
     }
-    self.gridPosition = [tempArray copy];
-    [[self parent] reorderChild:self z:-self.position.y];
+    return [tempArray copy];
 }
 
 -(NSString*)description
@@ -129,4 +149,22 @@
     structureSize = size;
 }
 
+-(float)getZHeight
+{
+    if (structureSize.height>1) {
+        return -self.position.y-(contentSize_.height/4);
+    }
+    else return -self.position.y;
+}
+
+-(void)onExit
+{
+    [super onExit];
+    [ResourceLabel addGoldBy:self.cost];
+}
+
++(int)cost
+{
+    mustOverride();
+}
 @end
