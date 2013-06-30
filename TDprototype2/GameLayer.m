@@ -8,6 +8,8 @@
 
 #import "GameLayer.h"
 #import "IsometricOperator.h"
+#import "ResourceLabel.h"
+
 #import "BasicBlock.h"
 #import "FireTower.h"
 #import "WorldTree.h"
@@ -39,6 +41,7 @@ WorldTree* tree;
 CGPoint startPoint;
 CGPoint endPoint;
 CGPoint vert[4];
+CGPoint borderVert[4];
 CGPoint vert2[4];
 NSMutableArray* buildingArray;
 CGContextRef context;
@@ -46,7 +49,7 @@ CGContextRef context;
 -(void)onEnter
 {
     [super onEnter];
-
+    winSize = [[CCDirector sharedDirector] winSize]; 
 //    self.contentSize = CGSizeApplyAffineTransform([[CCDirector sharedDirector] winSize],CGAffineTransformMakeScale(2, 2));
     UIGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
@@ -59,15 +62,16 @@ CGContextRef context;
     UIGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:panGestureRecognizer];
-    
+    [self setContentSize:CGSizeMake(winSize.width*2, winSize.height*2)];
     self.isTouchEnabled = YES;
+    self.scale = 1.4;
     
     filledList = [[NSMutableArray alloc]init];
     unitList = [[NSMutableArray alloc]init];
     [IsometricOperator init];
     unitAndBoxLayer = [CCLayer node];
     [self addChild:unitAndBoxLayer];
-    winSize = [[CCDirector sharedDirector] winSize];    
+   
     tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(winSize.width/2, winSize.height*1.5)])]];
     [unitAndBoxLayer addChild:tree];
 //    [filledList addObject:tree]; //commented out else units cant find path
@@ -78,6 +82,7 @@ CGContextRef context;
     vert[1] = ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(winSize.width, 0)]);
     vert[2] = ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(winSize.width, winSize.height*1.5)]);
     vert[3] = ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(0, winSize.height*1.5)]);
+    
     
     vert2[0] = ccp(0, 0);
     vert2[1] = ccp(winSize.width, 0);
@@ -117,9 +122,12 @@ CGContextRef context;
         
         CGPoint mid = ccpMidpoint(touch1, touch2);
         mid=[self convertToNodeSpace:mid];
+        mid = ccp(mid.x/self.contentSize.width, mid.y/self.contentSize.height);
         float scale = gesture.scale;
         if ((scale>1 && self.scale>5.0)||(scale<1 && self.scale<1));
         else {
+            NSLog(@"%@",NSStringFromCGPoint(mid));
+            self.anchorPoint = mid;
             self.scale *= scale;
         }
     gesture.scale = 1;
@@ -349,15 +357,23 @@ CGContextRef context;
 
 -(void)placeFireTower
 {
+    if (![ResourceLabel subtractGoldBy:[FireTower cost]]) {
+        NSLog(@"not enough gold");
+        return;
+    }
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     FireTower* sprite = [[FireTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
-    [filledList addObject:sprite];
+//    [filledList addObject:sprite];
 }
 
 -(void)placeCanon
 {
+    if (![ResourceLabel subtractGoldBy:[CanonTower cost]]) {
+        NSLog(@"not enough gold");
+        return;
+    }
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     CanonTower* sprite = [[CanonTower alloc] initWithPosition:touchLocation];
@@ -367,6 +383,10 @@ CGContextRef context;
 
 -(void)placeIce
 {
+    if (![ResourceLabel subtractGoldBy:[IceBeamTower cost]]) {
+        NSLog(@"not enough gold");
+        return;
+    }
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     IceBeamTower* sprite = [[IceBeamTower alloc] initWithPosition:touchLocation];
@@ -377,5 +397,8 @@ CGContextRef context;
 {
     return unitList;
 }
-
++(NSMutableArray*)getFilledArray
+{
+    return filledList;
+}
 @end
