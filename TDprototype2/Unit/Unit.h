@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "GameLayer.h"
 
 @interface Unit : CCSprite {
     
@@ -22,5 +23,6 @@ typedef NS_ENUM(NSInteger, UnitType) {
 @property int hp;
 @property float speedMultiplier;
 @property UnitType unitType;
+@property int bounty;
 -(NSMutableArray*)moveToward:(CGPoint)target;
 @end

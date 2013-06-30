@@ -9,7 +9,8 @@
 #import "Unit.h"
 #import "ShortestPathStep.h"
 #import "IsometricOperator.h"
-#import "GameLayer.h"
+#import "ResourceLabel.h"
+
 #import "HpBar.h"
 
 
@@ -22,7 +23,7 @@
 @end
 
 @implementation Unit
-@synthesize speed,hp,speedMultiplier,unitType;
+@synthesize speed,hp,speedMultiplier,unitType,bounty;
 
 -(id)init
 {
@@ -247,4 +248,9 @@
     return;
 }
 
+-(void)onExit
+{
+    [super onExit];
+    [ResourceLabel addGoldBy:self.bounty];
+}
 @end

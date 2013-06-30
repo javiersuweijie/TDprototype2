@@ -19,6 +19,7 @@
         self.color = ccc3(0, 120, 200);
         self.hp = 100;
         self.unitType = Normal;
+        self.bounty = 10;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
         [self moveToward:pointTo];

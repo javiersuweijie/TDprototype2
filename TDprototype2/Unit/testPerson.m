@@ -10,7 +10,6 @@
 
 
 @implementation testPerson
-
 -(id)initWithPosition:(CGPoint)point moveTo:(CGPoint)pointTo
 {
     if (self = [super initWithFile:@"whiteball.png"]) {
@@ -19,6 +18,7 @@
         self.color = ccc3(255, 0, 0);
         self.hp = 200;
         self.unitType=Normal;
+        self.bounty = 10;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
         [self moveToward:pointTo];

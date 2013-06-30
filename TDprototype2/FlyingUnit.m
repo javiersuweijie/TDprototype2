@@ -19,6 +19,7 @@
         self.color = ccc3(100, 100, 120);
         self.hp = 100;
         self.unitType = Flying;
+        self.bounty = 10;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
         [self moveToward:pointTo];
@@ -34,6 +35,15 @@
 	// Remove the step
 	[self runAction:speeding];
     return nil;
+}
+
+-(void)update:(ccTime)dt
+{
+    if (self.hp<0) {
+        [[GameLayer getUnitArray] removeObject:self];
+        [self removeFromParentAndCleanup:YES];
+        
+    }
 }
 
 @end
