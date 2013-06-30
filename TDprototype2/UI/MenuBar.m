@@ -100,6 +100,7 @@ id game_layer;
     }
     if (extended) {
         extended = NO;
+        [self setContentSize:CGSizeMake(root.contentSize.width, root.contentSize.height)];
         for (id menuitem in [self children]) {
             if (menuitem==root) {
                 [menuitem runAction:[CCRotateTo actionWithDuration:0.4 angle:0]];
@@ -115,6 +116,7 @@ id game_layer;
     }
     else {
         extended = YES;
+        [self setContentSize:CGSizeMake(root.contentSize.width, 320)];
         NSLog(@"%@",NSStringFromCGSize(self.contentSize));
         for (id menuitem in [self children]) {
             if (menuitem==root) {
