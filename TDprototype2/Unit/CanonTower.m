@@ -23,6 +23,7 @@ BOOL isShooting;
 CGPoint currentPoint;
 CGPoint prevPoint;
 float airTime; //air time of the projectile
+static int cost = 500;
 
 -(id)initWithPosition:(CGPoint)point
 {
@@ -30,6 +31,7 @@ float airTime; //air time of the projectile
         [self setColor:ccc3(52, 196, 150)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(1, 1)];
+        [self setCost:cost];
         [self setPosition:point];
         [self setName:@"canontower"];
         [self setCanBeMoved:YES];
@@ -115,5 +117,10 @@ float airTime; //air time of the projectile
 
     [projectile removeFromParentAndCleanup:NO];
     [projectile setPosition:ccp(self.contentSize.width/2, 0)];
+}
+
++(int)cost
+{
+    return cost;
 }
 @end

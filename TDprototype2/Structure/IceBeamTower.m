@@ -15,6 +15,7 @@
 
 NSArray* array;
 Unit* unit;
+static int cost = 300;
 
 -(id)initWithPosition:(CGPoint)point
 {
@@ -22,6 +23,7 @@ Unit* unit;
         [self setColor:ccc3(255, 213, 67)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(1, 1)];
+        [self setCost:cost];
         [self setPosition:point];
         [self setName:@"icetower"];
         [self setCanBeMoved:YES];
@@ -67,5 +69,10 @@ Unit* unit;
         [emitter stopSystem];
         unit=nil;
     }
+}
+
++(int)cost
+{
+    return cost;
 }
 @end

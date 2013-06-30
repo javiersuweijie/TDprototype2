@@ -12,14 +12,16 @@
 @synthesize emitter;
 NSMutableArray* array;
 Unit* unit;
-
+static int cost = 100;
 
 -(id)initWithPosition:(CGPoint)point
 {
     if ([super initWithFile:[NSString stringWithFormat:@"whitebox.png"]]) {
         [self setColor:ccc3(243, 136, 136)];
         [self setAnchorPoint:ccp(0.5,0)];
-        [self setSize:CGSizeMake(1, 1)];
+        [self setSize:CGSizeMake(2, 2)];
+        [self setCost:cost];
+        [self setScale:2.0];
         [self setPosition:point];
         [self setName:@"firetower"];
         [self setCanBeMoved:YES];
@@ -68,6 +70,10 @@ Unit* unit;
         [emitter stopSystem];
         unit=nil;
     }
+}
++(int)cost
+{
+    return cost;
 }
 @end
 
