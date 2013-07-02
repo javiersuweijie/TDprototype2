@@ -64,14 +64,15 @@ CGContextRef context;
     [self addGestureRecognizer:panGestureRecognizer];
     [self setContentSize:CGSizeMake(winSize.width*2, winSize.height*2)];
     self.isTouchEnabled = YES;
-    self.scale = 1.4;
+//    self.scale = 1.4;
     
     filledList = [[NSMutableArray alloc]init];
     unitList = [[NSMutableArray alloc]init];
     [IsometricOperator init];
     unitAndBoxLayer = [CCLayer node];
+    [unitAndBoxLayer setAnchorPoint:ccp(0,0)];
     [self addChild:unitAndBoxLayer];
-   
+    [self setAnchorPoint:ccp(0,0)];
     tree = [[WorldTree alloc]initWithPosition:[IsometricOperator nearestPoint:ccpAdd(ccp(0,winSize.height/2),[IsometricOperator coordTransform:ccp(winSize.width/2, winSize.height*1.5)])]];
     [unitAndBoxLayer addChild:tree];
 //    [filledList addObject:tree]; //commented out else units cant find path
@@ -106,6 +107,7 @@ CGContextRef context;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
+    
 }
 
 -(void)handlePinchGesture:(UIPinchGestureRecognizer*) gesture
@@ -122,25 +124,34 @@ CGContextRef context;
         
         CGPoint mid = ccpMidpoint(touch1, touch2);
         mid=[self convertToNodeSpace:mid];
-        mid = ccp(mid.x/self.contentSize.width, mid.y/self.contentSize.height);
         float scale = gesture.scale;
-        if ((scale>1 && self.scale>5.0)||(scale<1 && self.scale<1));
-        else {
-            NSLog(@"%@",NSStringFromCGPoint(mid));
-            self.anchorPoint = mid;
-            self.scale *= scale;
-        }
-    gesture.scale = 1;
+//        if ((scale>1 && self.scale>5.0)||(scale<1 && self.scale<1));
+//        else {
+//            NSLog(@"%@",NSStringFromCGPoint(mid));
+//            self.anchorPoint = mid;
+//            self.scale *= scale;
+//        
+//        }
+        CGPoint oldCenter = ccp(mid.x*self.scale,mid.y*self.scale);
+        self.scale *= scale;
+        self.scale = MAX(self.scale, 0.5);
+        self.scale = MIN(self.scale, 5);
+        CGPoint newCenter = ccp(mid.x*self.scale,mid.y*self.scale);
+        CGPoint delta = ccpSub(oldCenter,newCenter);
+        NSLog(@"%@",NSStringFromCGPoint(delta));
+        self.position = ccpAdd(self.position, delta);
+        gesture.scale = 1;
     }
 }
 
--(void)draw {
-    ccDrawPoly(vert, 4, YES);
-//    ccDrawPoly(vert2, 4, YES);
-    if (buildingMode && !CGPointEqualToPoint(endPoint, startPoint)) {
-        ccDrawLine(startPoint, endPoint);
-    }
-}
+//-(void)draw {
+//    ccDrawPoly(vert, 4, YES);
+////    ccDrawSolidRect(ccp(0,0), ccp(self.contentSize.width, self.contentSize.height), ccc4FFromccc3B(ccGRAY));
+////    ccDrawPoly(vert2, 4, YES);
+//    if (buildingMode && !CGPointEqualToPoint(endPoint, startPoint)) {
+//        ccDrawLine(startPoint, endPoint);
+//    }
+//}
 
 -(void)handlePanGesture:(UIPanGestureRecognizer*)aPanGestureRecognizer
 {
@@ -164,7 +175,7 @@ CGContextRef context;
             }
             float angle1 =  ccpAngleSigned(ccp(1,0),ccpSub(endPoint,startPoint));
             int j = 0;
-            for (int dist=0; dist<ccpDistance(startPoint, endPoint); dist+=16) {
+            for (int dist=0; dist<ccpDistance(startPoint, endPoint); dist+=9) {
                 if (j>19) {
                     break;
                 }
@@ -172,9 +183,17 @@ CGContextRef context;
                 place = [IsometricOperator nearestPoint:place];
                 if ([GameLayer isValid:place]) {
                     Structure* block = buildingArray[j];
-                    [block setPosition:place];
-                    [block setVisible:YES];
-                    [block unSelect];
+                    for (Structure* block2 in buildingArray) {
+                        if (block2.visible&&CGPointEqualToPoint([block position], [block2 position])) {
+                            break;
+                        }
+                        else {
+                            [block setPosition:place];
+                            [block setVisible:YES];
+                            [block unSelect];
+                        }
+                    }
+
                     j++;
                 }
                 
@@ -182,21 +201,20 @@ CGContextRef context;
         }
     }
     else {
-        CCNode *node = aPanGestureRecognizer.node;
         CGPoint translation = [aPanGestureRecognizer translationInView:aPanGestureRecognizer.view];
         translation.y *= -1;
         [aPanGestureRecognizer setTranslation:CGPointZero inView:aPanGestureRecognizer.view];
-        if ([self convertToNodeSpace:CGPointZero].x<0&&translation.x>0) {
-        }
-        else if ([self convertToNodeSpace:CGPointZero].y<0&&translation.y>0) {
-        }
-        else if ([self convertToNodeSpace:ccp(winSize.width, winSize.height)].x>winSize.width&&translation.x<0) {
-        }
-        else if ([self convertToNodeSpace:ccp(winSize.width, winSize.height)].y>winSize.height&&translation.y<0) {
-        }
-        else {
-            node.position = ccpAdd(node.position, translation);
-        }
+//        if ([self convertToNodeSpace:CGPointZero].x<0&&translation.x>0) {
+//        }
+//        else if ([self convertToNodeSpace:CGPointZero].y<0&&translation.y>0) {
+//        }
+//        else if ([self convertToNodeSpace:ccp(winSize.width, winSize.height)].x>winSize.width&&translation.x<0) {
+//        }
+//        else if ([self convertToNodeSpace:ccp(winSize.width, winSize.height)].y>winSize.height&&translation.y<0) {
+//        }
+//        else {
+            self.position = ccpAdd(self.position, translation);
+//        }
 
     }
     if ([aPanGestureRecognizer state]==UIGestureRecognizerStateEnded) {
@@ -400,5 +418,20 @@ CGContextRef context;
 +(NSMutableArray*)getFilledArray
 {
     return filledList;
+}
+
+-(void)draw
+{
+    ccDrawPoly(vert, 4, YES);
+    for (int i=0;i<10;i++) {
+        for (int j=0; j<10; j++) {
+            vert2[0] = [IsometricOperator gridToCoord:ccp(i,j)];
+            vert2[1] = [IsometricOperator gridToCoord:ccp(i+1,j)];
+            vert2[2] = [IsometricOperator gridToCoord:ccp(i+1,j+1)];
+            vert2[3] = [IsometricOperator gridToCoord:ccp(i,j+1)];
+            ccDrawPoly(vert2, 4, YES);
+        }
+    }
+
 }
 @end

@@ -20,11 +20,11 @@ static float tileHeight;
 {
     kmMat4Identity(&transform);
     kmMat4Translation(&translate, 0, 0.8f, 0);
-    kmMat4Scaling(&scale, sqrtf(2.0)/2.0, sqrtf(2.0)/4.0, 1.0f);
+    kmMat4Scaling(&scale, sqrtf(2.0)*cosf(CC_DEGREES_TO_RADIANS(40)), 1.0f, 1.0f);
     kmMat4RotationZ(&rotate, CC_DEGREES_TO_RADIANS(-45));
     kmMat4Multiply(&transform, &scale, &rotate);
     kmMat4Inverse(&invTransform, &transform);
-    tileHeight = [[CCDirector sharedDirector]winSize].width/15;
+    tileHeight = 16;
     NSLog(@"%f",[[CCDirector sharedDirector]winSize].width);
     NSLog(@"%f",tileHeight);
 }
@@ -68,8 +68,8 @@ static float tileHeight;
 
 +(CGPoint)gridNumber:(CGPoint)nPoint{
     CGPoint xypoint = [IsometricOperator coordInvTransform:nPoint];
-    int x = xypoint.x/tileHeight;
-    int y = xypoint.y/tileHeight;
+    int x = roundf(xypoint.x/tileHeight);
+    int y = roundf(xypoint.y/tileHeight);
     
     return ccp(x,y);
 }
