@@ -50,8 +50,8 @@
     
     if (canBeMoved) {
         self.isTouchEnabled = YES;
-        [self setOpacity:100];
-        isSelected = YES;
+//        [self setOpacity:100];
+//        isSelected = YES;
         tempPosition = self.position;
     }
 }
@@ -127,7 +127,7 @@
 
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"%f,%f,%@",self.position.x,self.position.y,name];
+    return [NSString stringWithFormat:@"%f, %f, %@",self.position.x,self.position.y,name];
 }
 
 -(void)setName:(NSString*)n
