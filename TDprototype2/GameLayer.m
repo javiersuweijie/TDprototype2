@@ -115,35 +115,40 @@ id menu;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
+    touchLocation = ccpAdd(touchLocation, ccp(0,12.5));
     if (!CGPathContainsPoint(path, NULL, touchLocation, NO) ) {
         return;
     }
     menu = [[[self parent]getChildByTag:2]getChildByTag:1];
     
     NSLog(@"tapped");
-    if (isMenuOpen) {
-        [menu keepCircle];
-        isMenuOpen = NO;
-    }
+    if ([self closeMenu]);
     else {
         isMenuOpen = YES;
             CGPoint mid = [self convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
         CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),self.scale);
-        id move = [CCMoveBy actionWithDuration:0.5 position:moveby];
+        float dist = ccpDistance(ccp(0,0), moveby);
+        id move = [CCMoveBy actionWithDuration:dist/500 position:moveby];
         id ease = [CCEaseOut actionWithAction:move rate:0.5];
         id popMenu = [CCCallFunc actionWithTarget:menu selector:@selector(arrangeCircle)];
         [self runAction:[CCSequence actions:ease, popMenu, nil]];
-//        [menu arrangeCircle];
     }
     
 }
 
--(void)handlePinchGesture:(UIPinchGestureRecognizer*) gesture
+-(BOOL)closeMenu
 {
     if (isMenuOpen) {
         [menu keepCircle];
         isMenuOpen = NO;
+        return YES;
     }
+    return NO;
+}
+
+-(void)handlePinchGesture:(UIPinchGestureRecognizer*) gesture
+{
+    [self closeMenu];
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
         if ([gesture numberOfTouches]<2) {
             return;
@@ -186,10 +191,7 @@ id menu;
 
 -(void)handlePanGesture:(UIPanGestureRecognizer*)aPanGestureRecognizer
 {
-    if (isMenuOpen) {
-        [menu keepCircle];
-        isMenuOpen = NO;
-    }
+    [self closeMenu];
     if (buildingMode) {
 
         if (aPanGestureRecognizer.state == UIGestureRecognizerStateBegan) {
@@ -401,8 +403,10 @@ id menu;
 //        [buildingArray addObject:block];
 //        [buildingLayer addChild:block];
 //    }
+    [self closeMenu];
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
+    touchLocation = [IsometricOperator nearestPoint:touchLocation];
     BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
@@ -410,12 +414,14 @@ id menu;
 
 -(void)placeFireTower
 {
+    [self closeMenu];
     if (![ResourceLabel subtractGoldBy:[FireTower cost]]) {
         NSLog(@"not enough gold");
         return;
     }
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
+    touchLocation = [IsometricOperator nearestPoint:touchLocation];
     FireTower* sprite = [[FireTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
 //    [filledList addObject:sprite];
@@ -423,12 +429,14 @@ id menu;
 
 -(void)placeCanon
 {
+    [self closeMenu];
     if (![ResourceLabel subtractGoldBy:[CanonTower cost]]) {
         NSLog(@"not enough gold");
         return;
     }
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
+    touchLocation = [IsometricOperator nearestPoint:touchLocation];
     CanonTower* sprite = [[CanonTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
@@ -436,12 +444,14 @@ id menu;
 
 -(void)placeIce
 {
+    [self closeMenu];
     if (![ResourceLabel subtractGoldBy:[IceBeamTower cost]]) {
         NSLog(@"not enough gold");
         return;
     }
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
+    touchLocation = [IsometricOperator nearestPoint:touchLocation];
     IceBeamTower* sprite = [[IceBeamTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
@@ -465,4 +475,8 @@ id menu;
     ccDrawPoint(mid);
 
 }
+
+
+
+
 @end

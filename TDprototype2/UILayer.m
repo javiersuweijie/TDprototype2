@@ -22,6 +22,9 @@ Structure_Menu* menu;
     winSize = [[CCDirector sharedDirector]winSize];
     menu = [[Structure_Menu alloc]init];
     [self addChild:menu z:1 tag:1];
+    
+    id resource = [[ResourceLabel alloc]init];
+    [self addChild:resource];
 }
 
 @end
