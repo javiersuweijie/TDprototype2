@@ -62,7 +62,7 @@
     // the user pressed the "Done" button, so dismiss the keyboard
     [textField resignFirstResponder];
     [textField removeFromSuperview];
-    [[CCDirector sharedDirector]pushScene:[MenuLayer scene]];
+    [[CCDirector sharedDirector]pushScene:[GameScene scene]];
     return YES;
 }
 @end

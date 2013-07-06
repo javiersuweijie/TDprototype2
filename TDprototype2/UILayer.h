@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "MenuBar.h"
 
-@interface UILayer : CCLayer {
+@interface UILayer : CCLayer <UIGestureRecognizerDelegate>{
     
 }
 

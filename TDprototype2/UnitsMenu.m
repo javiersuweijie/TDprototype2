@@ -89,7 +89,7 @@ id game_layer;
 -(void)onEnter
 {
     [super onEnter];
-    game_layer= [[[self parent]parent] getChildByTag:1];
+    game_layer = [[[self parent]parent] getChildByTag:1];
     extended = NO;
     [self setContentSize:CGSizeMake(root.contentSize.width, 320)];
     [self setPosition:ccp(410, 10)];

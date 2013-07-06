@@ -9,19 +9,19 @@
 #import "UILayer.h"
 #import "UnitsMenu.h"
 #import "ResourceLabel.h"
-@implementation UILayer
+#import "Structure Menu.h"
 
+@implementation UILayer
+CGSize winSize;
+UIGestureRecognizer *tapGestureRecognizer;
+Structure_Menu* menu;
 
 -(void)onEnter
 {
     [super onEnter];
-//    MenuBar* menu = [[MenuBar alloc]init];
-//    [self addChild:menu];
-//    UnitsMenu*unitsmenu = [[UnitsMenu alloc]init];
-//    [self addChild:unitsmenu];
-//    ResourceLabel*resouces = [[ResourceLabel alloc]init];
-//    [self addChild:resouces];
-    
-    
+    winSize = [[CCDirector sharedDirector]winSize];
+    menu = [[Structure_Menu alloc]init];
+    [self addChild:menu z:1 tag:1];
 }
+
 @end

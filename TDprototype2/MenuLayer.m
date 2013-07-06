@@ -15,8 +15,7 @@ NSArray* menuArray;
 CGSize winSize;
 UIGestureRecognizer *tapGestureRecognizer;
 Structure_Menu* menu;
-BOOL isMenuOpen;
-
+@synthesize isMenuOpen;
 +(id) scene
 {
 	CCScene *scene = [CCScene node];

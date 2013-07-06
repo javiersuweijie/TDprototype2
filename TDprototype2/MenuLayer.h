@@ -12,5 +12,6 @@
 @interface MenuLayer : CCLayer <UIGestureRecognizerDelegate>{
     
 }
+@property BOOL isMenuOpen;
 +(id)scene;
 @end

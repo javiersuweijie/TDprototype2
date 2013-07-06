@@ -34,6 +34,6 @@
     
     //Init user interface
     UILayer* userinterface = [UILayer node];
-    [self addChild:userinterface z:10];
+    [self addChild:userinterface z:10 tag:2];
 }
 @end
