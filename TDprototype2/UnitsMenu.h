@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-
-@interface UnitsMenu : CCMenu {
+#import "CustomMenu.h"  
+@interface UnitsMenu : CustomMenu {
     
 }
 @property BOOL extended;

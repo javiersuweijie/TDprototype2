@@ -8,6 +8,7 @@
 
 #import "StartMenu.h"
 #import "GameScene.h"
+#import "MenuLayer.h"
 
 @interface StartMenu () {
     CGSize winSize;
@@ -61,7 +62,7 @@
     // the user pressed the "Done" button, so dismiss the keyboard
     [textField resignFirstResponder];
     [textField removeFromSuperview];
-    [[CCDirector sharedDirector]pushScene:[GameScene scene]];
+    [[CCDirector sharedDirector]pushScene:[MenuLayer scene]];
     return YES;
 }
 @end

@@ -50,10 +50,6 @@
     
     if (canBeMoved) {
         self.isTouchEnabled = YES;
-        downArrows = [CCSprite spriteWithFile:@"arrowAI.png"];
-        [downArrows setAnchorPoint:ccp(0, 0.5)];
-        [downArrows setPosition:ccp(0, self.contentSize.height/2)];
-        [self addChild:downArrows];
         [self setOpacity:100];
         isSelected = YES;
         tempPosition = self.position;

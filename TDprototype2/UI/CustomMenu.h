@@ -12,5 +12,9 @@
 @interface CustomMenu : CCNode {
     
 }
+@property BOOL isSelected;
 
+-(id) initWithArray:(NSArray *)arrayOfItems;
+-(void)arrangeCircle;
+-(void)keepCircle;
 @end

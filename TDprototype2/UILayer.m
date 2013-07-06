@@ -9,19 +9,18 @@
 #import "UILayer.h"
 #import "UnitsMenu.h"
 #import "ResourceLabel.h"
-#import "Resources.h"
 @implementation UILayer
 
 
 -(void)onEnter
 {
     [super onEnter];
-    MenuBar* menu = [[MenuBar alloc]init];
-    [self addChild:menu];
-    UnitsMenu*unitsmenu = [[UnitsMenu alloc]init];
-    [self addChild:unitsmenu];
-    ResourceLabel*resouces = [[ResourceLabel alloc]init];
-    [self addChild:resouces];
+//    MenuBar* menu = [[MenuBar alloc]init];
+//    [self addChild:menu];
+//    UnitsMenu*unitsmenu = [[UnitsMenu alloc]init];
+//    [self addChild:unitsmenu];
+//    ResourceLabel*resouces = [[ResourceLabel alloc]init];
+//    [self addChild:resouces];
     
     
 }

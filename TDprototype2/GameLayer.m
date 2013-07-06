@@ -98,6 +98,7 @@ CGContextRef context;
     CGPathAddLineToPoint(path, NULL, vert[3].x, vert[3].y);
     CGPathCloseSubpath(path);
     
+    NSLog(@"%f",ccpDistance([IsometricOperator gridToCoord:ccp(0,0)], [IsometricOperator gridToCoord:ccp(1,1)]));
     
 }
 
@@ -138,7 +139,6 @@ CGContextRef context;
         self.scale = MIN(self.scale, 5);
         CGPoint newCenter = ccp(mid.x*self.scale,mid.y*self.scale);
         CGPoint delta = ccpSub(oldCenter,newCenter);
-        NSLog(@"%@",NSStringFromCGPoint(delta));
         self.position = ccpAdd(self.position, delta);
         gesture.scale = 1;
     }
@@ -423,15 +423,15 @@ CGContextRef context;
 -(void)draw
 {
     ccDrawPoly(vert, 4, YES);
-    for (int i=0;i<10;i++) {
-        for (int j=0; j<10; j++) {
-            vert2[0] = [IsometricOperator gridToCoord:ccp(i,j)];
-            vert2[1] = [IsometricOperator gridToCoord:ccp(i+1,j)];
-            vert2[2] = [IsometricOperator gridToCoord:ccp(i+1,j+1)];
-            vert2[3] = [IsometricOperator gridToCoord:ccp(i,j+1)];
-            ccDrawPoly(vert2, 4, YES);
-        }
-    }
+//    for (int i=0;i<10;i++) {
+//        for (int j=0; j<10; j++) {
+//            vert2[0] = [IsometricOperator gridToCoord:ccp(i,j)];
+//            vert2[1] = [IsometricOperator gridToCoord:ccp(i+1,j)];
+//            vert2[2] = [IsometricOperator gridToCoord:ccp(i+1,j+1)];
+//            vert2[3] = [IsometricOperator gridToCoord:ccp(i,j+1)];
+//            ccDrawPoly(vert2, 4, YES);
+//        }
+//    }
 
 }
 @end

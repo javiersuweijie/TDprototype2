@@ -20,7 +20,8 @@ static float tileHeight;
 {
     kmMat4Identity(&transform);
     kmMat4Translation(&translate, 0, 0.8f, 0);
-    kmMat4Scaling(&scale, sqrtf(2.0)*cosf(CC_DEGREES_TO_RADIANS(40)), 1.0f, 1.0f);
+//    kmMat4Scaling(&scale, sqrtf(2.0)*cosf(CC_DEGREES_TO_RADIANS(40)), 1.0f, 1.0f);
+    kmMat4Scaling(&scale, sqrtf(2.0), 1.0f, 1.0f);
     kmMat4RotationZ(&rotate, CC_DEGREES_TO_RADIANS(-45));
     kmMat4Multiply(&transform, &scale, &rotate);
     kmMat4Inverse(&invTransform, &transform);
@@ -35,7 +36,7 @@ static float tileHeight;
     };
     
     kmVec3Transform(&vPoint, &vPoint, &transform);
-    return ccp(roundf(vPoint.x),roundf(vPoint.y));
+    return ccp(vPoint.x,vPoint.y);
 }
 
 +(CGPoint)coordInvTransform:(CGPoint)point {

@@ -20,6 +20,7 @@
         self.unitType=Normal;
         self.bounty = 10;
         [self setAnchorPoint:ccp(0.5,0)];
+        [self setScale:0.75];
         [self setPosition:point];
         [self moveToward:pointTo];
     }

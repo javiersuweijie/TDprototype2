@@ -16,12 +16,11 @@ static int cost = 100;
 
 -(id)initWithPosition:(CGPoint)point
 {
-    if ([super initWithFile:[NSString stringWithFormat:@"whitebox.png"]]) {
+    if ([super initWithFile:[NSString stringWithFormat:@"psuedoisobox2.png"]]) {
         [self setColor:ccc3(243, 136, 136)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
-        [self setScale:2.0];
         [self setPosition:point];
         [self setName:@"firetower"];
         [self setCanBeMoved:YES];

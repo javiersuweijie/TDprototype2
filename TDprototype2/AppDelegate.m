@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "GameScene.h"
 #import "StartMenu.h"
+#import "MenuLayer.h"
 
 @implementation AppController
 
