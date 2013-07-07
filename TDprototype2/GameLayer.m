@@ -48,8 +48,8 @@ CGPoint borderVert[4];
 CGPoint vert2[4];
 NSMutableArray* buildingArray;
 CGContextRef context;
-BOOL isMenuOpen;
 id menu;
+IOOObject* ioObject;
 
 -(void)onEnter
 {
@@ -103,9 +103,9 @@ id menu;
     
     NSLog(@"%f",ccpDistance([IsometricOperator gridToCoord:ccp(0,1)], [IsometricOperator gridToCoord:ccp(1,0)]));
     
-    isMenuOpen = NO;
-    
     [self schedule:@selector(gridChecker:) interval:0.5];
+    
+    ioObject = [[IOOObject alloc]init];
 }
 int i = 0;
 -(void)gridChecker:(ccTime)dt
@@ -128,14 +128,14 @@ int i = 0;
         return;
     }
     menu = [[[self parent]getChildByTag:2]getChildByTag:1];
-    
-    NSLog(@"tapped");
+    if ([[[menu children]objectAtIndex:0] numberOfRunningActions]>0) {
+        return;
+    }
     if ([self closeMenu]);
     else {
         if ([Structure isSelectedGlobally]) {
             return;
         }
-        isMenuOpen = YES;
         CGPoint mid = [self convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
         CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),self.scale);
         float dist = ccpDistance(ccp(0,0), moveby);
@@ -148,9 +148,8 @@ int i = 0;
 
 -(BOOL)closeMenu
 {
-    if (isMenuOpen) {
+    if ([menu isSelected]) {
         [menu keepCircle];
-        isMenuOpen = NO;
         return YES;
     }
     return NO;
@@ -465,6 +464,11 @@ int i = 0;
     IceBeamTower* sprite = [[IceBeamTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
+}
+
+-(void)exportData
+{
+    [ioObject exportStructureListFrom:filledList];
 }
 +(NSMutableArray*)getUnitArray
 {

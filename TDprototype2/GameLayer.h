@@ -31,4 +31,6 @@
 -(void)spawnFastPaper;
 -(void)spawnSlowThick;
 -(void)spawnFlyingUnit;
+
+-(void)exportData;
 @end

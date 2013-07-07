@@ -55,7 +55,9 @@ NSArray* list_;
         [array setObject:[structure getName]  forKey:NSStringFromCGPoint(structure.position)];
     }
     NSData* data = [array toJSON];
-    return [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSString* string = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(string);
+    return string;
 }
 
 -(void)sendData

@@ -90,7 +90,7 @@ id game_layer;
 }
 -(void) do5Action
 {
-        NSLog(@"touched 5");
+    [game_layer exportData];
 }
 -(void) do6Action{
         NSLog(@"touched 6");
