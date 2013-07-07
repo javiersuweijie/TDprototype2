@@ -14,11 +14,15 @@
 @interface Structure : CCSprite <UIGestureRecognizerDelegate> {
     
 }
+
 @property (nonatomic,strong) NSArray* gridPosition;
 @property int cost;
+
 -(void)setName:(NSString*)n;
 -(void)setCanBeMoved:(BOOL)b;
 -(void)setSize:(CGSize)size;
+-(NSString*)getName;
 -(void)unSelect;
 +(int)cost;
++(BOOL)isSelectedGlobally;
 @end

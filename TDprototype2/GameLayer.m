@@ -10,7 +10,9 @@
 #import "IsometricOperator.h"
 #import "ResourceLabel.h"
 #import "CustomMenu.h"
+#import "IOOObject.h"
 
+#import "Structure.h"
 #import "BasicBlock.h"
 #import "FireTower.h"
 #import "WorldTree.h"
@@ -78,17 +80,12 @@ id menu;
     [self setAnchorPoint:ccp(0,0)];
 //    [filledList addObject:tree]; //commented out else units cant find path
     
-
-    vert[0] = ccpAdd(ccp(0,winSize.height),[IsometricOperator coordTransform:ccp(0, 0)]);
-    vert[1] = ccpAdd(ccp(0,winSize.height),[IsometricOperator coordTransform:ccp(winSize.width, 0)]);
-    vert[2] = ccpAdd(ccp(0,winSize.height),[IsometricOperator coordTransform:ccp(winSize.width, winSize.height*1.5)]);
-    vert[3] = ccpAdd(ccp(0,winSize.height),[IsometricOperator coordTransform:ccp(0, winSize.height*1.5)]);
+    float translate = 22.627*14;
     
-    
-    vert2[0] = ccp(0, 0);
-    vert2[1] = ccp(winSize.width, 0);
-    vert2[2] = ccp(winSize.width, winSize.height);
-    vert2[3] = ccp(0, winSize.height);
+    vert[0] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, 0)]);
+    vert[1] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width, 0)]);
+    vert[2] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width, winSize.height*1.5)]);
+    vert[3] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, winSize.height*1.5)]);
     
     CCSprite* background = [CCSprite spriteWithFile:@"gridfloor.png"];
     [background setPosition:vert[0]];
@@ -104,9 +101,20 @@ id menu;
     CGPathAddLineToPoint(path, NULL, vert[3].x, vert[3].y);
     CGPathCloseSubpath(path);
     
-    NSLog(@"%f",ccpDistance([IsometricOperator gridToCoord:ccp(0,0)], [IsometricOperator gridToCoord:ccp(1,1)]));
+    NSLog(@"%f",ccpDistance([IsometricOperator gridToCoord:ccp(0,1)], [IsometricOperator gridToCoord:ccp(1,0)]));
     
     isMenuOpen = NO;
+    
+    [self schedule:@selector(gridChecker:) interval:0.5];
+}
+int i = 0;
+-(void)gridChecker:(ccTime)dt
+{
+    vert2[0] = [IsometricOperator gridToCoord:ccp(-2,i)];
+    vert2[1] = [IsometricOperator gridToCoord:ccp(-2,i+1)];
+    vert2[2] = [IsometricOperator gridToCoord:ccp(-2+1,i+1)];
+    vert2[3] = [IsometricOperator gridToCoord:ccp(-2+1,i)];
+    i++;
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -115,7 +123,7 @@ id menu;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
-    touchLocation = ccpAdd(touchLocation, ccp(0,12.5));
+    touchLocation = ccpAdd(touchLocation, ccp(0,11.31));
     if (!CGPathContainsPoint(path, NULL, touchLocation, NO) ) {
         return;
     }
@@ -124,16 +132,18 @@ id menu;
     NSLog(@"tapped");
     if ([self closeMenu]);
     else {
+        if ([Structure isSelectedGlobally]) {
+            return;
+        }
         isMenuOpen = YES;
-            CGPoint mid = [self convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
+        CGPoint mid = [self convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
         CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),self.scale);
         float dist = ccpDistance(ccp(0,0), moveby);
-        id move = [CCMoveBy actionWithDuration:dist/500 position:moveby];
+        id move = [CCMoveBy actionWithDuration:dist/700 position:moveby];
         id ease = [CCEaseOut actionWithAction:move rate:0.5];
         id popMenu = [CCCallFunc actionWithTarget:menu selector:@selector(arrangeCircle)];
         [self runAction:[CCSequence actions:ease, popMenu, nil]];
     }
-    
 }
 
 -(BOOL)closeMenu
@@ -424,7 +434,7 @@ id menu;
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
     FireTower* sprite = [[FireTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
-//    [filledList addObject:sprite];
+    [filledList addObject:sprite];
 }
 
 -(void)placeCanon
@@ -468,12 +478,14 @@ id menu;
 -(void)draw
 {
     ccDrawPoly(vert, 4, YES);
+    ccDrawPoly(vert2, 4, YES);
     ccPointSize(5);
     
     CGPoint mid = [self convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
     ccDrawPoint(ccpIntersectPoint(vert[0], vert[2], vert[1], vert[3]));
     ccDrawPoint(mid);
 
+    
 }
 
 

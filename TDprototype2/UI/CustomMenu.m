@@ -60,14 +60,18 @@
 
 -(void)arrangeCircle
 {
+    
     if ([[self children]count]>0&&!isSelected) {
         isSelected=YES;
         float angle = M_PI*2/[[self children] count];
         int i = 1;
         for (CCNode* menuItem in [self children]) {
+            if ([menuItem numberOfRunningActions]>0) {
+                return;
+            }
             menuItem.visible = YES;
             CGPoint endpoint = ccpMult(ccp(cosf(angle*i),sinf(angle*i)),75);
-            CCMoveBy* move = [CCMoveBy actionWithDuration:0.5 position:endpoint];
+            CCMoveBy* move = [CCMoveTo actionWithDuration:0.5 position:endpoint];
             id ease = [CCEaseElasticOut actionWithAction:move];
 
             [menuItem runAction:ease];
@@ -81,6 +85,9 @@
     if (isSelected) {
         isSelected = NO;
         for (id menuItem in [self children]) {
+            if ([menuItem numberOfRunningActions]>0) {
+                return;
+            }
             [menuItem setVisible:NO];
             [menuItem setPosition:ccp(0,0)];
         }

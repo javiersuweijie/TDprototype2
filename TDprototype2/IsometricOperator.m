@@ -28,6 +28,10 @@ static float tileHeight;
     tileHeight = 16;
     NSLog(@"%f",[[CCDirector sharedDirector]winSize].width);
     NSLog(@"%f",tileHeight);
+    
+    
+    NSLog(@"%d",(int)-1.5);
+    NSLog(@"%d",(int)1.5);
 }
 
 +(CGPoint)coordTransform:(CGPoint)point {
@@ -60,6 +64,8 @@ static float tileHeight;
     else {
         x = xypoint.x/tileHeight;
         y = xypoint.y/tileHeight;
+        if (x<0)x--;
+        if (y<0)y--;
         x*=tileHeight;
         y*=tileHeight;
         return [IsometricOperator coordTransform:ccp(x+tileHeight,y)];

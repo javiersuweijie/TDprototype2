@@ -25,6 +25,8 @@
 @implementation Structure
 @synthesize gridPosition,cost;
 
+static BOOL isSelectedGlobal;
+
 //-(id)initWithFile:(NSString *)filename {
 //    self=[super initWithFile:filename];
 //    if (![ResourceLabel subtractGoldBy:self.cost]) {
@@ -46,7 +48,7 @@
     [self addGestureRecognizer:pan];
     [pan setEnabled:YES];
     pan.delegate = self;
-
+    isSelectedGlobal = NO;
     
     if (canBeMoved) {
         self.isTouchEnabled = YES;
@@ -61,6 +63,7 @@
     [self setOpacity:255];
     [downArrows setVisible:NO];
     isSelected = NO;
+    isSelectedGlobal = NO;
     [pan setEnabled:NO];
 }
 
@@ -71,9 +74,10 @@
             [self unSelect];
             [[GameLayer getFilledArray]addObject:self];
         }
-        else {
+        else if (!isSelectedGlobal) {
             [self setOpacity:100];
             [downArrows setVisible:YES];
+            isSelectedGlobal = YES;
             isSelected = YES;
             [pan setEnabled:YES];
             [[GameLayer getFilledArray]removeObject:self];
@@ -85,9 +89,11 @@
 -(void)handlePanGesture:(UIPanGestureRecognizer*)gesture
 {
     if (isSelected) {
+//        NSLog(@"%f",self.scale);
         CGPoint translation = [gesture translationInView:gesture.view];
         translation.y *= -1;
         [gesture setTranslation:CGPointZero inView:gesture.view];
+        translation = ccpMult(translation, 1/[[self parent]parent].scale);
         tempPosition = ccpAdd(tempPosition, translation);
         CGPoint newPoint = [IsometricOperator nearestPoint:tempPosition];
         if (!CGPointEqualToPoint(newPoint,self.position)) {
@@ -135,6 +141,11 @@
     name = n;
 }
 
+-(NSString*)getName
+{
+    return name;
+}
+
 -(void)setCanBeMoved:(BOOL)b
 {
     canBeMoved = b;
@@ -162,5 +173,15 @@
 +(int)cost
 {
     mustOverride();
+}
+
++(BOOL)isSelectedGlobally
+{
+    return isSelectedGlobal;
+}
+
++(void)setIsSelectedGlobally:(BOOL)bool_
+{
+    isSelectedGlobal = bool_;
 }
 @end

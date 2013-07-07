@@ -15,6 +15,7 @@
 		7D3C32511776EF7500F052B4 /* UnitsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32501776EF7500F052B4 /* UnitsMenu.m */; };
 		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
 		7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */; };
+		7D746BF2178870D400EF195C /* IOOObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF310EA178858910099EEEF /* IOOObject.m */; };
 		7D9224C5177FD36B001A7D9E /* ResourceLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9224C4177FD36B001A7D9E /* ResourceLabel.m */; };
 		7D9C28FD177B1AE00074CF93 /* whiteball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C28FC177B1ADF0074CF93 /* whiteball.png */; };
 		7D9C2901177B3A470074CF93 /* whitebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C2900177B3A470074CF93 /* whitebox.png */; };
@@ -504,6 +505,8 @@
 		7DF310E1178816560099EEEF /* gridfloor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gridfloor.png; path = Resources/gridfloor.png; sourceTree = "<group>"; };
 		7DF310E5178850AE0099EEEF /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = Resources/button.png; sourceTree = "<group>"; };
 		7DF310E7178850F80099EEEF /* psuedoisobox2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = psuedoisobox2.png; path = Resources/psuedoisobox2.png; sourceTree = "<group>"; };
+		7DF310E9178858910099EEEF /* IOOObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOOObject.h; sourceTree = "<group>"; };
+		7DF310EA178858910099EEEF /* IOOObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOOObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -531,6 +534,8 @@
 			children = (
 				7D3C323C1774927D00F052B4 /* StartMenu.h */,
 				7D3C323D1774927D00F052B4 /* StartMenu.m */,
+				7DF310E9178858910099EEEF /* IOOObject.h */,
+				7DF310EA178858910099EEEF /* IOOObject.m */,
 			);
 			name = "Start Menu";
 			sourceTree = "<group>";
@@ -1261,6 +1266,7 @@
 				7D9224C5177FD36B001A7D9E /* ResourceLabel.m in Sources */,
 				7DF310DD1787D0FA0099EEEF /* CustomMenuItem.m in Sources */,
 				7DF310E01787DA0C0099EEEF /* Structure Menu.m in Sources */,
+				7D746BF2178870D400EF195C /* IOOObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
