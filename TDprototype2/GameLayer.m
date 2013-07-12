@@ -105,7 +105,7 @@ IOOObject* ioObject;
     
     [self schedule:@selector(gridChecker:) interval:0.5];
     
-    ioObject = [[IOOObject alloc]init];
+    ioObject = [[IOOObject alloc]initWithList:filledList];
 }
 int i = 0;
 -(void)gridChecker:(ccTime)dt
@@ -366,7 +366,7 @@ int i = 0;
 
 -(void)testSP
 {
-    Unit* person = [[testPerson alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:tree.position]];
+    Unit* person = [[testPerson alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:ccp(864, 316.784)]];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
@@ -470,6 +470,17 @@ int i = 0;
 {
     [ioObject exportStructureListFrom:filledList];
 }
+
+-(void)loadData
+{
+    NSDictionary* towerD = [ioObject load];
+    for (NSString* key in towerD) {
+        NSString* tower = [towerD objectForKey:key];
+        
+        
+    }
+}
+
 +(NSMutableArray*)getUnitArray
 {
     return unitList;

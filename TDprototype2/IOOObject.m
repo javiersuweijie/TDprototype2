@@ -10,14 +10,12 @@
 #import "Structure.h"
 
 @interface NSDictionary(JSONCategories)
-+(NSDictionary*)dictionaryWithContentsOfJSONURLString:
-(NSString*)urlAddress;
++(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress;
 -(NSData*)toJSON;
 @end
 
 @implementation NSDictionary(JSONCategories)
-+(NSDictionary*)dictionaryWithContentsOfJSONURLString:
-(NSString*)urlAddress
++(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress
 {
     NSData* data = [NSData dataWithContentsOfURL:
                     [NSURL URLWithString: urlAddress] ];
@@ -40,47 +38,63 @@
 
 @implementation IOOObject
 NSArray* list_;
-
+NSString *documentsDirectory;
 -(id)initWithList:(NSArray*)list {
     if (self=[super init]) {
         list_=list;
+        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+        documentsDirectory = [path objectAtIndex:0];
+        NSLog(@"%@",documentsDirectory);
     }
     return self;
 }
 
--(NSString*)exportStructureListFrom:(NSArray*)filledList
+-(void)exportStructureListFrom:(NSArray*)filledList
 {
     NSMutableDictionary* array = [[NSMutableDictionary alloc]init];
     for (Structure* structure in filledList) {
         [array setObject:[structure getName]  forKey:NSStringFromCGPoint(structure.position)];
     }
     NSData* data = [array toJSON];
-    NSString* string = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(string);
-    return string;
+    [data writeToFile:[documentsDirectory stringByAppendingPathComponent:@"save_game"] atomically:YES];
+    NSLog(@"saved@ %@",[documentsDirectory stringByAppendingPathComponent:@"save_game"]);
+}
+
+-(id)load
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"save_game"]]) {
+        NSLog(@"save game found");
+        NSData* data = [NSData dataWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:@"save_game"]];
+        NSError*error = nil;
+        id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        return result;
+    }
+    else NSLog(@"not found");
+    return nil;
 }
 
 -(void)sendData
 {
-    NSString *post = [NSString stringWithFormat:@"api_key=%@&game_id=%@&response=%@&username=%@key=%@value=%@",
-                      [self urlEncodeValue:@"c3980e65244e55d733f5bec89d54b71b9c708cd1"]
-                      ,[self urlEncodeValue:@"70c2bee046"]
-                      ,[self urlEncodeValue:@"json"]
-                      ,[self urlEncodeValue:@"javier"]
-                      ,[self urlEncodeValue:@"game_state"]
-                      ,[self urlEncodeValue:[self exportStructureListFrom:list_]]];
-    
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"https://api.scoreoid.com/v1/setPlayerData"]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    id a=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    a=nil;
+//    NSString *post = [NSString stringWithFormat:@"api_key=%@&game_id=%@&response=%@&username=%@key=%@value=%@",
+//                      [self urlEncodeValue:@"c3980e65244e55d733f5bec89d54b71b9c708cd1"]
+//                      ,[self urlEncodeValue:@"70c2bee046"]
+//                      ,[self urlEncodeValue:@"json"]
+//                      ,[self urlEncodeValue:@"javier"]
+//                      ,[self urlEncodeValue:@"game_state"]
+//                      ,[self urlEncodeValue:[self exportStructureListFrom:list_]]];
+//    
+//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+//    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    [request setURL:[NSURL URLWithString:@"https://api.scoreoid.com/v1/setPlayerData"]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    [request setHTTPBody:postData];
+//    id a=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+//    a=nil;
 }
                                     
 - (NSString *)urlEncodeValue:(NSString *)str

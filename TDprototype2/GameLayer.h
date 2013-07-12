@@ -33,4 +33,5 @@
 -(void)spawnFlyingUnit;
 
 -(void)exportData;
+-(void)loadData;
 @end

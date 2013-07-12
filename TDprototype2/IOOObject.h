@@ -11,5 +11,6 @@
 @interface IOOObject : NSObject
 -(id)initWithList:(NSArray*)list;
 -(void)sendData;
--(NSString*)exportStructureListFrom:(NSArray*)filledList;
+-(void)exportStructureListFrom:(NSArray*)filledList;
+-(id)load;
 @end

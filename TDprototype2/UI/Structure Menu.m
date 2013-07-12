@@ -44,16 +44,16 @@ id game_layer;
     [menuItem4 addChild:label4];
     
     CustomMenuItem * menuItem5 = [CustomMenuItem menuItemWithOnlyImage:@"button.png" target:self selector:@selector(do5Action)];
-    CCLabelTTF* label5 = [CCLabelTTF labelWithString:@"Nothing" fontName:@"Helvetica" fontSize:8];
+    CCLabelTTF* label5 = [CCLabelTTF labelWithString:@"Save" fontName:@"Helvetica" fontSize:8];
     [label5 setAnchorPoint:ccp(0,0)];
     [label5 setPosition:ccp(left_padding, 0)];
     [menuItem5 addChild:label5];
     
     CustomMenuItem * menuItem6 = [CustomMenuItem menuItemWithOnlyImage:@"button.png" target:self selector:@selector(do6Action)];
-    CCLabelTTF* label6 = [CCLabelTTF labelWithString:@"Nothing" fontName:@"Helvetica" fontSize:8];
+    CCLabelTTF* label6 = [CCLabelTTF labelWithString:@"Load" fontName:@"Helvetica" fontSize:8];
     [label6 setAnchorPoint:ccp(0,0)];
     [label6 setPosition:ccp(left_padding, 0)];
-    [menuItem5 addChild:label6];
+    [menuItem6 addChild:label6];
     
     NSArray* menuArray = [[NSArray alloc]initWithObjects:menuItem6,menuItem5,menuItem4,menuItem3,menuItem2,menuItem1 ,nil];
     
@@ -92,8 +92,8 @@ id game_layer;
 {
     [game_layer exportData];
 }
--(void) do6Action{
-        NSLog(@"touched 6");
-        NSLog(@"%@",NSStringFromCGSize(self.contentSize));
+-(void) do6Action
+{
+    [game_layer loadData];
 }
 @end
