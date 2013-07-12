@@ -22,20 +22,20 @@
         self.bounty = 10;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
-        [self moveToward:pointTo];
+//        [self moveToward:pointTo];
     }
     return self;
 }
 
--(NSMutableArray*)moveToward:(CGPoint)target
-{
-    float timetaken=ccpDistance(self.position, target)/self.speed;
-	id moveAction = [CCMoveTo actionWithDuration:timetaken position:target];
-    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, nil] speed:self.speedMultiplier];
-	// Remove the step
-	[self runAction:speeding];
-    return nil;
-}
+//-(NSMutableArray*)moveToward:(CGPoint)target
+//{
+//    float timetaken=ccpDistance(self.position, target)/self.speed;
+//	id moveAction = [CCMoveTo actionWithDuration:timetaken position:target];
+//    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, nil] speed:self.speedMultiplier];
+//	// Remove the step
+//	[self runAction:speeding];
+//    return nil;
+//}
 
 -(void)update:(ccTime)dt
 {

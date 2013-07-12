@@ -24,5 +24,5 @@ typedef NS_ENUM(NSInteger, UnitType) {
 @property float speedMultiplier;
 @property UnitType unitType;
 @property int bounty;
--(NSMutableArray*)moveToward:(CGPoint)target;
+-(NSMutableArray*)moveToward:(NSValue*)target;
 @end

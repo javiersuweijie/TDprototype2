@@ -22,7 +22,7 @@
         self.bounty = 100;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
-        [self moveToward:pointTo];
+//        [self moveToward:pointTo];
     }
     return self;
 }

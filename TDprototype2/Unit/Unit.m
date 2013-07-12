@@ -52,10 +52,10 @@
     }
 }
 
--(NSMutableArray*)moveToward:(CGPoint)target
+-(NSMutableArray*)moveToward:(NSValue*)target
 {
     NSDate *start = [NSDate date];
-    CGPoint toGrid = [IsometricOperator gridNumber:target];
+    CGPoint toGrid = [IsometricOperator gridNumber:[target CGPointValue]];
     CGPoint fromGrid = [IsometricOperator gridNumber:self.position];
     if (![GameLayer isValidGrid:toGrid]) {  //check if destination is valid
         NSLog(@"Not valid point");
