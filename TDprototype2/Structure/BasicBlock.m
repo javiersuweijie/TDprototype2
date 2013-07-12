@@ -22,7 +22,7 @@ static int cost = 0;
         [self setSize:CGSizeMake(1, 1)];
         [self setCost:cost];
         [self setPosition:point];
-        [self setName:@"basicbluebox"];
+        [self setName:@"BasicBlock"];
         [self setCanBeMoved:YES];
     }
     return self;

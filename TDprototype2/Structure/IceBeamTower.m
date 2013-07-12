@@ -25,7 +25,7 @@ static int cost = 300;
         [self setSize:CGSizeMake(1, 1)];
         [self setCost:cost];
         [self setPosition:point];
-        [self setName:@"icetower"];
+        [self setName:@"IceBeamTower"];
         [self setCanBeMoved:YES];
         [self scheduleUpdate];
         

@@ -22,7 +22,7 @@ static int cost = 100;
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
         [self setPosition:point];
-        [self setName:@"firetower"];
+        [self setName:@"FireTower"];
         [self setCanBeMoved:YES];
         
     }

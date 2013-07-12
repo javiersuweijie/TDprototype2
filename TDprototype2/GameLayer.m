@@ -476,8 +476,11 @@ int i = 0;
     NSDictionary* towerD = [ioObject load];
     for (NSString* key in towerD) {
         NSString* tower = [towerD objectForKey:key];
-        
-        
+        NSLog(@"%@",tower);
+        CCSprite* sprite = [[NSClassFromString(tower) alloc] initWithPosition:CGPointFromString(key)];
+        NSLog(@"%@",sprite);
+        [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+        [filledList addObject:sprite];
     }
 }
 

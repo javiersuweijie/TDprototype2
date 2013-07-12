@@ -33,7 +33,7 @@ static int cost = 500;
         [self setSize:CGSizeMake(1, 1)];
         [self setCost:cost];
         [self setPosition:point];
-        [self setName:@"canontower"];
+        [self setName:@"CanonTower"];
         [self setCanBeMoved:YES];
         projectile = [[CCSprite alloc]initWithFile:@"redbox.png"];
         [self scheduleUpdate];
