@@ -10,12 +10,13 @@
 #import "UnitsMenu.h"
 #import "ResourceLabel.h"
 #import "Structure Menu.h"
+#import "ConfirmMenu.h"
 
 @implementation UILayer
 CGSize winSize;
 UIGestureRecognizer *tapGestureRecognizer;
 Structure_Menu* menu;
-
+ConfirmMenu* confirmMenu;
 -(void)onEnter
 {
     [super onEnter];
@@ -23,8 +24,13 @@ Structure_Menu* menu;
     menu = [[Structure_Menu alloc]init];
     [self addChild:menu z:1 tag:1];
     
+    confirmMenu = [[ConfirmMenu alloc]init];
+    [self addChild:confirmMenu z:2 tag:2];
+    
     id resource = [[ResourceLabel alloc]init];
     [self addChild:resource];
+    
+    [menu setConfirmMenu:confirmMenu];
 }
 
 @end

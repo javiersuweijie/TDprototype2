@@ -399,7 +399,7 @@ int i = 0;
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
 }
--(void)placeBlueTile
+-(id)placeBlueTile
 {
 //    buildingMode = YES;
 //    buildingArray = [[NSMutableArray alloc]init];
@@ -419,6 +419,7 @@ int i = 0;
     BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
+    return sprite;
 }
 
 -(void)placeFireTower

@@ -52,8 +52,8 @@ static BOOL isSelectedGlobal;
     
     if (canBeMoved) {
         self.isTouchEnabled = YES;
-//        [self setOpacity:100];
-//        isSelected = YES;
+        [self setOpacity:100];
+        isSelected = YES;
         tempPosition = self.position;
     }
 }
@@ -61,7 +61,6 @@ static BOOL isSelectedGlobal;
 -(void)unSelect
 {
     [self setOpacity:255];
-    [downArrows setVisible:NO];
     isSelected = NO;
     isSelectedGlobal = NO;
     [pan setEnabled:NO];

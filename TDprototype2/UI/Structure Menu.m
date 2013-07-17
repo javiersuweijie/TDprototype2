@@ -9,10 +9,11 @@
 #import "Structure Menu.h"
 #import "CustomMenuItem.h"
 #import "GameLayer.h"
+#import "ConfirmMenu.h"
 
 @implementation Structure_Menu
 id game_layer;
-
+id confirm_menu;
 
 -(id)init
 {
@@ -71,7 +72,7 @@ id game_layer;
 -(void) do1Action
 {
     NSLog(@"touched 1");
-    [game_layer placeBlueTile];
+    [confirm_menu openWithStructure:[game_layer placeBlueTile]];
 }
 -(void) do2Action
 {
@@ -95,5 +96,10 @@ id game_layer;
 -(void) do6Action
 {
     [game_layer loadData];
+}
+
+-(void)setConfirmMenu:(id)confirm
+{
+    confirm_menu = confirm;
 }
 @end

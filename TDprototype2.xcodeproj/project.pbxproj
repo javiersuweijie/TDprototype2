@@ -19,6 +19,7 @@
 		7D9224C5177FD36B001A7D9E /* ResourceLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9224C4177FD36B001A7D9E /* ResourceLabel.m */; };
 		7D9C28FD177B1AE00074CF93 /* whiteball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C28FC177B1ADF0074CF93 /* whiteball.png */; };
 		7D9C2901177B3A470074CF93 /* whitebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C2900177B3A470074CF93 /* whitebox.png */; };
+		7DAA9FFE1795A7690081569D /* ConfirmMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAA9FFD1795A7690081569D /* ConfirmMenu.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -197,6 +198,8 @@
 		7D9224C4177FD36B001A7D9E /* ResourceLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResourceLabel.m; path = UI/ResourceLabel.m; sourceTree = "<group>"; };
 		7D9C28FC177B1ADF0074CF93 /* whiteball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteball.png; sourceTree = "<group>"; };
 		7D9C2900177B3A470074CF93 /* whitebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitebox.png; sourceTree = "<group>"; };
+		7DAA9FFC1795A7690081569D /* ConfirmMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfirmMenu.h; path = UI/ConfirmMenu.h; sourceTree = "<group>"; };
+		7DAA9FFD1795A7690081569D /* ConfirmMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmMenu.m; path = UI/ConfirmMenu.m; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1035,6 +1038,8 @@
 			children = (
 				7DE16A98176386F60095142F /* CustomMenu.h */,
 				7DE16A99176386F60095142F /* CustomMenu.m */,
+				7DAA9FFC1795A7690081569D /* ConfirmMenu.h */,
+				7DAA9FFD1795A7690081569D /* ConfirmMenu.m */,
 				7DF310DB1787D0FA0099EEEF /* CustomMenuItem.h */,
 				7DF310DC1787D0FA0099EEEF /* CustomMenuItem.m */,
 				7DE16AB5176387D70095142F /* MenuBar.h */,
@@ -1267,6 +1272,7 @@
 				7DF310DD1787D0FA0099EEEF /* CustomMenuItem.m in Sources */,
 				7DF310E01787DA0C0099EEEF /* Structure Menu.m in Sources */,
 				7D746BF2178870D400EF195C /* IOOObject.m in Sources */,
+				7DAA9FFE1795A7690081569D /* ConfirmMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

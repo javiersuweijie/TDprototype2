@@ -13,5 +13,5 @@
 @interface Structure_Menu : CustomMenu {
     
 }
-
+-(void)setConfirmMenu:(id)confirm;
 @end
