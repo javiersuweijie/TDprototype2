@@ -77,17 +77,17 @@ id confirm_menu;
 -(void) do2Action
 {
     NSLog(@"touched 2");
-    [game_layer placeCanon];
+    [confirm_menu openWithStructure:[game_layer placeCanon]];
 }
 -(void) do3Action
 {
     NSLog(@"touched 3");
-    [game_layer placeIce];
+    [confirm_menu openWithStructure:[game_layer placeIce]];
 }
 -(void) do4Action
 {
     NSLog(@"touched 4");
-    [game_layer placeFireTower];
+    [confirm_menu openWithStructure:[game_layer placeFireTower]];
 }
 -(void) do5Action
 {

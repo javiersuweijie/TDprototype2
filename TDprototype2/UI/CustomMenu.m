@@ -81,6 +81,7 @@
     if (isSelected) {
         isSelected = NO;
         for (id menuItem in [self children]) {
+            [menuItem stopAllActions];
             [menuItem setVisible:NO];
             [menuItem setPosition:ccp(0,0)];
         }

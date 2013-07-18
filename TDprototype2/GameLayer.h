@@ -20,9 +20,9 @@
 +(NSArray*)walkableAdjGrid:(CGPoint)grid;
 
 -(id)placeBlueTile;
--(void)placeFireTower;
--(void)placeCanon;
--(void)placeIce;
+-(id)placeFireTower;
+-(id)placeCanon;
+-(id)placeIce;
 //returns an array with all the units for target acquiring 
 +(NSMutableArray*)getUnitArray;
 +(NSMutableArray*)getFilledArray;

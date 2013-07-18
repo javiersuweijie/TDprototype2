@@ -49,6 +49,7 @@ CGPoint vert2[4];
 NSMutableArray* buildingArray;
 CGContextRef context;
 id menu;
+id confirm_menu;
 IOOObject* ioObject;
 
 -(void)onEnter
@@ -128,7 +129,11 @@ int i = 0;
         return;
     }
     menu = [[[self parent]getChildByTag:2]getChildByTag:1];
+    confirm_menu = [[[self parent]getChildByTag:2]getChildByTag:2];
     if ([[[menu children]objectAtIndex:0] numberOfRunningActions]>0) {
+        return;
+    }
+    if ([confirm_menu isSelected]) {
         return;
     }
     if ([self closeMenu]);
@@ -150,6 +155,10 @@ int i = 0;
 {
     if ([menu isSelected]) {
         [menu keepCircle];
+        return YES;
+    }
+    if ([confirm_menu isSelected]) {
+        [confirm_menu keepCircle];
         return YES;
     }
     return NO;
@@ -200,7 +209,7 @@ int i = 0;
 
 -(void)handlePanGesture:(UIPanGestureRecognizer*)aPanGestureRecognizer
 {
-    [self closeMenu];
+
     if (buildingMode) {
 
         if (aPanGestureRecognizer.state == UIGestureRecognizerStateBegan) {
@@ -246,7 +255,8 @@ int i = 0;
             }
         }
     }
-    else {
+    else if (![confirm_menu isSelected]){
+        [self closeMenu];
         CGPoint translation = [aPanGestureRecognizer translationInView:aPanGestureRecognizer.view];
         translation.y *= -1;
         [aPanGestureRecognizer setTranslation:CGPointZero inView:aPanGestureRecognizer.view];
@@ -422,49 +432,52 @@ int i = 0;
     return sprite;
 }
 
--(void)placeFireTower
+-(id)placeFireTower
 {
-    [self closeMenu];
     if (![ResourceLabel subtractGoldBy:[FireTower cost]]) {
         NSLog(@"not enough gold");
-        return;
+        return nil;
     }
+    [self closeMenu];
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
     FireTower* sprite = [[FireTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
+    return sprite;
 }
 
--(void)placeCanon
+-(id)placeCanon
 {
-    [self closeMenu];
     if (![ResourceLabel subtractGoldBy:[CanonTower cost]]) {
         NSLog(@"not enough gold");
-        return;
+        return nil;
     }
+    [self closeMenu];
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
     CanonTower* sprite = [[CanonTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
+    return sprite;
 }
 
--(void)placeIce
+-(id)placeIce
 {
-    [self closeMenu];
     if (![ResourceLabel subtractGoldBy:[IceBeamTower cost]]) {
         NSLog(@"not enough gold");
-        return;
+        return nil;
     }
+    [self closeMenu];
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
     IceBeamTower* sprite = [[IceBeamTower alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
+    return sprite;
 }
 
 -(void)exportData

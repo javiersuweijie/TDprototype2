@@ -47,6 +47,9 @@ id structure_;
 
 -(void)openWithStructure:(Structure *)structure
 {
+    if (!structure) {
+        return;
+    }
     NSLog(@"OPEN");
     structure_ = structure;
     [self setVisible:YES];
