@@ -124,6 +124,7 @@ int i = 0;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
+    NSLog(@"%d",[GameLayer isConnected:ccp(-13,14) to:[IsometricOperator gridNumber:touchLocation]]);
     touchLocation = ccpAdd(touchLocation, ccp(0,11.31));
     if (!CGPathContainsPoint(path, NULL, touchLocation, NO) ) {
         return;
@@ -372,6 +373,32 @@ int i = 0;
     
 	return [NSArray arrayWithArray:tmpArray];
     
+}
+
++(BOOL)isConnected:(CGPoint)grid1 to:(CGPoint)grid2
+{
+    NSValue* endValue = [NSValue valueWithCGPoint:grid2];
+    NSMutableArray* stack = [[NSMutableArray alloc]init];
+    NSMutableArray* connected = [[NSMutableArray alloc]init];
+    NSArray* adj = [GameLayer walkableAdjGrid:grid1];
+    [stack addObjectsFromArray:adj];
+    [connected addObjectsFromArray:stack];
+    while ([stack count]>0) {
+        NSValue* tempValue = [stack objectAtIndex:[stack count]-1];
+        [stack removeLastObject];
+        NSArray* tempArray = [GameLayer walkableAdjGrid:[tempValue CGPointValue]];
+        for (NSValue* temp in tempArray) {
+            if ([temp isEqualToValue:endValue]) {
+                return YES;
+            }
+            else if (![connected containsObject:temp]) {
+                [stack addObject:temp];
+                [connected addObject:temp];
+            }
+            else {}
+        }
+    }
+    return NO;
 }
 
 -(void)testSP
