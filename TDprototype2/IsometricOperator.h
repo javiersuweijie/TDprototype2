@@ -24,4 +24,6 @@
 
 +(CGPoint)gridToCoord:(CGPoint)grid;
 
++(id)getArea:(CGPoint)position;
+
 @end

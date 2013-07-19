@@ -19,6 +19,7 @@
     UIGestureRecognizer* pan;
     CCSprite* downArrows;
     CGSize structureSize;
+    CGPoint vert[4];
 }
 @end
 
@@ -50,12 +51,33 @@ static BOOL isSelectedGlobal;
     pan.delegate = self;
     isSelectedGlobal = NO;
     
+    vert[0] = [IsometricOperator gridToCoord:ccp(0,0)];
+    vert[1] = [IsometricOperator gridToCoord:ccp(0,1)];
+    vert[2] = [IsometricOperator gridToCoord:ccp(1,1)];
+    vert[3] = [IsometricOperator gridToCoord:ccp(1,0)];
+    
     if (canBeMoved) {
         self.isTouchEnabled = YES;
         [self setOpacity:100];
         isSelected = YES;
         tempPosition = self.position;
     }
+}
+
+-(void)draw
+{
+    [super draw];
+    if (isSelected) {
+        for (NSValue* points in [self createGridPosition:self.position]) {
+            if (![GameLayer isValidGrid:[points CGPointValue]]) {
+                ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
+                break;
+            }
+        }
+        
+    }
+
+
 }
 
 -(void)unSelect
@@ -95,14 +117,15 @@ static BOOL isSelectedGlobal;
         translation = ccpMult(translation, 1/[[self parent]parent].scale);
         tempPosition = ccpAdd(tempPosition, translation);
         CGPoint newPoint = [IsometricOperator nearestPoint:tempPosition];
-        if (!CGPointEqualToPoint(newPoint,self.position)) {
-            for (NSValue* points in [self createGridPosition:newPoint]) {
-                if (![GameLayer isValidGrid:[points CGPointValue]]) {
-                    return;
-                }
-            }
-            [self setPosition:newPoint];
-        }
+        [self setPosition:newPoint];
+//        if (!CGPointEqualToPoint(newPoint,self.position)) {
+//            for (NSValue* points in [self createGridPosition:newPoint]) {
+//                if (![GameLayer isValidGrid:[points CGPointValue]]) {
+//                    return;
+//                }
+//            }
+//            [self setPosition:newPoint];
+//        }
     }
     
     else {

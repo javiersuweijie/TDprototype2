@@ -51,6 +51,7 @@ CGContextRef context;
 id menu;
 id confirm_menu;
 IOOObject* ioObject;
+BOOL resultFound = NO;
 
 -(void)onEnter
 {
@@ -104,18 +105,7 @@ IOOObject* ioObject;
     
     NSLog(@"%f",ccpDistance([IsometricOperator gridToCoord:ccp(0,1)], [IsometricOperator gridToCoord:ccp(1,0)]));
     
-    [self schedule:@selector(gridChecker:) interval:0.5];
-    
     ioObject = [[IOOObject alloc]initWithList:filledList];
-}
-int i = 0;
--(void)gridChecker:(ccTime)dt
-{
-    vert2[0] = [IsometricOperator gridToCoord:ccp(-2,i)];
-    vert2[1] = [IsometricOperator gridToCoord:ccp(-2,i+1)];
-    vert2[2] = [IsometricOperator gridToCoord:ccp(-2+1,i+1)];
-    vert2[3] = [IsometricOperator gridToCoord:ccp(-2+1,i)];
-    i++;
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -124,7 +114,7 @@ int i = 0;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
-    NSLog(@"%d",[GameLayer isConnected:ccp(-13,14) to:[IsometricOperator gridNumber:touchLocation]]);
+    NSLog(@"%d",[GameLayer isConnected:[IsometricOperator gridNumber:touchLocation]]);
     touchLocation = ccpAdd(touchLocation, ccp(0,11.31));
     if (!CGPathContainsPoint(path, NULL, touchLocation, NO) ) {
         return;
@@ -320,11 +310,7 @@ int i = 0;
     
     // Top
 	CGPoint top = ccp(grid.x,grid.y+1);
-	if ([GameLayer isValidGrid:top])
-    {
-		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
-        
-    }
+
     // Bottom
     CGPoint bottom = ccp(grid.x,grid.y-1);
     if ([GameLayer isValidGrid:bottom])
@@ -369,26 +355,37 @@ int i = 0;
             }
         }
     }
-    
+    if ([GameLayer isValidGrid:top])
+    {
+		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
+        
+    }
+
     
 	return [NSArray arrayWithArray:tmpArray];
     
 }
 
-+(BOOL)isConnected:(CGPoint)grid1 to:(CGPoint)grid2
++(BOOL)isConnected:(CGPoint)grid2
 {
+    NSDate* start = [NSDate date];
     NSValue* endValue = [NSValue valueWithCGPoint:grid2];
     NSMutableArray* stack = [[NSMutableArray alloc]init];
     NSMutableArray* connected = [[NSMutableArray alloc]init];
-    NSArray* adj = [GameLayer walkableAdjGrid:grid1];
+    NSArray* adj;
+    if (ccpDistance([IsometricOperator gridToCoord:ccp(-13,14)], [IsometricOperator gridToCoord:grid2])<ccpDistance([IsometricOperator gridToCoord:ccp(16,43)], [IsometricOperator gridToCoord:grid2])) {
+            adj = [GameLayer walkableAdjGrid:ccp(-13,14)];
+    }
+    else adj = [GameLayer walkableAdjGrid:ccp(16,43)];
     [stack addObjectsFromArray:adj];
     [connected addObjectsFromArray:stack];
-    while ([stack count]>0) {
+    while ([stack count]>0||!resultFound) {
         NSValue* tempValue = [stack objectAtIndex:[stack count]-1];
         [stack removeLastObject];
         NSArray* tempArray = [GameLayer walkableAdjGrid:[tempValue CGPointValue]];
         for (NSValue* temp in tempArray) {
             if ([temp isEqualToValue:endValue]) {
+                NSLog(@"%f",[[NSDate date]timeIntervalSinceDate:start]);
                 return YES;
             }
             else if (![connected containsObject:temp]) {
@@ -398,6 +395,7 @@ int i = 0;
             else {}
         }
     }
+    NSLog(@"%f",[[NSDate date]timeIntervalSinceDate:start]);
     return NO;
 }
 

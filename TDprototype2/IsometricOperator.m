@@ -88,7 +88,17 @@ static float tileHeight;
     return [IsometricOperator coordTransform:ccp(x,y)];
 }
 
-
++(id)getArea:(CGPoint)position
+{
+    CGPoint vert[4];
+    CGPoint grid = [IsometricOperator gridNumber:position];
+    vert[0] = [IsometricOperator gridToCoord:ccp(grid.x,grid.y)];
+    vert[1] = [IsometricOperator gridToCoord:ccp(grid.x,grid.y+1)];
+    vert[2] = [IsometricOperator gridToCoord:ccp(grid.x+1,grid.y+1)];
+    vert[3] = [IsometricOperator gridToCoord:ccp(grid.x+1,grid.y)];
+    
+    return (__bridge id)(vert);
+}
 
 
 
