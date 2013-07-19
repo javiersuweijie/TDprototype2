@@ -20,6 +20,8 @@
     CCSprite* downArrows;
     CGSize structureSize;
     CGPoint vert[4];
+    BOOL checked;
+    BOOL isValid;
 }
 @end
 
@@ -62,22 +64,31 @@ static BOOL isSelectedGlobal;
         isSelected = YES;
         tempPosition = self.position;
     }
+    checked = YES;
+    isValid = YES;
 }
 
 -(void)draw
 {
     [super draw];
-    if (isSelected) {
-        for (NSValue* points in [self createGridPosition:self.position]) {
-            if (![GameLayer isValidGrid:[points CGPointValue]]||![GameLayer isConnected:[points CGPointValue]]) {
-                ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
-                break;
-            }
-        }
-        
+    if (isSelected&&!checked) {
+        isValid = [self checkValidPosition];
     }
+    if (!isValid) {
+                ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
+    }
+}
 
-
+-(BOOL)checkValidPosition
+{
+    for (NSValue* points in [self createGridPosition:self.position]) {
+        if (![GameLayer isValidGrid:[points CGPointValue]]||![GameLayer isConnected:[points CGPointValue]]) {
+            checked = YES;
+            return NO;
+        }
+    }
+    checked = YES;
+    return YES;
 }
 
 -(void)unSelect
@@ -136,6 +147,7 @@ static BOOL isSelectedGlobal;
 -(void)setPosition:(CGPoint)position
 {
     [super setPosition:position];
+    checked=NO;
     self.gridPosition = [self createGridPosition:position];
     [[self parent] reorderChild:self z:[self getZHeight]];
 }
