@@ -22,6 +22,7 @@
     CGPoint vert[4];
     BOOL checked;
     BOOL isValid;
+    CGPoint validPoint;
 }
 @end
 
@@ -81,7 +82,7 @@ static BOOL isSelectedGlobal;
 
 -(BOOL)checkValidPosition
 {
-    for (NSValue* points in [self createGridPosition:self.position]) {
+    for (NSValue* points in gridPosition) {
         if (![GameLayer isValidGrid:[points CGPointValue]]||![GameLayer isConnected:[points CGPointValue]]) {
             checked = YES;
             return NO;
@@ -120,6 +121,10 @@ static BOOL isSelectedGlobal;
 
 -(void)handlePanGesture:(UIPanGestureRecognizer*)gesture
 {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        validPoint = self.position;
+    }
+    
     if (isSelected) {
 //        NSLog(@"%f",self.scale);
         CGPoint translation = [gesture translationInView:gesture.view];
@@ -139,8 +144,9 @@ static BOOL isSelectedGlobal;
 //        }
     }
     
-    else {
-        
+    if (gesture.state == UIGestureRecognizerStateEnded && !isValid) {
+        tempPosition = validPoint;
+        [self setPosition:validPoint];
     }
 }
 
