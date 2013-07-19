@@ -85,15 +85,15 @@ BOOL resultFound = NO;
     float translate = 22.627*14;
     
     vert[0] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, 0)]);
-    vert[1] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width, 0)]);
-    vert[2] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width, winSize.height*1.5)]);
-    vert[3] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, winSize.height*1.5)]);
+    vert[1] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width/2, 0)]);
+    vert[2] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width/2, winSize.height*0.75)]);
+    vert[3] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, winSize.height*0.75)]);
     
     CCSprite* background = [CCSprite spriteWithFile:@"gridfloor.png"];
     [background setPosition:vert[0]];
     [background setAnchorPoint:ccp(0,0.5)];
     [background setColor:ccc3(129, 229, 0)];
-    [self addChild:background z:-1000];
+//    [self addChild:background z:-1000];
     
     context = UIGraphicsGetCurrentContext();
     path = CGPathCreateMutable();
@@ -114,8 +114,9 @@ BOOL resultFound = NO;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
-    NSLog(@"%d",[GameLayer isConnected:[IsometricOperator gridNumber:touchLocation]]);
+    NSLog(@"%@",NSStringFromCGPoint([IsometricOperator gridNumber:touchLocation]));
     touchLocation = ccpAdd(touchLocation, ccp(0,11.31));
+
     if (!CGPathContainsPoint(path, NULL, touchLocation, NO) ) {
         return;
     }
@@ -313,11 +314,7 @@ BOOL resultFound = NO;
 
     // Bottom
     CGPoint bottom = ccp(grid.x,grid.y-1);
-    if ([GameLayer isValidGrid:bottom])
-    {
-        [tmpArray addObject:[NSValue valueWithCGPoint:bottom]];
-        
-    }
+
 	// Left
     CGPoint left = ccp(grid.x-1,grid.y);
     if ([GameLayer isValidGrid:left])
@@ -335,6 +332,18 @@ BOOL resultFound = NO;
                 [tmpArray addObject:[NSValue valueWithCGPoint:bottomleft]];
             }
         }
+    }
+    
+    if ([GameLayer isValidGrid:bottom])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:bottom]];
+        
+    }
+    
+    if ([GameLayer isValidGrid:top])
+    {
+		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
+        
     }
     
 	// Right
@@ -355,12 +364,6 @@ BOOL resultFound = NO;
             }
         }
     }
-    if ([GameLayer isValidGrid:top])
-    {
-		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
-        
-    }
-
     
 	return [NSArray arrayWithArray:tmpArray];
     
@@ -372,19 +375,17 @@ BOOL resultFound = NO;
     NSValue* endValue = [NSValue valueWithCGPoint:grid2];
     NSMutableArray* stack = [[NSMutableArray alloc]init];
     NSMutableArray* connected = [[NSMutableArray alloc]init];
-    NSArray* adj;
-    if (ccpDistance([IsometricOperator gridToCoord:ccp(-13,14)], [IsometricOperator gridToCoord:grid2])<ccpDistance([IsometricOperator gridToCoord:ccp(16,43)], [IsometricOperator gridToCoord:grid2])) {
-            adj = [GameLayer walkableAdjGrid:ccp(-13,14)];
-    }
-    else adj = [GameLayer walkableAdjGrid:ccp(16,43)];
+    NSMutableArray* adj = [NSMutableArray arrayWithArray:[GameLayer walkableAdjGrid:(ccp(1,28))]];
+    [adj removeObject:endValue];
     [stack addObjectsFromArray:adj];
     [connected addObjectsFromArray:stack];
-    while ([stack count]>0||!resultFound) {
+    while ([stack count]>0) {
         NSValue* tempValue = [stack objectAtIndex:[stack count]-1];
         [stack removeLastObject];
         NSArray* tempArray = [GameLayer walkableAdjGrid:[tempValue CGPointValue]];
         for (NSValue* temp in tempArray) {
-            if ([temp isEqualToValue:endValue]) {
+            if ([temp isEqualToValue:endValue]) {}
+            else if ([temp isEqualToValue:[NSValue valueWithCGPoint:ccp(-13,14)]]) {
                 NSLog(@"%f",[[NSDate date]timeIntervalSinceDate:start]);
                 return YES;
             }

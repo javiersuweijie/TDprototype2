@@ -19,6 +19,8 @@
 //returns the valid grids around a particular point
 +(NSArray*)walkableAdjGrid:(CGPoint)grid;
 
++(BOOL)isConnected:(CGPoint)grid2;
+
 -(id)placeBlueTile;
 -(id)placeFireTower;
 -(id)placeCanon;

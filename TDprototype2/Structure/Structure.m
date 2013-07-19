@@ -69,7 +69,7 @@ static BOOL isSelectedGlobal;
     [super draw];
     if (isSelected) {
         for (NSValue* points in [self createGridPosition:self.position]) {
-            if (![GameLayer isValidGrid:[points CGPointValue]]) {
+            if (![GameLayer isValidGrid:[points CGPointValue]]||![GameLayer isConnected:[points CGPointValue]]) {
                 ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
                 break;
             }
