@@ -30,7 +30,7 @@
 @synthesize gridPosition,cost;
 
 static BOOL isSelectedGlobal;
-
+static NSMutableArray* threadArray;
 //-(id)initWithFile:(NSString *)filename {
 //    self=[super initWithFile:filename];
 //    if (![ResourceLabel subtractGoldBy:self.cost]) {
@@ -67,29 +67,41 @@ static BOOL isSelectedGlobal;
     }
     checked = YES;
     isValid = YES;
+    threadArray = [[NSMutableArray alloc]init];
 }
 
 -(void)draw
 {
     [super draw];
-    if (isSelected&&!checked) {
-        isValid = [self checkValidPosition];
-    }
     if (!isValid) {
-                ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
+        ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
     }
 }
 
--(BOOL)checkValidPosition
+-(void)checkValidPosition
 {
+    if ([threadArray count]>0) {
+        for (NSMutableDictionary* dict in threadArray) {
+            [dict setValue:[NSNumber numberWithBool:YES] forKey:@"ThreadExitNow"];
+        }
+        [threadArray removeAllObjects];
+    }
+    
+    NSMutableDictionary* threadDict = [[NSThread currentThread]threadDictionary];
+    [threadDict setValue:[NSNumber numberWithBool:NO] forKey:@"ThreadExitNow"];
+    [threadArray addObject:threadDict];
+    
     for (NSValue* points in gridPosition) {
-        if (![GameLayer isValidGrid:[points CGPointValue]]||![GameLayer isConnected:[points CGPointValue]]) {
+        BOOL test = [GameLayer isConnected:[points CGPointValue]];
+        if (![GameLayer isValidGrid:[points CGPointValue]]||!test) {
+            NSLog(@"%d",test);
             checked = YES;
-            return NO;
+            isValid = NO;
+            return;
         }
     }
     checked = YES;
-    return YES;
+    isValid = YES;
 }
 
 -(void)unSelect
@@ -133,15 +145,14 @@ static BOOL isSelectedGlobal;
         translation = ccpMult(translation, 1/[[self parent]parent].scale);
         tempPosition = ccpAdd(tempPosition, translation);
         CGPoint newPoint = [IsometricOperator nearestPoint:tempPosition];
-        [self setPosition:newPoint];
-//        if (!CGPointEqualToPoint(newPoint,self.position)) {
+        if (!CGPointEqualToPoint(newPoint,self.position)) {
 //            for (NSValue* points in [self createGridPosition:newPoint]) {
 //                if (![GameLayer isValidGrid:[points CGPointValue]]) {
 //                    return;
 //                }
 //            }
-//            [self setPosition:newPoint];
-//        }
+            [self setPosition:newPoint];
+        }
     }
     
     if (gesture.state == UIGestureRecognizerStateEnded && !isValid) {
@@ -156,6 +167,9 @@ static BOOL isSelectedGlobal;
     checked=NO;
     self.gridPosition = [self createGridPosition:position];
     [[self parent] reorderChild:self z:[self getZHeight]];
+    if (isSelected&&!checked) {
+        [self performSelectorInBackground:@selector(checkValidPosition) withObject:nil];
+    }
 }
 
 -(NSArray*)createGridPosition:(CGPoint)point
@@ -224,4 +238,5 @@ static BOOL isSelectedGlobal;
 {
     isSelectedGlobal = bool_;
 }
+
 @end

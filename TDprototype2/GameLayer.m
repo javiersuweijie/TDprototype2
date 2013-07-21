@@ -53,6 +53,7 @@ id confirm_menu;
 IOOObject* ioObject;
 BOOL resultFound = NO;
 
+
 -(void)onEnter
 {
     [super onEnter];
@@ -307,6 +308,8 @@ BOOL resultFound = NO;
 
 +(NSArray*)walkableAdjGrid:(CGPoint)grid
 {
+
+    
     NSMutableArray* tmpArray = [NSMutableArray arrayWithCapacity:8];
     
     // Top
@@ -371,6 +374,8 @@ BOOL resultFound = NO;
 
 +(BOOL)isConnected:(CGPoint)grid2
 {
+    BOOL exitNow = NO;
+    
     NSDate* start = [NSDate date];
     NSValue* endValue = [NSValue valueWithCGPoint:grid2];
     NSMutableArray* stack = [[NSMutableArray alloc]init];
@@ -379,9 +384,11 @@ BOOL resultFound = NO;
     [adj removeObject:endValue];
     [stack addObjectsFromArray:adj];
     [connected addObjectsFromArray:stack];
-    int i = 0;
     while ([stack count]>0) {
-        i++;
+        exitNow = [[[NSThread currentThread]threadDictionary]valueForKey:@"ThreadShouldExitNow"];
+        if (exitNow) {
+            return nil;
+        }
         NSValue* tempValue = [stack objectAtIndex:[stack count]-1];
         [stack removeLastObject];
         NSArray* tempArray = [GameLayer walkableAdjGrid:[tempValue CGPointValue]];
@@ -389,7 +396,6 @@ BOOL resultFound = NO;
             if ([temp isEqualToValue:endValue]) {}
             else if ([temp isEqualToValue:[NSValue valueWithCGPoint:ccp(-13,14)]]) {
                 NSLog(@"%f",[[NSDate date]timeIntervalSinceDate:start]);
-                NSLog(@"%d",i);
                 return YES;
             }
             else if (![connected containsObject:temp]) {
@@ -400,7 +406,6 @@ BOOL resultFound = NO;
         }
     }
     NSLog(@"%f",[[NSDate date]timeIntervalSinceDate:start]);
-    NSLog(@"%d",i);
     return NO;
 }
 
