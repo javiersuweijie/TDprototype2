@@ -13,6 +13,7 @@
 @implementation ConfirmMenu
 id game_layer;
 id structure_;
+Structure* prevStruct_;
 -(id)init
 {
     float left_padding = 10;
@@ -56,15 +57,32 @@ id structure_;
     [self arrangeCircle];
 }
 
+-(void)openWithStructure:(Structure *)structure andPrev:(Structure *)prevStruct
+{
+    if (!prevStruct) {
+        prevStruct_ = prevStruct;
+        prevStruct_.visible = NO;
+    }
+    [self openWithStructure:structure];
+}
+
 -(void)confirm
 {
+    if (!prevStruct_) {
+        [prevStruct_ removeFromParentAndCleanup:YES];
+        prevStruct_ = nil;
+    }
     [structure_ unSelect];
     [self keepCircle];
 }
 
 -(void)cancel
 {
+    if (!prevStruct_) {
+        prevStruct_.visible = YES;
+    }
     [structure_ removeFromParentAndCleanup:YES];
+    structure_=nil;
     [self keepCircle];
 }
 @end

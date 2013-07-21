@@ -53,14 +53,14 @@ static NSMutableArray* threadArray;
     [pan setEnabled:YES];
     pan.delegate = self;
     isSelectedGlobal = NO;
-    
+    self.isTouchEnabled = YES;
     vert[0] = [IsometricOperator gridToCoord:ccp(0,0)];
     vert[1] = [IsometricOperator gridToCoord:ccp(0,1)];
     vert[2] = [IsometricOperator gridToCoord:ccp(1,1)];
     vert[3] = [IsometricOperator gridToCoord:ccp(1,0)];
     
     if (canBeMoved) {
-        self.isTouchEnabled = YES;
+
         [self setOpacity:100];
         isSelected = YES;
         tempPosition = self.position;
@@ -138,7 +138,6 @@ static NSMutableArray* threadArray;
     }
     
     if (isSelected) {
-//        NSLog(@"%f",self.scale);
         CGPoint translation = [gesture translationInView:gesture.view];
         translation.y *= -1;
         [gesture setTranslation:CGPointZero inView:gesture.view];
@@ -146,11 +145,6 @@ static NSMutableArray* threadArray;
         tempPosition = ccpAdd(tempPosition, translation);
         CGPoint newPoint = [IsometricOperator nearestPoint:tempPosition];
         if (!CGPointEqualToPoint(newPoint,self.position)) {
-//            for (NSValue* points in [self createGridPosition:newPoint]) {
-//                if (![GameLayer isValidGrid:[points CGPointValue]]) {
-//                    return;
-//                }
-//            }
             [self setPosition:newPoint];
         }
     }

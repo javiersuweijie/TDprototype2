@@ -18,6 +18,7 @@
 #import "WorldTree.h"
 #import "CanonTower.h"
 #import "IceBeamTower.h"
+#import "DummyTower.h"
 
 #import "testPerson.h"
 #import "FastPaper.h"
@@ -461,7 +462,8 @@ BOOL resultFound = NO;
     CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
-    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+//    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
+    DummyTower* sprite = [[DummyTower alloc]initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
     return sprite;
@@ -551,11 +553,12 @@ BOOL resultFound = NO;
     CGPoint mid = [self convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
     ccDrawPoint(ccpIntersectPoint(vert[0], vert[2], vert[1], vert[3]));
     ccDrawPoint(mid);
-
-    
 }
 
-
+-(float)getScale
+{
+    return self.scale;
+}
 
 
 @end

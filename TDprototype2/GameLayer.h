@@ -36,4 +36,7 @@
 
 -(void)exportData;
 -(void)loadData;
+
+-(BOOL)closeMenu;
+-(float)getScale;
 @end
