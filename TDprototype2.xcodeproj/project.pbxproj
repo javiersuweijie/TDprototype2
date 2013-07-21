@@ -21,6 +21,7 @@
 		7D9C2901177B3A470074CF93 /* whitebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C2900177B3A470074CF93 /* whitebox.png */; };
 		7DAA9FFE1795A7690081569D /* ConfirmMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAA9FFD1795A7690081569D /* ConfirmMenu.m */; };
 		7DAAA001179C23070081569D /* DummyTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA000179C23070081569D /* DummyTower.m */; };
+		7DAAA004179C36480081569D /* UpgradeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA003179C36480081569D /* UpgradeMenu.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -203,6 +204,8 @@
 		7DAA9FFD1795A7690081569D /* ConfirmMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmMenu.m; path = UI/ConfirmMenu.m; sourceTree = "<group>"; };
 		7DAA9FFF179C23060081569D /* DummyTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyTower.h; sourceTree = "<group>"; };
 		7DAAA000179C23070081569D /* DummyTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyTower.m; sourceTree = "<group>"; };
+		7DAAA002179C36470081569D /* UpgradeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeMenu.h; sourceTree = "<group>"; };
+		7DAAA003179C36480081569D /* UpgradeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeMenu.m; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1051,6 +1054,8 @@
 				7DE16AB6176387D70095142F /* MenuBar.m */,
 				7DF310DE1787DA0C0099EEEF /* Structure Menu.h */,
 				7DF310DF1787DA0C0099EEEF /* Structure Menu.m */,
+				7DAAA002179C36470081569D /* UpgradeMenu.h */,
+				7DAAA003179C36480081569D /* UpgradeMenu.m */,
 				7D3C324F1776EF7500F052B4 /* UnitsMenu.h */,
 				7D3C32501776EF7500F052B4 /* UnitsMenu.m */,
 				7D9224C3177FD36B001A7D9E /* ResourceLabel.h */,
@@ -1279,6 +1284,7 @@
 				7D746BF2178870D400EF195C /* IOOObject.m in Sources */,
 				7DAA9FFE1795A7690081569D /* ConfirmMenu.m in Sources */,
 				7DAAA001179C23070081569D /* DummyTower.m in Sources */,
+				7DAAA004179C36480081569D /* UpgradeMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
