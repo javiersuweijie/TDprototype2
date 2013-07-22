@@ -383,11 +383,10 @@ BOOL resultFound = NO;
     
 }
 
-+(BOOL)isConnected:(CGPoint)grid2
++(Byte)isConnected:(CGPoint)grid2
 {
     BOOL exitNow = NO;
     
-    NSDate* start = [NSDate date];
     NSValue* endValue = [NSValue valueWithCGPoint:grid2];
     NSMutableArray* stack = [[NSMutableArray alloc]init];
     NSMutableArray* connected = [[NSMutableArray alloc]init];
@@ -396,9 +395,10 @@ BOOL resultFound = NO;
     [stack addObjectsFromArray:adj];
     [connected addObjectsFromArray:stack];
     while ([stack count]>0) {
-        exitNow = [[[NSThread currentThread]threadDictionary]valueForKey:@"ThreadShouldExitNow"];
+        exitNow = [[[[NSThread currentThread]threadDictionary]valueForKey:@"ThreadShouldExitNow"] boolValue];
         if (exitNow) {
-            return nil;
+            NSLog(@"exitNow");
+            return 2;
         }
         NSValue* tempValue = [stack objectAtIndex:[stack count]-1];
         [stack removeLastObject];
@@ -406,8 +406,7 @@ BOOL resultFound = NO;
         for (NSValue* temp in tempArray) {
             if ([temp isEqualToValue:endValue]) {}
             else if ([temp isEqualToValue:[NSValue valueWithCGPoint:ccp(-13,14)]]) {
-                NSLog(@"%f",[[NSDate date]timeIntervalSinceDate:start]);
-                return YES;
+                return 1;
             }
             else if (![connected containsObject:temp]) {
                 [stack addObject:temp];
@@ -416,8 +415,7 @@ BOOL resultFound = NO;
             else {}
         }
     }
-    NSLog(@"%f",[[NSDate date]timeIntervalSinceDate:start]);
-    return NO;
+    return 0;
 }
 
 -(void)testSP

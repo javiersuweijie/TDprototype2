@@ -22,6 +22,7 @@
     CGPoint vert[4];
     BOOL checked;
     BOOL isValid;
+    BOOL isChecking;
     CGPoint validPoint;
 }
 @end
@@ -80,21 +81,25 @@ static NSMutableArray* threadArray;
 
 -(void)checkValidPosition
 {
-    if ([threadArray count]>0) {
+    NSLog(@"thread count = %d",[threadArray count]);
+    if ([threadArray count]>1) {
         for (NSMutableDictionary* dict in threadArray) {
-            [dict setValue:[NSNumber numberWithBool:YES] forKey:@"ThreadExitNow"];
+            [dict setValue:[NSNumber numberWithBool:YES] forKey:@"ThreadShouldExitNow"];
         }
         [threadArray removeAllObjects];
     }
     
     NSMutableDictionary* threadDict = [[NSThread currentThread]threadDictionary];
-    [threadDict setValue:[NSNumber numberWithBool:NO] forKey:@"ThreadExitNow"];
+    [threadDict setValue:[NSNumber numberWithBool:NO] forKey:@"ThreadShouldExitNow"];
     [threadArray addObject:threadDict];
     
     for (NSValue* points in gridPosition) {
-        BOOL test = [GameLayer isConnected:[points CGPointValue]];
-        if (![GameLayer isValidGrid:[points CGPointValue]]||!test) {
-            NSLog(@"%d",test);
+        Byte test = [GameLayer isConnected:[points CGPointValue]];
+        if (test == 2) {
+            return;
+        }
+        if (![GameLayer isValidGrid:[points CGPointValue]]||test==0) {
+            NSLog(@"not valid");
             checked = YES;
             isValid = NO;
             return;
@@ -149,9 +154,34 @@ static NSMutableArray* threadArray;
         }
     }
     
-    if (gesture.state == UIGestureRecognizerStateEnded && !isValid) {
+    if (gesture.state == UIGestureRecognizerStateEnded && checked) {
+        if (!isValid) {
+            tempPosition = validPoint;
+            [self setPosition:validPoint];
+        }
+    }
+    else {
+        if (!isChecking) {
+            isChecking = YES;
+            [self schedule:@selector(continueChecking)];
+        }
+    }
+}
+
+-(void)continueChecking
+{
+    if (!checked) {
+        return;
+    }
+    else if (!isValid){
         tempPosition = validPoint;
         [self setPosition:validPoint];
+        [self unschedule:@selector(continueChecking)];
+        isChecking = NO;
+    }
+    else {
+        [self unschedule:@selector(continueChecking)];
+        isChecking = NO;
     }
 }
 
