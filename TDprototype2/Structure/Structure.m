@@ -82,7 +82,7 @@ static NSMutableArray* threadArray;
 -(void)checkValidPosition
 {
     NSLog(@"thread count = %d",[threadArray count]);
-    if ([threadArray count]>1) {
+    if ([threadArray count]>0) {
         for (NSMutableDictionary* dict in threadArray) {
             [dict setValue:[NSNumber numberWithBool:YES] forKey:@"ThreadShouldExitNow"];
         }
@@ -94,17 +94,24 @@ static NSMutableArray* threadArray;
     [threadArray addObject:threadDict];
     
     for (NSValue* points in gridPosition) {
+        if (![GameLayer isValidGrid:[points CGPointValue]]) {
+            NSLog(@"not valid");
+            checked = YES;
+            isValid = NO;
+            return;
+        }
         Byte test = [GameLayer isConnected:[points CGPointValue]];
         if (test == 2) {
             return;
         }
-        if (![GameLayer isValidGrid:[points CGPointValue]]||test==0) {
+        if (test==0) {
             NSLog(@"not valid");
             checked = YES;
             isValid = NO;
             return;
         }
     }
+    NSLog(@"is valid");
     checked = YES;
     isValid = YES;
 }
@@ -160,7 +167,7 @@ static NSMutableArray* threadArray;
             [self setPosition:validPoint];
         }
     }
-    else {
+    else if (gesture.state == UIGestureRecognizerStateEnded){
         if (!isChecking) {
             isChecking = YES;
             [self schedule:@selector(continueChecking)];
