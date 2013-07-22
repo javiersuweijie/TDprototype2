@@ -216,6 +216,7 @@ static NSMutableArray* threadArray;
 {
     [super onExit];
     [ResourceLabel addGoldBy:self.cost];
+    [[GameLayer getFilledArray]removeObject:self];
 }
 
 +(int)cost

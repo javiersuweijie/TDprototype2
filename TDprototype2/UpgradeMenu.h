@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "CustomMenu.h"
 
 @interface UpgradeMenu : CustomMenu {
     
 }
-
+- (id) initWithCurrent:(id)current andStrings:(NSString*)string1, ...;
 @end

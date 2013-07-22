@@ -15,4 +15,5 @@
 }
 // confirmmenu is tagged to 2
 -(void)openWithStructure:(Structure*)structure;
+-(void)openWithStructure:(Structure *)structure andCurrent:(Structure *)currentStruct;
 @end

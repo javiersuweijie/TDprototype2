@@ -11,6 +11,7 @@
 #import "ResourceLabel.h"
 #import "Structure Menu.h"
 #import "ConfirmMenu.h"
+#import "UpgradeMenu.h"
 
 @implementation UILayer
 CGSize winSize;
@@ -33,4 +34,8 @@ ConfirmMenu* confirmMenu;
     [menu setConfirmMenu:confirmMenu];
 }
 
+-(id)addUpgradeMenuOf:(Structure*)prev to:(NSString*)string, ...
+{
+    return nil;
+}
 @end

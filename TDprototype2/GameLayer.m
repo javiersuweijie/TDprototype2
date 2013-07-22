@@ -51,6 +51,7 @@ NSMutableArray* buildingArray;
 CGContextRef context;
 id menu;
 id confirm_menu;
+id upgrade_menu;
 IOOObject* ioObject;
 BOOL resultFound = NO;
 
@@ -147,6 +148,15 @@ BOOL resultFound = NO;
 
 -(BOOL)closeMenu
 {
+    if (!upgrade_menu) {
+        upgrade_menu = [[[self parent]getChildByTag:2]getChildByTag:3];
+    }
+    if ([upgrade_menu isSelected]) {
+        [upgrade_menu keepCircle];
+        [upgrade_menu removeFromParentAndCleanup:YES];
+        upgrade_menu = nil;
+        return YES;
+    }
     if ([menu isSelected]) {
         [menu keepCircle];
         return YES;
@@ -512,6 +522,22 @@ BOOL resultFound = NO;
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
     IceBeamTower* sprite = [[IceBeamTower alloc] initWithPosition:touchLocation];
+    [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+    [filledList addObject:sprite];
+    return sprite;
+}
+
+-(id)placeTower:(NSString*)tower
+{
+    if (![ResourceLabel subtractGoldBy:[NSClassFromString(tower) cost]]) {
+        NSLog(@"not enough gold");
+        return nil;
+    }
+    [self closeMenu];
+    CGPoint touchLocation = ccp(winSize.width/2,winSize.height/2);
+    touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
+    touchLocation = [IsometricOperator nearestPoint:touchLocation];
+    Structure* sprite = [[NSClassFromString(tower) alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
     return sprite;

@@ -25,6 +25,7 @@
 -(id)placeFireTower;
 -(id)placeCanon;
 -(id)placeIce;
+-(id)placeTower:(NSString*)tower;
 //returns an array with all the units for target acquiring 
 +(NSMutableArray*)getUnitArray;
 +(NSMutableArray*)getFilledArray;

@@ -13,7 +13,7 @@
 @implementation ConfirmMenu
 id game_layer;
 id structure_;
-Structure* prevStruct_;
+Structure* current_;
 -(id)init
 {
     float left_padding = 10;
@@ -57,20 +57,23 @@ Structure* prevStruct_;
     [self arrangeCircle];
 }
 
--(void)openWithStructure:(Structure *)structure andPrev:(Structure *)prevStruct
+-(void)openWithStructure:(Structure *)structure andCurrent:(Structure *)currentStruct
 {
-    if (!prevStruct) {
-        prevStruct_ = prevStruct;
-        prevStruct_.visible = NO;
+    if (!currentStruct) {
+        current_ = currentStruct;
+        current_.visible = NO;
     }
+    NSLog(@"%@",current_);
     [self openWithStructure:structure];
 }
 
 -(void)confirm
 {
-    if (!prevStruct_) {
-        [prevStruct_ removeFromParentAndCleanup:YES];
-        prevStruct_ = nil;
+    
+    if (current_) {
+        NSLog(@"dummy removed");
+        [current_ removeFromParentAndCleanup:YES];
+        current_ = nil;
     }
     [structure_ unSelect];
     [self keepCircle];
@@ -78,8 +81,8 @@ Structure* prevStruct_;
 
 -(void)cancel
 {
-    if (!prevStruct_) {
-        prevStruct_.visible = YES;
+    if (!current_) {
+        current_.visible = YES;
     }
     [structure_ removeFromParentAndCleanup:YES];
     structure_=nil;
