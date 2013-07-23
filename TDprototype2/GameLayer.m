@@ -383,28 +383,28 @@ BOOL resultFound = NO;
     
 }
 
-+(Byte)isConnected:(CGPoint)grid2
++(Byte)isConnected:(NSArray*)gridArray
 {
     BOOL exitNow = NO;
     
-    NSValue* endValue = [NSValue valueWithCGPoint:grid2];
     NSMutableArray* stack = [[NSMutableArray alloc]init];
     NSMutableArray* connected = [[NSMutableArray alloc]init];
     NSMutableArray* adj = [NSMutableArray arrayWithArray:[GameLayer walkableAdjGrid:(ccp(1,28))]];
-    [adj removeObject:endValue];
+    for (NSValue* value in gridArray) {
+        [adj removeObject:value];
+    }
     [stack addObjectsFromArray:adj];
     [connected addObjectsFromArray:stack];
     while ([stack count]>0) {
         exitNow = [[[[NSThread currentThread]threadDictionary]valueForKey:@"ThreadShouldExitNow"] boolValue];
         if (exitNow) {
-            NSLog(@"exitNow");
             return 2;
         }
         NSValue* tempValue = [stack objectAtIndex:[stack count]-1];
         [stack removeLastObject];
         NSArray* tempArray = [GameLayer walkableAdjGrid:[tempValue CGPointValue]];
         for (NSValue* temp in tempArray) {
-            if ([temp isEqualToValue:endValue]) {}
+            if ([gridArray containsObject:temp]) {}
             else if ([temp isEqualToValue:[NSValue valueWithCGPoint:ccp(-13,14)]]) {
                 return 1;
             }

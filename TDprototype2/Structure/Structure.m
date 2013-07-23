@@ -81,7 +81,6 @@ static NSMutableArray* threadArray;
 
 -(void)checkValidPosition
 {
-    NSLog(@"thread count = %d",[threadArray count]);
     if ([threadArray count]>0) {
         for (NSMutableDictionary* dict in threadArray) {
             [dict setValue:[NSNumber numberWithBool:YES] forKey:@"ThreadShouldExitNow"];
@@ -95,23 +94,20 @@ static NSMutableArray* threadArray;
     
     for (NSValue* points in gridPosition) {
         if (![GameLayer isValidGrid:[points CGPointValue]]) {
-            NSLog(@"not valid");
-            checked = YES;
-            isValid = NO;
-            return;
-        }
-        Byte test = [GameLayer isConnected:[points CGPointValue]];
-        if (test == 2) {
-            return;
-        }
-        if (test==0) {
-            NSLog(@"not valid");
             checked = YES;
             isValid = NO;
             return;
         }
     }
-    NSLog(@"is valid");
+        Byte test = [GameLayer isConnected:gridPosition];
+        if (test == 2) {
+            return;
+        }
+        if (test==0) {
+            checked = YES;
+            isValid = NO;
+            return;
+        }
     checked = YES;
     isValid = YES;
 }

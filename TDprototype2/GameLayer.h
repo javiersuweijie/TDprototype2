@@ -19,7 +19,7 @@
 //returns the valid grids around a particular point
 +(NSArray*)walkableAdjGrid:(CGPoint)grid;
 
-+(Byte)isConnected:(CGPoint)grid2;
++(Byte)isConnected:(NSArray*)gridArray;
 
 -(id)placeBlueTile;
 -(id)placeFireTower;
