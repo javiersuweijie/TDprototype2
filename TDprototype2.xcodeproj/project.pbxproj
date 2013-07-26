@@ -22,6 +22,9 @@
 		7DAA9FFE1795A7690081569D /* ConfirmMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAA9FFD1795A7690081569D /* ConfirmMenu.m */; };
 		7DAAA001179C23070081569D /* DummyTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA000179C23070081569D /* DummyTower.m */; };
 		7DAAA004179C36480081569D /* UpgradeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA003179C36480081569D /* UpgradeMenu.m */; };
+		7DAAA00817A0D5BF0081569D /* bar-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA00717A0D5BF0081569D /* bar-01.png */; };
+		7DAAA00D17A0E56B0081569D /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA00C17A0E56B0081569D /* Lato-Regular.ttf */; };
+		7DAAA01117A0F1010081569D /* save_game in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA01017A0F1010081569D /* save_game */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -206,6 +209,9 @@
 		7DAAA000179C23070081569D /* DummyTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyTower.m; sourceTree = "<group>"; };
 		7DAAA002179C36470081569D /* UpgradeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeMenu.h; sourceTree = "<group>"; };
 		7DAAA003179C36480081569D /* UpgradeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeMenu.m; sourceTree = "<group>"; };
+		7DAAA00717A0D5BF0081569D /* bar-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bar-01.png"; path = "Resources/bar-01.png"; sourceTree = "<group>"; };
+		7DAAA00C17A0E56B0081569D /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		7DAAA01017A0F1010081569D /* save_game */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = save_game; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -627,6 +633,9 @@
 				7DE16AB81763A0820095142F /* ball.png */,
 				7DE16ABF1764E3BB0095142F /* worldtree.png */,
 				7DF310E7178850F80099EEEF /* psuedoisobox2.png */,
+				7DAAA01017A0F1010081569D /* save_game */,
+				7DAAA00C17A0E56B0081569D /* Lato-Regular.ttf */,
+				7DAAA00717A0D5BF0081569D /* bar-01.png */,
 				7DF310D717806BF80099EEEF /* psuedoisobox.png */,
 				7DF310E5178850AE0099EEEF /* button.png */,
 				7DF310E1178816560099EEEF /* gridfloor.png */,
@@ -1141,6 +1150,9 @@
 				7DF310E2178816560099EEEF /* gridfloor.png in Resources */,
 				7DF310E6178850AE0099EEEF /* button.png in Resources */,
 				7DF310E8178850F80099EEEF /* psuedoisobox2.png in Resources */,
+				7DAAA00817A0D5BF0081569D /* bar-01.png in Resources */,
+				7DAAA00D17A0E56B0081569D /* Lato-Regular.ttf in Resources */,
+				7DAAA01117A0F1010081569D /* save_game in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

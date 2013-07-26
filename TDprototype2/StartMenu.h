@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface StartMenu : CCLayer <UITextFieldDelegate> {
+@interface StartMenu : CCLayerColor <UITextFieldDelegate> {
     
 }
 +(id)scene;

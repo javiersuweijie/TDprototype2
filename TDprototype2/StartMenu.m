@@ -28,7 +28,7 @@
 
 -(id)init
 {
-    if (self = [super init]) {
+    if (self = [super initWithColor:ccc4(44, 62, 80,1.0)]) {
 
     }
     return self;
@@ -38,6 +38,7 @@
 {
     winSize = [[CCDirector sharedDirector] winSize];
     [self createTextField];
+    
 }
 
 -(void)createTextField

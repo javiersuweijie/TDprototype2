@@ -23,7 +23,7 @@ CGSize winSize;
 -(id)initWithPosition:(CGPoint)point
 {
     if ([super initWithFile:[NSString stringWithFormat:@"psuedoisobox2.png"]]) {
-        [self setColor:ccc3(255, 255, 255)];
+        [self setColor:ccc3(127, 140, 141)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
@@ -61,7 +61,7 @@ CGSize winSize;
         if ([Structure isSelectedGlobally]) {
             return;
         }
-        UpgradeMenu* upgrademenu = [[UpgradeMenu alloc]initWithCurrent:self andStrings:@"FireTower",@"FireTower", nil];
+        UpgradeMenu* upgrademenu = [[UpgradeMenu alloc]initWithCurrent:self andStrings:@"FireTower", @"CanonTower", @"IceBeamTower", nil];
         [uilayer addChild:upgrademenu z:3 tag:3];
         CGPoint mid = [gamelayer convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
         CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),[gamelayer getScale]);

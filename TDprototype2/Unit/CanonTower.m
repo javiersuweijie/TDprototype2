@@ -28,7 +28,7 @@ static int cost = 500;
 -(id)initWithPosition:(CGPoint)point
 {
     if ([super initWithFile:[NSString stringWithFormat:@"psuedoisobox2.png"]]) {
-        [self setColor:ccc3(52, 196, 150)];
+        [self setColor:ccc3(230, 126, 34)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];

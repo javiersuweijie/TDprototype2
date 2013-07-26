@@ -44,7 +44,7 @@ static NSMutableArray* threadArray;
 -(void)onEnter
 {
     [super onEnter];
-    
+    [self.texture setAntiAliasTexParameters];
     UIGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
