@@ -471,7 +471,7 @@ BOOL resultFound = NO;
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
 //    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
-    DummyTower* sprite = [[DummyTower alloc]initWithPosition:touchLocation];
+    Structure* sprite = [[BasicBlock alloc]initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
     return sprite;
@@ -552,9 +552,10 @@ BOOL resultFound = NO;
     for (NSString* key in towerD) {
         NSString* tower = [towerD objectForKey:key];
         NSLog(@"%@",tower);
-        CCSprite* sprite = [[NSClassFromString(tower) alloc] initWithPosition:CGPointFromString(key)];
+        CCSprite* sprite = [[NSClassFromString(tower) alloc] initWithPosition:[IsometricOperator gridToCoord:CGPointFromString(key)]];
         NSLog(@"%@",sprite);
         [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
+        [sprite performSelector:@selector(unSelect)];
         [filledList addObject:sprite];
     }
 }
@@ -570,7 +571,7 @@ BOOL resultFound = NO;
 
 -(void)draw
 {
-    ccDrawPoly(vert, 4, YES);
+    ccDrawSolidPoly(vert, 4, ccc4f(236, 240, 241, 1));
     ccDrawPoly(vert2, 4, YES);
     ccPointSize(5);
     

@@ -8,6 +8,7 @@
 
 #import "IOOObject.h"
 #import "Structure.h"
+#import "IsometricOperator.h"
 
 @interface NSDictionary(JSONCategories)
 +(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress;
@@ -53,7 +54,7 @@ NSString *documentsDirectory;
 {
     NSMutableDictionary* array = [[NSMutableDictionary alloc]init];
     for (Structure* structure in filledList) {
-        [array setObject:[structure getName]  forKey:NSStringFromCGPoint(structure.position)];
+        [array setObject:[structure getName]  forKey:NSStringFromCGPoint([IsometricOperator gridNumber:structure.position])];
     }
     NSData* data = [array toJSON];
     [data writeToFile:[documentsDirectory stringByAppendingPathComponent:@"save_game"] atomically:YES];
@@ -65,7 +66,8 @@ NSString *documentsDirectory;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"save_game"]]) {
         NSLog(@"save game found");
-        NSData* data = [NSData dataWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:@"save_game"]];
+//        NSData* data = [NSData dataWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:@"save_game"]];
+        NSData* data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"save_game" ofType:@""]];
         NSError*error = nil;
         id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         return result;
