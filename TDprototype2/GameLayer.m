@@ -19,6 +19,7 @@
 #import "CanonTower.h"
 #import "IceBeamTower.h"
 #import "DummyTower.h"
+#import "Wall.h"
 
 #import "testPerson.h"
 #import "FastPaper.h"
@@ -55,6 +56,7 @@ id upgrade_menu;
 IOOObject* ioObject;
 BOOL resultFound = NO;
 
+CGPoint targetPoint;
 
 -(void)onEnter
 {
@@ -109,6 +111,8 @@ BOOL resultFound = NO;
     NSLog(@"%f",ccpDistance([IsometricOperator gridToCoord:ccp(0,1)], [IsometricOperator gridToCoord:ccp(1,0)]));
     
     ioObject = [[IOOObject alloc]initWithList:filledList];
+    
+    targetPoint = [IsometricOperator gridToCoord:ccp(1,28)];
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -420,28 +424,28 @@ BOOL resultFound = NO;
 
 -(void)testSP
 {
-    Unit* person = [[testPerson alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:ccp(864, 316.784)]];
+    Unit* person = [[testPerson alloc]initWithPosition:vert[0] moveTo:targetPoint];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnFastPaper
 {
-    Unit* person = [[FastPaper alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:tree.position]];
+    Unit* person = [[FastPaper alloc]initWithPosition:vert[0] moveTo:targetPoint];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnSlowThick
 {
-    Unit* person = [[SlowThick alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:tree.position]];
+    Unit* person = [[SlowThick alloc]initWithPosition:vert[0] moveTo:targetPoint];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnFlyingUnit
 {
-    Unit* person = [[FlyingUnit alloc]initWithPosition:vert[0] moveTo:[IsometricOperator nearestPoint:tree.position]];
+    Unit* person = [[FlyingUnit alloc]initWithPosition:vert[0] moveTo:targetPoint];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
@@ -471,7 +475,7 @@ BOOL resultFound = NO;
     touchLocation = [unitAndBoxLayer convertToNodeSpace:touchLocation];
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
 //    BasicBlock* sprite = [[BasicBlock alloc] initWithPosition:touchLocation];
-    Structure* sprite = [[BasicBlock alloc]initWithPosition:touchLocation];
+    Structure* sprite = [[Wall alloc]initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
     [filledList addObject:sprite];
     return sprite;

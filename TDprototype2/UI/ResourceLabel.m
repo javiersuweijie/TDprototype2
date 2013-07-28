@@ -26,6 +26,8 @@ static CCSprite* filledTechBar;
 -(id)init
 {
     if (self = [super init]) {
+        CGSize winSize =[[CCDirector sharedDirector]winSize];
+        
         [self setAnchorPoint:ccp(0,0)];
         emptyGoldBar = [CCSprite spriteWithFile:@"bar-01.png"];
         [emptyGoldBar setAnchorPoint:ccp(0,0.5)];
@@ -43,7 +45,7 @@ static CCSprite* filledTechBar;
         [emptyGoldBar addChild:goldLabel];
         
         [goldLabel setPosition:ccp([[goldLabel parent] contentSize].width/2,[[goldLabel parent] contentSize].height/2)];
-        [emptyGoldBar setPosition:ccp([[CCDirector sharedDirector]winSize].width/5*3, [[CCDirector sharedDirector]winSize].height/15*14)];
+        [emptyGoldBar setPosition:ccp(winSize.width/20, winSize.height/15*14)];
         
         emptyTechBar = [CCSprite spriteWithFile:@"bar-01.png"];
         [emptyTechBar setAnchorPoint:ccp(0,0.5)];
@@ -59,7 +61,7 @@ static CCSprite* filledTechBar;
         [emptyTechBar addChild:techLabel];
         
         [techLabel setPosition:ccp([[techLabel parent] contentSize].width/2,[[techLabel parent] contentSize].height/2)];
-        [emptyTechBar setPosition:ccp([[CCDirector sharedDirector]winSize].width/5*3, [[CCDirector sharedDirector]winSize].height/15*13)];
+        [emptyTechBar setPosition:ccp(winSize.width/20, winSize.height/15*13)];
     }
     return self;
 }
@@ -76,13 +78,13 @@ static CCSprite* filledTechBar;
 {
     gold+=addition;
     [goldLabel setString:[NSString stringWithFormat:@"$%d",gold]];
-    [techLabel setString:[NSString stringWithFormat:@"$%d",tech]];
+    [techLabel setString:[NSString stringWithFormat:@"#%d",tech]];
 }
 
 +(BOOL)subtractGoldBy:(int)cost
 {
     [filledTechBar setScaleX:((float)tech/10)];
-    [techLabel setString:[NSString stringWithFormat:@"$%d",tech]];
+    [techLabel setString:[NSString stringWithFormat:@"#%d",tech]];
     if (cost>gold) {
         return NO;
     }

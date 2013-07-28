@@ -27,8 +27,8 @@ static int cost = 500;
 
 -(id)initWithPosition:(CGPoint)point
 {
-    if ([super initWithFile:[NSString stringWithFormat:@"psuedoisobox2.png"]]) {
-        [self setColor:ccc3(230, 126, 34)];
+    if ([super initWithFile:[NSString stringWithFormat:@"Canon.png"]]) {
+//        [self setColor:ccc3(230, 126, 34)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
@@ -116,7 +116,7 @@ static int cost = 500;
     }
 
     [projectile removeFromParentAndCleanup:NO];
-    [projectile setPosition:ccp(self.contentSize.width/2, 0)];
+    [projectile setPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
 }
 
 +(int)cost

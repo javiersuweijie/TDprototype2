@@ -12,6 +12,7 @@
 #import "Structure Menu.h"
 #import "ConfirmMenu.h"
 #import "UpgradeMenu.h"
+#import "FightButton.h"
 
 @implementation UILayer
 CGSize winSize;
@@ -32,6 +33,9 @@ ConfirmMenu* confirmMenu;
     [self addChild:resource];
     
     [menu setConfirmMenu:confirmMenu];
+    
+    FightButton *fight_button = [FightButton node];
+    [self addChild:fight_button];
 }
 
 -(id)addUpgradeMenuOf:(Structure*)prev to:(NSString*)string, ...

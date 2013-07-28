@@ -25,6 +25,15 @@
 		7DAAA00817A0D5BF0081569D /* bar-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA00717A0D5BF0081569D /* bar-01.png */; };
 		7DAAA00D17A0E56B0081569D /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA00C17A0E56B0081569D /* Lato-Regular.ttf */; };
 		7DAAA01117A0F1010081569D /* save_game in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA01017A0F1010081569D /* save_game */; };
+		7DAAA01417A397BC0081569D /* FightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA01317A397BC0081569D /* FightButton.m */; };
+		7DAAA01617A398340081569D /* fight_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA01517A398340081569D /* fight_button.png */; };
+		7DAAA01A17A4B7B40081569D /* Canon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA01717A4B7B40081569D /* Canon.png */; };
+		7DAAA01B17A4B7B40081569D /* FireTower.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA01817A4B7B40081569D /* FireTower.png */; };
+		7DAAA01C17A4B7B40081569D /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA01917A4B7B40081569D /* Water.png */; };
+		7DAAA01F17A4BF270081569D /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA01E17A4BF270081569D /* Wall.m */; };
+		7DAAA02317A4BF880081569D /* WallCRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02017A4BF880081569D /* WallCRight.png */; };
+		7DAAA02417A4BF880081569D /* WallCLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02117A4BF880081569D /* WallCLeft.png */; };
+		7DAAA02517A4BF880081569D /* Wall.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02217A4BF880081569D /* Wall.png */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -212,6 +221,17 @@
 		7DAAA00717A0D5BF0081569D /* bar-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bar-01.png"; path = "Resources/bar-01.png"; sourceTree = "<group>"; };
 		7DAAA00C17A0E56B0081569D /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		7DAAA01017A0F1010081569D /* save_game */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = save_game; sourceTree = "<group>"; };
+		7DAAA01217A397BC0081569D /* FightButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FightButton.h; path = UI/FightButton.h; sourceTree = "<group>"; };
+		7DAAA01317A397BC0081569D /* FightButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FightButton.m; path = UI/FightButton.m; sourceTree = "<group>"; };
+		7DAAA01517A398340081569D /* fight_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fight_button.png; path = Resources/fight_button.png; sourceTree = "<group>"; };
+		7DAAA01717A4B7B40081569D /* Canon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Canon.png; path = Resources/Canon.png; sourceTree = "<group>"; };
+		7DAAA01817A4B7B40081569D /* FireTower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FireTower.png; path = Resources/FireTower.png; sourceTree = "<group>"; };
+		7DAAA01917A4B7B40081569D /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Water.png; path = Resources/Water.png; sourceTree = "<group>"; };
+		7DAAA01D17A4BF260081569D /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
+		7DAAA01E17A4BF270081569D /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
+		7DAAA02017A4BF880081569D /* WallCRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WallCRight.png; path = Resources/WallCRight.png; sourceTree = "<group>"; };
+		7DAAA02117A4BF880081569D /* WallCLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WallCLeft.png; path = Resources/WallCLeft.png; sourceTree = "<group>"; };
+		7DAAA02217A4BF880081569D /* Wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Wall.png; path = Resources/Wall.png; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -631,8 +651,15 @@
 			isa = PBXGroup;
 			children = (
 				7DE16AB81763A0820095142F /* ball.png */,
+				7DAAA02017A4BF880081569D /* WallCRight.png */,
+				7DAAA02117A4BF880081569D /* WallCLeft.png */,
+				7DAAA02217A4BF880081569D /* Wall.png */,
 				7DE16ABF1764E3BB0095142F /* worldtree.png */,
 				7DF310E7178850F80099EEEF /* psuedoisobox2.png */,
+				7DAAA01517A398340081569D /* fight_button.png */,
+				7DAAA01717A4B7B40081569D /* Canon.png */,
+				7DAAA01817A4B7B40081569D /* FireTower.png */,
+				7DAAA01917A4B7B40081569D /* Water.png */,
 				7DAAA01017A0F1010081569D /* save_game */,
 				7DAAA00C17A0E56B0081569D /* Lato-Regular.ttf */,
 				7DAAA00717A0D5BF0081569D /* bar-01.png */,
@@ -1024,6 +1051,8 @@
 				7DE16AC51766262F0095142F /* CanonTower.m */,
 				7D57482417676E4600BAE638 /* IceBeamTower.h */,
 				7D57482517676E4600BAE638 /* IceBeamTower.m */,
+				7DAAA01D17A4BF260081569D /* Wall.h */,
+				7DAAA01E17A4BF270081569D /* Wall.m */,
 				7D574827176B727E00BAE638 /* Particles */,
 			);
 			name = Towers;
@@ -1069,6 +1098,8 @@
 				7D3C32501776EF7500F052B4 /* UnitsMenu.m */,
 				7D9224C3177FD36B001A7D9E /* ResourceLabel.h */,
 				7D9224C4177FD36B001A7D9E /* ResourceLabel.m */,
+				7DAAA01217A397BC0081569D /* FightButton.h */,
+				7DAAA01317A397BC0081569D /* FightButton.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1153,6 +1184,13 @@
 				7DAAA00817A0D5BF0081569D /* bar-01.png in Resources */,
 				7DAAA00D17A0E56B0081569D /* Lato-Regular.ttf in Resources */,
 				7DAAA01117A0F1010081569D /* save_game in Resources */,
+				7DAAA01617A398340081569D /* fight_button.png in Resources */,
+				7DAAA01A17A4B7B40081569D /* Canon.png in Resources */,
+				7DAAA01B17A4B7B40081569D /* FireTower.png in Resources */,
+				7DAAA01C17A4B7B40081569D /* Water.png in Resources */,
+				7DAAA02317A4BF880081569D /* WallCRight.png in Resources */,
+				7DAAA02417A4BF880081569D /* WallCLeft.png in Resources */,
+				7DAAA02517A4BF880081569D /* Wall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1297,6 +1335,8 @@
 				7DAA9FFE1795A7690081569D /* ConfirmMenu.m in Sources */,
 				7DAAA001179C23070081569D /* DummyTower.m in Sources */,
 				7DAAA004179C36480081569D /* UpgradeMenu.m in Sources */,
+				7DAAA01417A397BC0081569D /* FightButton.m in Sources */,
+				7DAAA01F17A4BF270081569D /* Wall.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,7 +1347,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Weijie, Javier Su (PW4K5SABHA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Weijie, Javier Su (PW4K5SABHA)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1319,6 +1360,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PROVISIONING_PROFILE = "4B27A017-89C1-4EAF-94F9-D938776A9FC0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4B27A017-89C1-4EAF-94F9-D938776A9FC0";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1328,7 +1371,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Weijie, Javier Su (PW4K5SABHA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Weijie, Javier Su (PW4K5SABHA)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -1338,6 +1382,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PROVISIONING_PROFILE = "4B27A017-89C1-4EAF-94F9-D938776A9FC0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4B27A017-89C1-4EAF-94F9-D938776A9FC0";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1385,8 +1431,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CD0B9B3C-F6B6-47B6-8777-94CC37E1543D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CD0B9B3C-F6B6-47B6-8777-94CC37E1543D";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
