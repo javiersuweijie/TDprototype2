@@ -94,11 +94,12 @@ CGPoint targetPoint;
     vert[2] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width/2, winSize.height*0.75)]);
     vert[3] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, winSize.height*0.75)]);
     
-    CCSprite* background = [CCSprite spriteWithFile:@"gridfloor.png"];
+    NSLog(@"width of map:%f",ccpDistance(vert[0], vert[2]));
+    
+    CCSprite* background = [CCSprite spriteWithFile:@"background.png"];
     [background setPosition:vert[0]];
     [background setAnchorPoint:ccp(0,0.5)];
-    [background setColor:ccc3(129, 229, 0)];
-//    [self addChild:background z:-1000];
+    [self addChild:background z:-1000];
     
     context = UIGraphicsGetCurrentContext();
     path = CGPathCreateMutable();
@@ -575,8 +576,8 @@ CGPoint targetPoint;
 
 -(void)draw
 {
-    ccDrawSolidPoly(vert, 4, ccc4f(236, 240, 241, 1));
-    ccDrawPoly(vert2, 4, YES);
+//    ccDrawSolidPoly(vert, 4, ccc4f(236, 240, 241, 1));
+    ccDrawPoly(vert, 4, YES);
     ccPointSize(5);
     
     CGPoint mid = [self convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
