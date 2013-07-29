@@ -28,6 +28,7 @@ static int cost = 500;
 -(id)initWithPosition:(CGPoint)point
 {
     if ([super initWithFile:[NSString stringWithFormat:@"Canon.png"]]) {
+        [self setSpriteFile:@"Canon.png"];
 //        [self setColor:ccc3(230, 126, 34)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
@@ -36,6 +37,7 @@ static int cost = 500;
         [self setName:@"CanonTower"];
         [self setCanBeMoved:YES];
         projectile = [[CCSprite alloc]initWithFile:@"redbox.png"];
+        [projectile setPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
         [self scheduleUpdate];
 
     }

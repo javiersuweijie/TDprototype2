@@ -30,7 +30,7 @@ static CCSprite* filledTechBar;
         
         [self setAnchorPoint:ccp(0,0)];
         emptyGoldBar = [CCSprite spriteWithFile:@"bar-01.png"];
-        [emptyGoldBar setAnchorPoint:ccp(0,0.5)];
+        [emptyGoldBar setAnchorPoint:ccp(0,1)];
         [emptyGoldBar setColor:ccc3(52, 73, 94)];
         [emptyGoldBar.texture setAntiAliasTexParameters];
         [self addChild:emptyGoldBar];
@@ -45,10 +45,10 @@ static CCSprite* filledTechBar;
         [emptyGoldBar addChild:goldLabel];
         
         [goldLabel setPosition:ccp([[goldLabel parent] contentSize].width/2,[[goldLabel parent] contentSize].height/2)];
-        [emptyGoldBar setPosition:ccp(winSize.width/20, winSize.height/15*14)];
+        [emptyGoldBar setPosition:ccp(winSize.width/40, winSize.height/30*29)];
         
         emptyTechBar = [CCSprite spriteWithFile:@"bar-01.png"];
-        [emptyTechBar setAnchorPoint:ccp(0,0.5)];
+        [emptyTechBar setAnchorPoint:ccp(0,1)];
         [emptyTechBar setColor:ccc3(52, 73, 94)];
         [self addChild:emptyTechBar];
         
@@ -61,7 +61,7 @@ static CCSprite* filledTechBar;
         [emptyTechBar addChild:techLabel];
         
         [techLabel setPosition:ccp([[techLabel parent] contentSize].width/2,[[techLabel parent] contentSize].height/2)];
-        [emptyTechBar setPosition:ccp(winSize.width/20, winSize.height/15*13)];
+        [emptyTechBar setPosition:ccp(winSize.width/40, winSize.height/30*27)];
     }
     return self;
 }

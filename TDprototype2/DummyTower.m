@@ -23,6 +23,7 @@ CGSize winSize;
 -(id)initWithPosition:(CGPoint)point
 {
     if ([super initWithFile:[NSString stringWithFormat:@"psuedoisobox2.png"]]) {
+        [self setSpriteFile:@"psudoisobox2.png"];
         [self setColor:ccc3(127, 140, 141)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];

@@ -9,7 +9,7 @@
 
 #import "Structure.h"
 #import "IsometricOperator.h"
-
+#import "InfoPanel.h"
 
 @interface Structure () {
     NSString* name;
@@ -25,11 +25,13 @@
     BOOL isChecking;
     CGPoint validPoint;
     BOOL isRed;
+    id uilayer;
+    id info_panel;
 }
 @end
 
 @implementation Structure
-@synthesize gridPosition,cost;
+@synthesize gridPosition,cost,spriteFile;
 
 static BOOL isSelectedGlobal;
 static NSMutableArray* threadArray;
@@ -70,6 +72,8 @@ static NSMutableArray* threadArray;
     checked = YES;
     isValid = YES;
     threadArray = [[NSMutableArray alloc]init];
+    
+    uilayer = [[[[self parent]parent]parent]getChildByTag:2];
 }
 
 -(void)draw
@@ -126,6 +130,7 @@ static NSMutableArray* threadArray;
     isSelected = NO;
     isSelectedGlobal = NO;
     [pan setEnabled:NO];
+    [info_panel removeFromParentAndCleanup:YES];
 }
 
 -(void)handleTapGesture:(UITapGestureRecognizer*)gesture
@@ -136,6 +141,8 @@ static NSMutableArray* threadArray;
             [[GameLayer getFilledArray]addObject:self];
         }
         else if (!isSelectedGlobal) {
+            info_panel = [[InfoPanel alloc]initWithStructure:self];
+            [uilayer addChild:info_panel];
             [self setOpacity:100];
             [downArrows setVisible:YES];
             isSelectedGlobal = YES;

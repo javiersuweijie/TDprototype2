@@ -20,6 +20,7 @@ static int cost = 300;
 -(id)initWithPosition:(CGPoint)point
 {
     if ([super initWithFile:[NSString stringWithFormat:@"Water.png"]]) {
+        [self setSpriteFile:@"Water.png"];
 //        [self setColor:ccc3(52, 152, 219)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];

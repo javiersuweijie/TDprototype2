@@ -17,6 +17,7 @@
 
 @property (nonatomic,strong) NSArray* gridPosition;
 @property int cost;
+@property NSString* spriteFile;
 
 -(void)setName:(NSString*)n;
 -(void)setCanBeMoved:(BOOL)b;

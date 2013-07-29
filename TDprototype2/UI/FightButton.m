@@ -20,7 +20,7 @@ id game_layer;
         CGSize winSize = [[CCDirector sharedDirector]winSize];
         [fight_button setAnchorPoint:ccp(1,0)];
 //        NSLog(@"%d",[self ignoreAnchorPointForPosition]);
-        [fight_button setPosition:ccp(winSize.width/20*19, winSize.height/15)];
+        [fight_button setPosition:ccp(winSize.width/40*39, winSize.height/30)];
         [self addChild:fight_button];
     }
     return self;

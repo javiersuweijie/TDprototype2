@@ -25,6 +25,7 @@ id filledNode;
         midWallDict = [[NSMutableDictionary alloc]init];
     }
     if ([super initWithFile:[NSString stringWithFormat:@"Wall.png"]]) {
+        [self setSpriteFile:@"Wall.png"];
 //        [self setColor:ccc3(189, 195, 199)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(1, 1)];
