@@ -227,6 +227,9 @@
 	// Get the next step to move to
 	ShortestPathStep *ss = [shortestPath objectAtIndex:0];
     CGPoint s = [IsometricOperator gridToCoord:ss.position];
+    int r1 = (arc4random() % 16)-8;
+    int r2 = (arc4random() % 16)-8;
+    s = ccpAdd(s, ccp(r1,r2));
     float timetaken=ccpDistance(self.position, s)/self.speed;
     
 	id moveAction = [CCMoveTo actionWithDuration:timetaken position:s];

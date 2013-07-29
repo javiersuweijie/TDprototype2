@@ -12,7 +12,7 @@
 @implementation ParticlesIceBeam
 -(id) init
 {
-	return [self initWithTotalParticles:50];
+	return [self initWithTotalParticles:100];
 }
 
 -(id) initWithTotalParticles:(NSUInteger)p
@@ -70,7 +70,7 @@
 		endSize = kCCParticleStartSizeEqualToEndSize;
         endSizeVar = 1.0f;
         self.positionType = kCCPositionTypeGrouped;
-		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"particleFire.png"];
         
 		// additive
 		self.blendAdditive = NO;

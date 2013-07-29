@@ -172,7 +172,7 @@
 		7DE16A8A1762DAE20095142F /* redbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A891762DAE20095142F /* redbox.png */; };
 		7DE16A8E176321F20095142F /* downarrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A8D176321F20095142F /* downarrows.png */; };
 		7DE16A921763252C0095142F /* arrowAI.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A911763252C0095142F /* arrowAI.png */; };
-		7DE16A97176373270095142F /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A96176373270095142F /* fire.png */; };
+		7DE16A97176373270095142F /* particleFire.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16A96176373270095142F /* particleFire.png */; };
 		7DE16A9C176386F60095142F /* CustomMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A99176386F60095142F /* CustomMenu.m */; };
 		7DE16AA41763871C0095142F /* ShortestPathStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16A9F1763871C0095142F /* ShortestPathStep.m */; };
 		7DE16AA51763871C0095142F /* testPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AA11763871C0095142F /* testPerson.m */; };
@@ -514,7 +514,7 @@
 		7DE16A891762DAE20095142F /* redbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redbox.png; sourceTree = "<group>"; };
 		7DE16A8D176321F20095142F /* downarrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrows.png; sourceTree = "<group>"; };
 		7DE16A911763252C0095142F /* arrowAI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowAI.png; sourceTree = "<group>"; };
-		7DE16A96176373270095142F /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
+		7DE16A96176373270095142F /* particleFire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = particleFire.png; sourceTree = "<group>"; };
 		7DE16A98176386F60095142F /* CustomMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomMenu.h; path = UI/CustomMenu.h; sourceTree = "<group>"; };
 		7DE16A99176386F60095142F /* CustomMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomMenu.m; path = UI/CustomMenu.m; sourceTree = "<group>"; };
 		7DE16A9E1763871C0095142F /* ShortestPathStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShortestPathStep.h; path = Unit/ShortestPathStep.h; sourceTree = "<group>"; };
@@ -677,7 +677,7 @@
 				7DF310E1178816560099EEEF /* gridfloor.png */,
 				7D9C28FC177B1ADF0074CF93 /* whiteball.png */,
 				7DE16A8D176321F20095142F /* downarrows.png */,
-				7DE16A96176373270095142F /* fire.png */,
+				7DE16A96176373270095142F /* particleFire.png */,
 				7DE16A911763252C0095142F /* arrowAI.png */,
 				7DE168CA175F6DEF0095142F /* Default.png */,
 				7DE168CC175F6DEF0095142F /* Default-Landscape~ipad.png */,
@@ -1183,7 +1183,7 @@
 				7DE16A8A1762DAE20095142F /* redbox.png in Resources */,
 				7DE16A8E176321F20095142F /* downarrows.png in Resources */,
 				7DE16A921763252C0095142F /* arrowAI.png in Resources */,
-				7DE16A97176373270095142F /* fire.png in Resources */,
+				7DE16A97176373270095142F /* particleFire.png in Resources */,
 				7DE16AB91763A0820095142F /* ball.png in Resources */,
 				7DE16AC01764E3BB0095142F /* worldtree.png in Resources */,
 				7D9C28FD177B1AE00074CF93 /* whiteball.png in Resources */,
