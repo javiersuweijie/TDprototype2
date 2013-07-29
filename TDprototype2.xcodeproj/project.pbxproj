@@ -34,6 +34,8 @@
 		7DAAA02317A4BF880081569D /* WallCRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02017A4BF880081569D /* WallCRight.png */; };
 		7DAAA02417A4BF880081569D /* WallCLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02117A4BF880081569D /* WallCLeft.png */; };
 		7DAAA02517A4BF880081569D /* Wall.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02217A4BF880081569D /* Wall.png */; };
+		7DAAA02817A605AA0081569D /* InfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA02717A605AA0081569D /* InfoPanel.m */; };
+		7DAAA02A17A6062A0081569D /* info-example.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02917A6062A0081569D /* info-example.png */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -232,6 +234,9 @@
 		7DAAA02017A4BF880081569D /* WallCRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WallCRight.png; path = Resources/WallCRight.png; sourceTree = "<group>"; };
 		7DAAA02117A4BF880081569D /* WallCLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WallCLeft.png; path = Resources/WallCLeft.png; sourceTree = "<group>"; };
 		7DAAA02217A4BF880081569D /* Wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Wall.png; path = Resources/Wall.png; sourceTree = "<group>"; };
+		7DAAA02617A605A90081569D /* InfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoPanel.h; path = UI/InfoPanel.h; sourceTree = "<group>"; };
+		7DAAA02717A605AA0081569D /* InfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoPanel.m; path = UI/InfoPanel.m; sourceTree = "<group>"; };
+		7DAAA02917A6062A0081569D /* info-example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info-example.png"; path = "Resources/info-example.png"; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -652,6 +657,7 @@
 			children = (
 				7DE16AB81763A0820095142F /* ball.png */,
 				7DAAA02017A4BF880081569D /* WallCRight.png */,
+				7DAAA02917A6062A0081569D /* info-example.png */,
 				7DAAA02117A4BF880081569D /* WallCLeft.png */,
 				7DAAA02217A4BF880081569D /* Wall.png */,
 				7DE16ABF1764E3BB0095142F /* worldtree.png */,
@@ -1100,6 +1106,8 @@
 				7D9224C4177FD36B001A7D9E /* ResourceLabel.m */,
 				7DAAA01217A397BC0081569D /* FightButton.h */,
 				7DAAA01317A397BC0081569D /* FightButton.m */,
+				7DAAA02617A605A90081569D /* InfoPanel.h */,
+				7DAAA02717A605AA0081569D /* InfoPanel.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1191,6 +1199,7 @@
 				7DAAA02317A4BF880081569D /* WallCRight.png in Resources */,
 				7DAAA02417A4BF880081569D /* WallCLeft.png in Resources */,
 				7DAAA02517A4BF880081569D /* Wall.png in Resources */,
+				7DAAA02A17A6062A0081569D /* info-example.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1337,6 +1346,7 @@
 				7DAAA004179C36480081569D /* UpgradeMenu.m in Sources */,
 				7DAAA01417A397BC0081569D /* FightButton.m in Sources */,
 				7DAAA01F17A4BF270081569D /* Wall.m in Sources */,
+				7DAAA02817A605AA0081569D /* InfoPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

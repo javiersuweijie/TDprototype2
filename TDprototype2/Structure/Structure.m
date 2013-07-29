@@ -24,6 +24,7 @@
     BOOL isValid;
     BOOL isChecking;
     CGPoint validPoint;
+    BOOL isRed;
 }
 @end
 
@@ -74,9 +75,16 @@ static NSMutableArray* threadArray;
 -(void)draw
 {
     [super draw];
-    if (!isValid) {
-        ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
+    if (isRed) {
+        isRed = NO;
+        [self setColor:ccWHITE];
     }
+    if (!isValid) {
+//        ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
+        [self setColor:ccc3(192, 57, 43)];
+        isRed = YES;
+    }
+    
 }
 
 -(void)checkValidPosition
