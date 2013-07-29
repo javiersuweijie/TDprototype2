@@ -76,4 +76,13 @@ static int cost = 300;
 {
     return cost;
 }
+
+-(int)dps
+{
+    return (int)60;
+}
+-(NSString*)aoe
+{
+    return @"Single";
+}
 @end

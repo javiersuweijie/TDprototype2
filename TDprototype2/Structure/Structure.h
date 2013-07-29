@@ -25,5 +25,7 @@
 -(NSString*)getName;
 -(void)unSelect;
 +(int)cost;
+-(int)dps;
+-(NSString*)aoe;
 +(BOOL)isSelectedGlobally;
 @end

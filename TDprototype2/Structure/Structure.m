@@ -141,7 +141,9 @@ static NSMutableArray* threadArray;
             [[GameLayer getFilledArray]addObject:self];
         }
         else if (!isSelectedGlobal) {
-            info_panel = [[InfoPanel alloc]initWithStructure:self];
+            if (![[self getName]isEqual:@"Wall"]) {
+                info_panel = [[InfoPanel alloc]initWithStructure:self];
+            }
             [uilayer addChild:info_panel];
             [self setOpacity:100];
             [downArrows setVisible:YES];
@@ -270,6 +272,16 @@ static NSMutableArray* threadArray;
 +(int)cost
 {
     mustOverride();
+}
+
+-(int)dps
+{
+    return 0;
+}
+
+-(NSString*)aoe
+{
+    return nil;
 }
 
 +(BOOL)isSelectedGlobally

@@ -42,28 +42,48 @@ id structure_;
 
 -(void)onEnter
 {
+    
+    float f3 = 15;
+    float f2 = 8;
+    float f1 = 6;
     CCSprite* structure = [CCSprite spriteWithFile:[structure_ spriteFile]];
     [self smartSet:structure PositionWithGrid:ccp(5,4)];
     [structure setAnchorPoint:ccp(0.5,0)];
     [info_base addChild:structure];
     
-    CCLabelTTF* name = [CCLabelTTF labelWithString:[structure_ getName] fontName:@"Lato-Regular" fontSize:15];
+    CCLabelTTF* name = [CCLabelTTF labelWithString:[structure_ getName] fontName:@"Lato-Regular" fontSize:f3];
     [self smartSet:name PositionWithGrid:ccp(1,13)];
     [info_base addChild:name];
     
-    CCLabelTTF* dps_title = [CCLabelTTF labelWithString:@"Damage per second" fontName:@"Lato-Regular" fontSize:8];
+    
+    CCLabelTTF* dps_title = [CCLabelTTF labelWithString:@"Damage per second" fontName:@"Lato-Regular" fontSize:f2];
     [self smartSet:dps_title PositionWithGrid:ccp(11,11)];
     [info_base addChild:dps_title];
     
-    CCLabelTTF* aoe_title = [CCLabelTTF labelWithString:@"Area of effect" fontName:@"Lato-Regular" fontSize:8];
+    CCLabelTTF* dps = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d",[structure_ dps]] fontName:@"Lato-Regular" fontSize:f1];
+    [self smartSet:dps PositionWithGrid:ccp(11,10)];
+    [info_base addChild:dps];
+    
+    
+    CCLabelTTF* aoe_title = [CCLabelTTF labelWithString:@"Area of effect" fontName:@"Lato-Regular" fontSize:f2];
     [self smartSet:aoe_title PositionWithGrid:ccp(11,8)];
     [info_base addChild:aoe_title];
+
+    CCLabelTTF* aoe = [CCLabelTTF labelWithString:[structure_ aoe] fontName:@"Lato-Regular" fontSize:f1];
+    [self smartSet:aoe PositionWithGrid:ccp(11,7)];
+    [info_base addChild:aoe];
     
-    CCLabelTTF* cost_title = [CCLabelTTF labelWithString:@"Cost to upgrade" fontName:@"Lato-Regular" fontSize:8];
+    
+    CCLabelTTF* cost_title = [CCLabelTTF labelWithString:@"Cost to upgrade" fontName:@"Lato-Regular" fontSize:f2];
     [self smartSet:cost_title PositionWithGrid:ccp(11,5)];
     [info_base addChild:cost_title];
     
-    CCLabelTTF* tips_title = [CCLabelTTF labelWithString:@"Tips" fontName:@"Lato-Regular" fontSize:8];
+    CCLabelTTF* cost = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d",[structure_ cost]] fontName:@"Lato-Regular" fontSize:f1];
+    [self smartSet:cost PositionWithGrid:ccp(11,4)];
+    [info_base addChild:cost];
+    
+    
+    CCLabelTTF* tips_title = [CCLabelTTF labelWithString:@"Tips" fontName:@"Lato-Regular" fontSize:f2];
     [self smartSet:tips_title PositionWithGrid:ccp(11,2)];
     [info_base addChild:tips_title];
     

@@ -51,7 +51,7 @@ Structure* current_;
     if (!structure) {
         return;
     }
-    NSLog(@"OPEN");
+//    NSLog(@"OPEN");
     structure_ = structure;
     [self setVisible:YES];
     [self arrangeCircle];
@@ -63,7 +63,7 @@ Structure* current_;
         current_ = currentStruct;
         current_.visible = NO;
     }
-    NSLog(@"%@",current_);
+//    NSLog(@"%@",current_);
     [self openWithStructure:structure];
 }
 
@@ -71,7 +71,7 @@ Structure* current_;
 {
     
     if (current_) {
-        NSLog(@"dummy removed");
+//        NSLog(@"dummy removed");
         [current_ removeFromParentAndCleanup:YES];
         current_ = nil;
     }

@@ -111,7 +111,7 @@ static int cost = 500;
     if ([array count]>0) {
         for (Unit* unitt in array) {
             if (ccpDistance(ccpAdd(projectile.position,self.position),unitt.position)<35) {
-                NSLog(@"hit");
+//                NSLog(@"hit");
                 unitt.hp -= 100;
             }
         }
@@ -124,5 +124,15 @@ static int cost = 500;
 +(int)cost
 {
     return cost;
+}
+
+-(int)dps
+{
+    return 100/k_cooldown;
+}
+
+-(NSString*)aoe
+{
+    return @"35";
 }
 @end

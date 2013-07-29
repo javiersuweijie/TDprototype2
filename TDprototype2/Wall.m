@@ -60,6 +60,7 @@ id filledNode;
         if (CGPointEqualToPoint([wall getGrid],ccpAdd(selfGrid, ccp(0,1)))) {
             CCSprite* midWall = [CCSprite spriteWithFile:@"WallCRight.png"];
             [midWall setPosition:ccpMidpoint(self.position, [IsometricOperator gridToCoord:ccpAdd(selfGrid, ccp(-1,2))])];
+            midWall.isTouchEnabled = NO;
             [filledNode addChild:midWall z:-self.position.y-self.contentSize.height/4];
             [midWallDict setObject:midWall forKey:[NSValue valueWithCGPoint:midWall.position]];
         }
@@ -67,6 +68,7 @@ id filledNode;
             NSLog(@"found adj wall1");
             CCSprite* midWall = [CCSprite spriteWithFile:@"WallCLeft.png"];
             [midWall setPosition:ccpMidpoint(self.position, [IsometricOperator gridToCoord:ccpAdd(selfGrid, ccp(0,1))])];
+            midWall.isTouchEnabled = NO;
             [filledNode addChild:midWall z:-self.position.y+self.contentSize.height/4];
             [midWallDict setObject:midWall forKey:[NSValue valueWithCGPoint:midWall.position]];
         }
@@ -74,6 +76,7 @@ id filledNode;
             NSLog(@"found adj wall1");
             CCSprite* midWall = [CCSprite spriteWithFile:@"WallCLeft.png"];
             [midWall setPosition:ccpMidpoint(self.position, [IsometricOperator gridToCoord:ccpAdd(selfGrid, ccp(-2,1))])];
+            midWall.isTouchEnabled = NO;
             [filledNode addChild:midWall z:-self.position.y-self.contentSize.height/4];
             [midWallDict setObject:midWall forKey:[NSValue valueWithCGPoint:midWall.position]];
         }
@@ -81,6 +84,7 @@ id filledNode;
             NSLog(@"found adj wall1");
             CCSprite* midWall = [CCSprite spriteWithFile:@"WallCRight.png"];
             [midWall setPosition:ccpMidpoint(self.position, [IsometricOperator gridToCoord:ccpAdd(selfGrid, ccp(-1,0))])];
+            midWall.isTouchEnabled = NO;
             [filledNode addChild:midWall z:-self.position.y+self.contentSize.height/4];
             [midWallDict setObject:midWall forKey:[NSValue valueWithCGPoint:midWall.position]];
         }

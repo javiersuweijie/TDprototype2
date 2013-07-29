@@ -46,7 +46,7 @@ CGSize winSize;
         uilayer = [[gamelayer parent]getChildByTag:2];
     }
     CGPoint touchLocation = self.position;
-    NSLog(@"%@",NSStringFromCGPoint([IsometricOperator gridNumber:touchLocation]));
+//    NSLog(@"%@",NSStringFromCGPoint([IsometricOperator gridNumber:touchLocation]));
     touchLocation = ccpAdd(touchLocation, ccp(0,11.31*2));
     
     menu = [[[gamelayer parent]getChildByTag:2]getChildByTag:1];

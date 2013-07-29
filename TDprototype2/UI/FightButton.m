@@ -19,7 +19,6 @@ id game_layer;
         id fight_button = [CustomMenuItem menuItemWithOnlyImage:@"fight_button.png" target:self selector:@selector(buttonPressed)];
         CGSize winSize = [[CCDirector sharedDirector]winSize];
         [fight_button setAnchorPoint:ccp(1,0)];
-//        NSLog(@"%d",[self ignoreAnchorPointForPosition]);
         [fight_button setPosition:ccp(winSize.width/40*39, winSize.height/30)];
         [self addChild:fight_button];
     }
@@ -28,7 +27,7 @@ id game_layer;
 
 -(void)buttonPressed
 {
-    NSLog(@"Fight button pressed");
+//    NSLog(@"Fight button pressed");
     if (!game_layer) {
         game_layer = [[[self parent]parent]getChildByTag:1];
     }
