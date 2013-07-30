@@ -77,6 +77,7 @@ static CCSprite* filledTechBar;
 +(void)addGoldBy:(int)addition
 {
     gold+=addition;
+    [filledGoldBar setScaleX:((float)gold/1000)];
     [goldLabel setString:[NSString stringWithFormat:@"$%d",gold]];
     [techLabel setString:[NSString stringWithFormat:@"#%d",tech]];
 }

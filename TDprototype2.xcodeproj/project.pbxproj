@@ -12,7 +12,6 @@
 		7D3C32451776D77600F052B4 /* FastPaper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32441776D77600F052B4 /* FastPaper.m */; };
 		7D3C32481776D86800F052B4 /* SlowThick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32471776D86800F052B4 /* SlowThick.m */; };
 		7D3C324E1776DD8200F052B4 /* FlyingUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C324D1776DD7E00F052B4 /* FlyingUnit.m */; };
-		7D3C32511776EF7500F052B4 /* UnitsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C32501776EF7500F052B4 /* UnitsMenu.m */; };
 		7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482517676E4600BAE638 /* IceBeamTower.m */; };
 		7D57482D176B72DA00BAE638 /* ParticlesIceBeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57482C176B72DA00BAE638 /* ParticlesIceBeam.m */; };
 		7D746BF2178870D400EF195C /* IOOObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF310EA178858910099EEEF /* IOOObject.m */; };
@@ -38,6 +37,7 @@
 		7DAAA02A17A6062A0081569D /* info-example.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02917A6062A0081569D /* info-example.png */; };
 		7DAAA02C17A60FC30081569D /* info-base.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02B17A60FC30081569D /* info-base.png */; };
 		7DAAA02E17A64B730081569D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02D17A64B730081569D /* background.png */; };
+		7DAAA03117A7B94E0081569D /* UnitMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA03017A7B94C0081569D /* UnitMenu.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -206,8 +206,6 @@
 		7D3C32471776D86800F052B4 /* SlowThick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowThick.m; sourceTree = "<group>"; };
 		7D3C324C1776DD7D00F052B4 /* FlyingUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingUnit.h; sourceTree = "<group>"; };
 		7D3C324D1776DD7E00F052B4 /* FlyingUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyingUnit.m; sourceTree = "<group>"; };
-		7D3C324F1776EF7500F052B4 /* UnitsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitsMenu.h; sourceTree = "<group>"; };
-		7D3C32501776EF7500F052B4 /* UnitsMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsMenu.m; sourceTree = "<group>"; };
 		7D57482417676E4600BAE638 /* IceBeamTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IceBeamTower.h; path = Structure/IceBeamTower.h; sourceTree = "<group>"; };
 		7D57482517676E4600BAE638 /* IceBeamTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IceBeamTower.m; path = Structure/IceBeamTower.m; sourceTree = "<group>"; };
 		7D57482B176B72DA00BAE638 /* ParticlesIceBeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticlesIceBeam.h; path = Structure/Particles/ParticlesIceBeam.h; sourceTree = "<group>"; };
@@ -241,6 +239,8 @@
 		7DAAA02917A6062A0081569D /* info-example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info-example.png"; path = "Resources/info-example.png"; sourceTree = "<group>"; };
 		7DAAA02B17A60FC30081569D /* info-base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info-base.png"; path = "Resources/info-base.png"; sourceTree = "<group>"; };
 		7DAAA02D17A64B730081569D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Resources/background.png; sourceTree = "<group>"; };
+		7DAAA02F17A7B94B0081569D /* UnitMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnitMenu.h; path = UI/UnitMenu.h; sourceTree = "<group>"; };
+		7DAAA03017A7B94C0081569D /* UnitMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitMenu.m; path = UI/UnitMenu.m; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1106,13 +1106,13 @@
 				7DF310DF1787DA0C0099EEEF /* Structure Menu.m */,
 				7DAAA002179C36470081569D /* UpgradeMenu.h */,
 				7DAAA003179C36480081569D /* UpgradeMenu.m */,
-				7D3C324F1776EF7500F052B4 /* UnitsMenu.h */,
-				7D3C32501776EF7500F052B4 /* UnitsMenu.m */,
 				7D9224C3177FD36B001A7D9E /* ResourceLabel.h */,
 				7D9224C4177FD36B001A7D9E /* ResourceLabel.m */,
 				7DAAA01217A397BC0081569D /* FightButton.h */,
 				7DAAA01317A397BC0081569D /* FightButton.m */,
 				7DAAA02617A605A90081569D /* InfoPanel.h */,
+				7DAAA02F17A7B94B0081569D /* UnitMenu.h */,
+				7DAAA03017A7B94C0081569D /* UnitMenu.m */,
 				7DAAA02717A605AA0081569D /* InfoPanel.m */,
 			);
 			name = UI;
@@ -1344,7 +1344,6 @@
 				7D3C32451776D77600F052B4 /* FastPaper.m in Sources */,
 				7D3C32481776D86800F052B4 /* SlowThick.m in Sources */,
 				7D3C324E1776DD8200F052B4 /* FlyingUnit.m in Sources */,
-				7D3C32511776EF7500F052B4 /* UnitsMenu.m in Sources */,
 				7D9224C5177FD36B001A7D9E /* ResourceLabel.m in Sources */,
 				7DF310DD1787D0FA0099EEEF /* CustomMenuItem.m in Sources */,
 				7DF310E01787DA0C0099EEEF /* Structure Menu.m in Sources */,
@@ -1355,6 +1354,7 @@
 				7DAAA01417A397BC0081569D /* FightButton.m in Sources */,
 				7DAAA01F17A4BF270081569D /* Wall.m in Sources */,
 				7DAAA02817A605AA0081569D /* InfoPanel.m in Sources */,
+				7DAAA03117A7B94E0081569D /* UnitMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,7 @@
     
 }
 @property BOOL isSelected;
-
+@property int radius;
 -(id) initWithArray:(NSArray *)arrayOfItems;
 -(void)arrangeCircle;
 -(void)keepCircle;

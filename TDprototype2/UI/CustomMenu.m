@@ -16,7 +16,7 @@
 @end
 
 @implementation CustomMenu
-@synthesize isSelected;
+@synthesize isSelected,radius;
 
 -(id) initWithArray:(NSArray *)arrayOfItems
 {
@@ -48,6 +48,7 @@
 		}
 		
 		selectedItem_ = nil;
+        radius = 75;
 	}
 	
 	return self;
@@ -66,7 +67,7 @@
         int i = 1;
         for (CCNode* menuItem in [self children]) {
             menuItem.visible = YES;
-            CGPoint endpoint = ccpMult(ccp(cosf(angle*i),sinf(angle*i)),75);
+            CGPoint endpoint = ccpMult(ccp(cosf(angle*i),sinf(angle*i)),radius);
             CCMoveBy* move = [CCMoveTo actionWithDuration:0.5 position:endpoint];
             id ease = [CCEaseElasticOut actionWithAction:move];
 
