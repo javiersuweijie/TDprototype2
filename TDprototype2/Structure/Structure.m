@@ -143,8 +143,8 @@ static NSMutableArray* threadArray;
         else if (!isSelectedGlobal) {
             if (![[self getName]isEqual:@"Wall"]) {
                 info_panel = [[InfoPanel alloc]initWithStructure:self];
+                [uilayer addChild:info_panel];
             }
-            [uilayer addChild:info_panel];
             [self setOpacity:100];
             [downArrows setVisible:YES];
             isSelectedGlobal = YES;

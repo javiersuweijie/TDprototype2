@@ -98,7 +98,7 @@
 		startSizeVar = 2.0f;
 		endSize = kCCParticleStartSizeEqualToEndSize;
 
-		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"particleFire.png"];
 
 		// additive
 		self.blendAdditive = NO;
