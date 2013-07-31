@@ -33,7 +33,7 @@ static int cost = 500;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
-        [self setPosition:point];
+        [self setTempPosition:point];
         [self setName:@"CanonTower"];
         [self setCanBeMoved:YES];
         projectile = [[CCSprite alloc]initWithFile:@"redbox.png"];
@@ -47,6 +47,7 @@ static int cost = 500;
 -(void)onEnter
 {
     [super onEnter];
+    [self setPosition:self.tempPosition];
     array = [GameLayer getUnitArray];
     coolDown = 0;
     isShooting = NO;

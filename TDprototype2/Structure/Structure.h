@@ -18,9 +18,9 @@
 @property (nonatomic,strong) NSArray* gridPosition;
 @property int cost;
 @property NSString* spriteFile;
+@property CGPoint tempPosition;
 
 -(void)setName:(NSString*)n;
--(void)setTempPos:(CGPoint)point;
 -(void)setCanBeMoved:(BOOL)b;
 -(void)setSize:(CGSize)size;
 -(NSString*)getName;

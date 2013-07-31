@@ -13,7 +13,6 @@
 NSMutableArray* array;
 Unit* unit;
 static int cost = 100;
-CGPoint point_;
 -(id)initWithPosition:(CGPoint)point
 {
     if ([super initWithFile:[NSString stringWithFormat:@"FireTower.png"]]) {
@@ -22,7 +21,7 @@ CGPoint point_;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
-        point_=point;
+        [self setTempPosition:point];
         [self setName:@"FireTower"];
         [self setCanBeMoved:YES];
         
@@ -33,8 +32,7 @@ CGPoint point_;
 -(void)onEnter
 {
     [super onEnter];
-    [self setPosition:point_];
-    [self setTempPos:point_];
+    [self setPosition:self.tempPosition];
     array = [GameLayer getUnitArray];
     emitter=[[CCParticleFire alloc]init];
     [emitter stopSystem];

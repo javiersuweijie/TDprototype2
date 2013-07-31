@@ -25,7 +25,7 @@ static int cost = 300;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
-        [self setPosition:point];
+        [self setTempPosition:point];
         [self setName:@"IceBeamTower"];
         [self setCanBeMoved:YES];
         [self scheduleUpdate];
@@ -38,6 +38,7 @@ static int cost = 300;
 {
     [super onEnter];
     array = [GameLayer getUnitArray];
+    [self setPosition:self.tempPosition];
     emitter=[[ParticlesIceBeam alloc]init];
     [emitter setPosition:ccp(self.contentSize.width/2,self.contentSize.height/2)];
     [emitter stopSystem];

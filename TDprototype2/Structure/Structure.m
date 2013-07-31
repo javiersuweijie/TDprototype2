@@ -13,7 +13,6 @@
 
 @interface Structure () {
     NSString* name;
-    CGPoint tempPosition; //used for snapping to grid
     BOOL canBeMoved;
     BOOL isSelected;
     UIGestureRecognizer* pan;
@@ -74,11 +73,6 @@ static NSMutableArray* threadArray;
     
     uilayer = [[[[self parent]parent]parent]getChildByTag:2];
 
-}
-
--(void)setTempPos:(CGPoint)point
-{
-    tempPosition = point;
 }
 
 -(void)draw
@@ -172,8 +166,8 @@ static NSMutableArray* threadArray;
         translation.y *= -1;
         [gesture setTranslation:CGPointZero inView:gesture.view];
         translation = ccpMult(translation, 1/[[self parent]parent].scale);
-        tempPosition = ccpAdd(tempPosition, translation);
-        CGPoint newPoint = [IsometricOperator nearestPoint:tempPosition];
+        self.tempPosition = ccpAdd(self.tempPosition, translation);
+        CGPoint newPoint = [IsometricOperator nearestPoint:self.tempPosition];
         if (!CGPointEqualToPoint(newPoint,self.position)) {
             [self setPosition:newPoint];
         }
@@ -181,7 +175,7 @@ static NSMutableArray* threadArray;
     
     if (gesture.state == UIGestureRecognizerStateEnded && checked) {
         if (!isValid) {
-            tempPosition = validPoint;
+            self.tempPosition = validPoint;
             [self setPosition:validPoint];
         }
     }
@@ -199,7 +193,7 @@ static NSMutableArray* threadArray;
         return;
     }
     else if (!isValid){
-        tempPosition = validPoint;
+        self.tempPosition = validPoint;
         [self setPosition:validPoint];
         [self unschedule:@selector(continueChecking)];
         isChecking = NO;
