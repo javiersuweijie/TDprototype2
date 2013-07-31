@@ -62,9 +62,12 @@ static float tileHeight;
     }
     
     else {
-        x = xypoint.x/tileHeight;
+        if (x<0) {
+            x = xypoint.x/tileHeight;
+            x--;
+        }
+        else x = xypoint.x/tileHeight;
         y = xypoint.y/tileHeight;
-        if (x<0)x--;
         if (y<0)y--;
         x*=tileHeight;
         y*=tileHeight;

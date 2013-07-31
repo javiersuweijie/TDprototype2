@@ -85,6 +85,7 @@ CGPoint targetPoint;
     [unitAndBoxLayer setAnchorPoint:ccp(0,0)];
     [self addChild:unitAndBoxLayer];
     [self setAnchorPoint:ccp(0,0)];
+    [self setPosition:ccp(0,-151)];
 //    [filledList addObject:tree]; //commented out else units cant find path
     
     float translate = 22.627*14;
@@ -96,7 +97,7 @@ CGPoint targetPoint;
     
     NSLog(@"width of map:%f",ccpDistance(vert[0], vert[2]));
     
-    CCSprite* background = [CCSprite spriteWithFile:@"background.png"];
+    CCSprite* background = [CCSprite spriteWithFile:@"background2.png"];
     [background setPosition:vert[0]];
     [background setAnchorPoint:ccp(0,0.5)];
     [self addChild:background z:-1000];
@@ -198,11 +199,16 @@ CGPoint targetPoint;
 //        }
         CGPoint oldCenter = ccp(mid.x*self.scale,mid.y*self.scale);
         self.scale *= scale;
-        self.scale = MAX(self.scale, 0.5);
+        self.scale = MAX(self.scale, 1);
         self.scale = MIN(self.scale, 5);
         CGPoint newCenter = ccp(mid.x*self.scale,mid.y*self.scale);
         CGPoint delta = ccpSub(oldCenter,newCenter);
         self.position = ccpAdd(self.position, delta);
+        self.position = ccp(self.position.x,MAX(-167*(self.scale)-(ccpDistance(vert[1], vert[3])+20)*(self.scale-1), self.position.y));
+        
+        self.position = ccp(self.position.x,MIN(-148*self.scale, self.position.y));
+        self.position = ccp(MAX(-ccpDistance(vert[0], vert[2])*(self.scale-1),self.position.x),self.position.y);
+        self.position = ccp(MIN(0,self.position.x),self.position.y);
         gesture.scale = 1;
     }
 }
@@ -278,7 +284,16 @@ CGPoint targetPoint;
 //        else if ([self convertToNodeSpace:ccp(winSize.width, winSize.height)].y>winSize.height&&translation.y<0) {
 //        }
 //        else {
-            self.position = ccpAdd(self.position, translation);
+        self.position = ccpAdd(self.position, translation);
+        self.position = ccp(self.position.x,MAX(-167*(self.scale)-(ccpDistance(vert[1], vert[3])-20)*(self.scale-1), self.position.y));
+        
+        self.position = ccp(self.position.x,MIN(-148*self.scale, self.position.y));
+        self.position = ccp(MAX(-ccpDistance(vert[0], vert[2])*(self.scale-1),self.position.x),self.position.y);
+        self.position = ccp(MIN(0,self.position.x),self.position.y);
+        NSLog(@"%@",NSStringFromCGPoint(self.position));
+        NSLog(@"%f",-ccpDistance(vert[0], vert[2])*self.scale);
+        NSLog(@"%f",-ccpDistance(vert[1], vert[3])*self.scale);
+        
 //        }
 
     }
@@ -311,7 +326,7 @@ CGPoint targetPoint;
     if (!CGPathContainsPoint(path, NULL, [IsometricOperator gridToCoord:grid], NO) ) {
         return NO;
     }
-    for (Structure* structure in filledList) {
+    for (Structure* structure in [filledList copy]) {
         for (NSValue* value in structure.gridPosition) {
             if (CGPointEqualToPoint(grid, [value CGPointValue])) {
                 return NO;
@@ -542,7 +557,9 @@ CGPoint targetPoint;
     touchLocation = [IsometricOperator nearestPoint:touchLocation];
     Structure* sprite = [[NSClassFromString(tower) alloc] initWithPosition:touchLocation];
     [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
-    [filledList addObject:sprite];
+    if (!([[sprite getName]isEqualToString:@"DummyTower"])) {
+        [filledList addObject:sprite];
+    }
     return sprite;
 }
 
@@ -557,11 +574,13 @@ CGPoint targetPoint;
     for (NSString* key in towerD) {
         NSString* tower = [towerD objectForKey:key];
         NSLog(@"%@",tower);
-        CCSprite* sprite = [[NSClassFromString(tower) alloc] initWithPosition:[IsometricOperator gridToCoord:CGPointFromString(key)]];
+        Structure* sprite = [[NSClassFromString(tower) alloc] initWithPosition:[IsometricOperator gridToCoord:CGPointFromString(key)]];
         NSLog(@"%@",sprite);
         [unitAndBoxLayer addChild:sprite z:-sprite.position.y];
         [sprite performSelector:@selector(unSelect)];
-        [filledList addObject:sprite];
+        if (!([[sprite getName]isEqualToString:@"DummyTower"])) {
+            [filledList addObject:sprite];
+        }
     }
 }
 

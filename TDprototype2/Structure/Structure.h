@@ -20,6 +20,7 @@
 @property NSString* spriteFile;
 
 -(void)setName:(NSString*)n;
+-(void)setTempPos:(CGPoint)point;
 -(void)setCanBeMoved:(BOOL)b;
 -(void)setSize:(CGSize)size;
 -(NSString*)getName;

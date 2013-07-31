@@ -20,23 +20,23 @@
         self.hp = 100;
         self.unitType = Flying;
         self.bounty = 10;
-        [self setAnchorPoint:ccp(0.5,0)];
+        [self setAnchorPoint:ccp(0.5,-0.3)];
         [self setPosition:point];
-//        [self moveToward:pointTo];
-        [self performSelectorInBackground:@selector(moveToward:) withObject:[NSValue valueWithCGPoint:pointTo]];
+        [self moveTowards:pointTo];
+//        [self performSelectorInBackground:@selector(moveToward:) withObject:[NSValue valueWithCGPoint:pointTo]];
     }
     return self;
 }
 
-//-(NSMutableArray*)moveToward:(CGPoint)target
-//{
-//    float timetaken=ccpDistance(self.position, target)/self.speed;
-//	id moveAction = [CCMoveTo actionWithDuration:timetaken position:target];
-//    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, nil] speed:self.speedMultiplier];
-//	// Remove the step
-//	[self runAction:speeding];
-//    return nil;
-//}
+-(NSMutableArray*)moveTowards:(CGPoint)target
+{
+    float timetaken=ccpDistance(self.position, target)/self.speed;
+	id moveAction = [CCMoveTo actionWithDuration:timetaken position:target];
+    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, nil] speed:self.speedMultiplier];
+	// Remove the step
+	[self runAction:speeding];
+    return nil;
+}
 
 -(void)update:(ccTime)dt
 {

@@ -67,13 +67,18 @@ static NSMutableArray* threadArray;
 
         [self setOpacity:100];
         isSelected = YES;
-        tempPosition = self.position;
     }
     checked = YES;
     isValid = YES;
     threadArray = [[NSMutableArray alloc]init];
     
     uilayer = [[[[self parent]parent]parent]getChildByTag:2];
+
+}
+
+-(void)setTempPos:(CGPoint)point
+{
+    tempPosition = point;
 }
 
 -(void)draw
