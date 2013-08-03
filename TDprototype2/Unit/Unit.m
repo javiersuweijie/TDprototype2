@@ -57,7 +57,7 @@
     NSDate *start = [NSDate date];
     CGPoint toGrid = [IsometricOperator gridNumber:[target CGPointValue]];
     CGPoint fromGrid = [IsometricOperator gridNumber:self.position];
-    if (![GameLayer isValidGrid:toGrid]) {  //check if destination is valid
+    if (![GameLayer isValidUnitGrid:toGrid]) {  //check if destination is valid
         NSLog(@"Not valid point");
         return nil;
     }
@@ -88,7 +88,7 @@
         }
         
         // Get the adjacent tiles coord of the current step
-        NSArray *adjSteps = [GameLayer walkableAdjGrid:currentStep.position];
+        NSArray *adjSteps = [GameLayer walkableAdjUnitGrid:currentStep.position];
         for (NSValue *v in adjSteps) {
             ShortestPathStep *step = [[ShortestPathStep alloc] initWithPosition:[v CGPointValue]];
             

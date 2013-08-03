@@ -29,7 +29,6 @@ static int cost = 500;
 {
     if ([super initWithFile:[NSString stringWithFormat:@"Canon.png"]]) {
         [self setSpriteFile:@"Canon.png"];
-//        [self setColor:ccc3(230, 126, 34)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];

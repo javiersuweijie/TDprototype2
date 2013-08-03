@@ -16,8 +16,12 @@
 +(BOOL)isValid:(CGPoint)point;
 //check if a grid point is valid
 +(BOOL)isValidGrid:(CGPoint)grid;
+//check if a grid is valid for units
++(BOOL)isValidUnitGrid:(CGPoint)grid;
 //returns the valid grids around a particular point
 +(NSArray*)walkableAdjGrid:(CGPoint)grid;
+//for units
++(NSArray*)walkableAdjUnitGrid:(CGPoint)grid;
 
 +(Byte)isConnected:(NSArray*)gridArray;
 

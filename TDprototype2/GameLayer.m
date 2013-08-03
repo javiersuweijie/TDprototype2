@@ -39,6 +39,7 @@ static NSMutableArray* unitList;
 static CCLayer* unitAndBoxLayer;
 static CGSize winSize;
 static CGMutablePathRef path;
+static CGMutablePathRef unitPath;
 
 BOOL buildingMode = NO;
 CCLayer* buildingLayer;
@@ -57,7 +58,7 @@ IOOObject* ioObject;
 BOOL resultFound = NO;
 
 CGPoint targetPoint;
-
+CGPoint unitEndPoint;
 -(void)onEnter
 {
     [super onEnter];
@@ -89,6 +90,11 @@ CGPoint targetPoint;
 //    [filledList addObject:tree]; //commented out else units cant find path
     
     float translate = 22.627*14;
+    float tileHeight = 16;
+    vert2[0] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, -tileHeight)]);
+    vert2[1] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width/2, -tileHeight)]);
+    vert2[2] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width/2, winSize.height*0.75+tileHeight)]);
+    vert2[3] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, winSize.height*0.75+tileHeight)]);
     
     vert[0] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, 0)]);
     vert[1] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width/2, 0)]);
@@ -110,11 +116,19 @@ CGPoint targetPoint;
     CGPathAddLineToPoint(path, NULL, vert[3].x, vert[3].y);
     CGPathCloseSubpath(path);
     
+    unitPath = CGPathCreateMutable();
+    CGPathMoveToPoint(unitPath, NULL, vert2[0].x, vert2[0].y);
+    CGPathAddLineToPoint(unitPath, NULL, vert2[1].x, vert2[1].y);
+    CGPathAddLineToPoint(unitPath, NULL, vert2[2].x, vert2[2].y);
+    CGPathAddLineToPoint(unitPath, NULL, vert2[3].x, vert2[3].y);
+    CGPathCloseSubpath(unitPath);
+    
     NSLog(@"%f",ccpDistance([IsometricOperator gridToCoord:ccp(0,1)], [IsometricOperator gridToCoord:ccp(1,0)]));
     
     ioObject = [[IOOObject alloc]initWithList:filledList];
     
-    targetPoint = [IsometricOperator gridToCoord:ccp(1,28)];
+    targetPoint = [IsometricOperator gridToCoord:ccp(-6,29)];
+    unitEndPoint = [IsometricOperator gridToCoord:ccp(-6,13)];
 }
 
 -(void)handleTapGesture:(UIGestureRecognizer*) tapGesture
@@ -337,6 +351,23 @@ CGPoint targetPoint;
     return YES;
 }
 
++(BOOL)isValidUnitGrid:(CGPoint)grid
+{
+    if (!CGPathContainsPoint(unitPath, NULL, [IsometricOperator gridToCoord:grid], NO) ) {
+        return NO;
+    }
+    for (Structure* structure in [filledList copy]) {
+        for (NSValue* value in structure.gridPosition) {
+            if (CGPointEqualToPoint(grid, [value CGPointValue])) {
+                return NO;
+            }
+            
+        }
+    }
+    return YES;
+}
+
+
 +(NSArray*)walkableAdjGrid:(CGPoint)grid
 {
 
@@ -403,13 +434,81 @@ CGPoint targetPoint;
     
 }
 
+
++(NSArray*)walkableAdjUnitGrid:(CGPoint)grid
+{
+    
+    
+    NSMutableArray* tmpArray = [NSMutableArray arrayWithCapacity:8];
+    
+    // Top
+	CGPoint top = ccp(grid.x,grid.y+1);
+    
+    // Bottom
+    CGPoint bottom = ccp(grid.x,grid.y-1);
+    
+	// Left
+    CGPoint left = ccp(grid.x-1,grid.y);
+    if ([GameLayer isValidUnitGrid:left])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:left]];
+        if ([GameLayer isValidUnitGrid:top]) {
+            CGPoint topleft = ccp(grid.x-1,grid.y+1);
+            if ([GameLayer isValidUnitGrid:topleft]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:topleft]];
+            }
+        }
+        if ([GameLayer isValidUnitGrid:bottom]) {
+            CGPoint bottomleft = ccp(grid.x-1,grid.y-1);
+            if ([GameLayer isValidUnitGrid:bottomleft]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:bottomleft]];
+            }
+        }
+    }
+    
+    if ([GameLayer isValidUnitGrid:bottom])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:bottom]];
+        
+    }
+    
+    if ([GameLayer isValidUnitGrid:top])
+    {
+		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
+        
+    }
+    
+	// Right
+    CGPoint right = ccp(grid.x+1,grid.y);
+    if ([GameLayer isValidUnitGrid:right])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:right]];
+        if ([GameLayer isValidUnitGrid:top]) {
+            CGPoint topright = ccp(grid.x+1,grid.y+1);
+            if ([GameLayer isValidUnitGrid:topright]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:topright]];
+            }
+        }
+        if ([GameLayer isValidUnitGrid:bottom]) {
+            CGPoint bottomright = ccp(grid.x+1,grid.y-1);
+            if ([GameLayer isValidUnitGrid:bottomright]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:bottomright]];
+            }
+        }
+    }
+    
+	return [NSArray arrayWithArray:tmpArray];
+    
+}
+
+
 +(Byte)isConnected:(NSArray*)gridArray
 {
     BOOL exitNow = NO;
     
     NSMutableArray* stack = [[NSMutableArray alloc]init];
     NSMutableArray* connected = [[NSMutableArray alloc]init];
-    NSMutableArray* adj = [NSMutableArray arrayWithArray:[GameLayer walkableAdjGrid:(ccp(1,28))]];
+    NSMutableArray* adj = [NSMutableArray arrayWithArray:[GameLayer walkableAdjUnitGrid:(ccp(-6,29))]];
     for (NSValue* value in gridArray) {
         [adj removeObject:value];
     }
@@ -422,10 +521,10 @@ CGPoint targetPoint;
         }
         NSValue* tempValue = [stack objectAtIndex:[stack count]-1];
         [stack removeLastObject];
-        NSArray* tempArray = [GameLayer walkableAdjGrid:[tempValue CGPointValue]];
+        NSArray* tempArray = [GameLayer walkableAdjUnitGrid:[tempValue CGPointValue]];
         for (NSValue* temp in tempArray) {
             if ([gridArray containsObject:temp]) {}
-            else if ([temp isEqualToValue:[NSValue valueWithCGPoint:ccp(-13,14)]]) {
+            else if ([temp isEqualToValue:[NSValue valueWithCGPoint:ccp(-6,13)]]) {
                 return 1;
             }
             else if (![connected containsObject:temp]) {
@@ -440,28 +539,28 @@ CGPoint targetPoint;
 
 -(void)testSP
 {
-    Unit* person = [[testPerson alloc]initWithPosition:vert[0] moveTo:targetPoint];
+    Unit* person = [[testPerson alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnFastPaper
 {
-    Unit* person = [[FastPaper alloc]initWithPosition:vert[0] moveTo:targetPoint];
+    Unit* person = [[FastPaper alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnSlowThick
 {
-    Unit* person = [[SlowThick alloc]initWithPosition:vert[0] moveTo:targetPoint];
+    Unit* person = [[SlowThick alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
 
 -(void)spawnFlyingUnit
 {
-    Unit* person = [[FlyingUnit alloc]initWithPosition:vert[0] moveTo:targetPoint];
+    Unit* person = [[FlyingUnit alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
     [unitAndBoxLayer addChild:person];
     [unitList addObject:person];
 }
