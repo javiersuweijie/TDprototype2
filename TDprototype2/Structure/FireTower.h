@@ -12,7 +12,7 @@
 
 @interface FireTower : Structure
 @property (strong,nonatomic) CCParticleFire* emitter;
-
+@property float dmg;
 -(id)initWithPosition:(CGPoint)point;
 @end
 

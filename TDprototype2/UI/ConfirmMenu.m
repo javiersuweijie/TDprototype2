@@ -72,6 +72,7 @@ Structure* current_;
     
     if (current_) {
 //        NSLog(@"dummy removed");
+        [current_ unSelect];
         [current_ removeFromParentAndCleanup:YES];
         current_ = nil;
     }
@@ -84,6 +85,7 @@ Structure* current_;
     if (!current_) {
         current_.visible = YES;
     }
+    [structure_ unSelect];
     [structure_ removeFromParentAndCleanup:YES];
     structure_=nil;
     [self keepCircle];

@@ -48,7 +48,6 @@ NSMutableArray* stringArray;
     NSString *string;
     short i=2;
     while((string = va_arg(args, id))) {
-        NSLog(@"do%dAction",i);
         CustomMenuItem * menuItem = [CustomMenuItem menuItemWithOnlyImage:@"button.png" target:self selector:NSSelectorFromString([NSString stringWithFormat:@"do%dAction",i])];
         CCLabelTTF* label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:8];
         [label setAnchorPoint:ccp(0,0)];
@@ -68,13 +67,6 @@ NSMutableArray* stringArray;
     [sellLabel setPosition:ccp(left_padding, 0)];
     [sell addChild:sellLabel];
     [buttonArray addObject:sell];
-    
-    CustomMenuItem * info = [CustomMenuItem menuItemWithOnlyImage:@"button.png" target:self selector:@selector(info)];
-    CCLabelTTF* infoLabel = [CCLabelTTF labelWithString:@"Info" fontName:@"Helvetica" fontSize:8];
-    [infoLabel setAnchorPoint:ccp(0,0)];
-    [infoLabel setPosition:ccp(left_padding, 0)];
-    [info addChild:infoLabel];
-    [buttonArray addObject:info];
 }
 
 -(void)onEnter
@@ -87,7 +79,6 @@ NSMutableArray* stringArray;
 -(void) do1Action
 {
     NSLog(@"touched 1 by %@",current_);
-    
     [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:0]]andCurrent:current_];
 }
 -(void) do2Action
@@ -108,10 +99,7 @@ NSMutableArray* stringArray;
 -(void) sell
 {
     [current_ removeFromParentAndCleanup:YES];
-}
--(void) info
-{
-    NSLog(@"Display some info here");
+    [self keepCircle];
 }
 
 @end

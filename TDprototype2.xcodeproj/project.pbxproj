@@ -1113,9 +1113,9 @@
 				7D9224C4177FD36B001A7D9E /* ResourceLabel.m */,
 				7DAAA01217A397BC0081569D /* FightButton.h */,
 				7DAAA01317A397BC0081569D /* FightButton.m */,
-				7DAAA02617A605A90081569D /* InfoPanel.h */,
 				7DAAA02F17A7B94B0081569D /* UnitMenu.h */,
 				7DAAA03017A7B94C0081569D /* UnitMenu.m */,
+				7DAAA02617A605A90081569D /* InfoPanel.h */,
 				7DAAA02717A605AA0081569D /* InfoPanel.m */,
 			);
 			name = UI;

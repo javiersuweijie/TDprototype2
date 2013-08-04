@@ -342,4 +342,11 @@ static NSMutableArray* threadArray;
     isSelectedGlobal = bool_;
 }
 
+-(void)removeFromParentAndCleanup:(BOOL)cleanup
+{
+    [super removeFromParentAndCleanup:cleanup];
+    if (isSelected){
+        [self unSelect];
+    }
+}
 @end

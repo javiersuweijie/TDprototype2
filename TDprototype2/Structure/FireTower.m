@@ -16,13 +16,12 @@
 NSMutableArray* array;
 Unit* unit;
 static int cost = 100;
-float dmg;
 id gamelayer;
 id uilayer;
 id menu;
 id confirm_menu;
 CGSize winSize;
-
+@synthesize dmg;
 -(id)initWithPosition:(CGPoint)point
 {
     if ([super initWithFile:[NSString stringWithFormat:@"FireTower.png"]]) {
@@ -55,7 +54,7 @@ CGSize winSize;
     emitter.positionType = kCCPositionTypeGrouped;
     [self addChild:emitter];
     [self scheduleUpdate];
-    dmg = 1;
+    self.dmg = 1;
     unit=nil;
     winSize = [[CCDirector sharedDirector]winSize];
 }
@@ -108,11 +107,10 @@ CGSize winSize;
 @end
 
 @implementation FireTower2
-
 -(void)onEnter
 {
     [super onEnter];
-    dmg = 10;
+    self.dmg = 3;
 }
 -(void)handleTapGesture:(UITapGestureRecognizer*)gesture
 {
