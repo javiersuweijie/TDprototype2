@@ -79,7 +79,6 @@ static CCSprite* filledTechBar;
     gold+=addition;
     [filledGoldBar setScaleX:((float)gold/1000)];
     [goldLabel setString:[NSString stringWithFormat:@"$%d",gold]];
-    [techLabel setString:[NSString stringWithFormat:@"#%d",tech]];
 }
 
 +(BOOL)subtractGoldBy:(int)cost
@@ -96,6 +95,12 @@ static CCSprite* filledTechBar;
         return YES;
     }
 }
++(void)subtractTechBy:(int)cost
+{
+    tech-=cost;
+    [techLabel setString:[NSString stringWithFormat:@"#%d",tech]];
+}
+
 +(int)getGold
 {
     return gold;

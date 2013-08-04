@@ -219,8 +219,21 @@
 - (void)popStepAndAnimate;
 {
 	// Check if there remains path steps to go through
-    if ([shortestPath count] == 0) {
-		shortestPath = nil;
+    if ([shortestPath count] == 1) {
+        ShortestPathStep *ss = [shortestPath objectAtIndex:0];
+        CGPoint s = [IsometricOperator gridToCoord:ss.position];
+        int r1 = (arc4random() % 16)-8;
+        int r2 = (arc4random() % 16)-8;
+        s = ccpAdd(s, ccp(r1,r2));
+        float timetaken=ccpDistance(self.position, s)/self.speed;
+        
+        id moveAction = [CCMoveTo actionWithDuration:timetaken position:s];
+        id moveCallback = [CCCallFunc actionWithTarget:self selector:@selector(reachEnd)]; // set the method itself as the callback
+        id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, moveCallback, nil] speed:speedMultiplier];
+        // Remove the step
+        [shortestPath removeObjectAtIndex:0];
+        //    [self runAction:[self animate:s.position]];
+        [self runAction:speeding];
 		return;
 	}
     
@@ -241,6 +254,14 @@
 	[self runAction:speeding];
 }
 
+- (void)reachEnd
+{
+    NSLog(@"last");
+    shortestPath = nil;
+    [ResourceLabel subtractTechBy:1];
+    [self removeFromParentAndCleanup:YES];
+}
+
 - (void)cancelStep
 {
     [self stopAllActions];
@@ -253,7 +274,9 @@
 
 -(void)onExit
 {
+    if (self.hp <= 0) {
+        [ResourceLabel addGoldBy:self.bounty];
+    }
     [super onExit];
-    [ResourceLabel addGoldBy:self.bounty];
 }
 @end

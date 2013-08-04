@@ -18,4 +18,5 @@
 +(BOOL)subtractGoldBy:(int)cost;
 +(void)addGoldBy:(int)addition;
 +(int)getGold;
++(void)subtractTechBy:(int)cost;
 @end
