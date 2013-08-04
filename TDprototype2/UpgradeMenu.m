@@ -79,21 +79,25 @@ NSMutableArray* stringArray;
 -(void) do1Action
 {
     NSLog(@"touched 1 by %@",current_);
+    [self keepCircle];
     [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:0]]andCurrent:current_];
 }
 -(void) do2Action
 {
     NSLog(@"touched 2");
+    [self keepCircle];
     [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:1]]andCurrent:current_];
 }
 -(void) do3Action
 {
     NSLog(@"touched 3");
+    [self keepCircle];
     [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:2]]andCurrent:current_];
 }
 -(void) do4Action
 {
     NSLog(@"touched 4");
+    [self keepCircle];
     [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:3]]andCurrent:current_];
 }
 -(void) sell

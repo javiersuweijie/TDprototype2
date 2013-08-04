@@ -277,6 +277,7 @@
     if (self.hp <= 0) {
         [ResourceLabel addGoldBy:self.bounty];
     }
+    [[GameLayer getUnitArray] removeObject:self];
     [super onExit];
 }
 @end

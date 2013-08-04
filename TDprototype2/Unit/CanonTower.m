@@ -57,7 +57,7 @@ static int cost = 500;
 {   
     
     if ([array count]>0) {
-        for (Unit* unitt in array) {
+        for (Unit* unitt in [array copy]) {
             if (ccpDistance(self.position,unitt.position)<75) {
                 unit = unitt;
                 currentPoint = unit.position;
