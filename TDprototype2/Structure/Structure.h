@@ -29,4 +29,7 @@
 -(int)dps;
 -(NSString*)aoe;
 +(BOOL)isSelectedGlobally;
+-(void)createMenuAfterTouch;
+-(void)handleTapGesture:(UITapGestureRecognizer*)gesture;
+-(void)tap:(UITapGestureRecognizer*)gesture;
 @end

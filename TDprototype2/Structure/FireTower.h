@@ -15,3 +15,7 @@
 
 -(id)initWithPosition:(CGPoint)point;
 @end
+
+@interface FireTower2 : FireTower
+
+@end

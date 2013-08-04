@@ -10,6 +10,9 @@
 #import "Structure.h"
 #import "IsometricOperator.h"
 #import "InfoPanel.h"
+#import "ConfirmMenu.h"
+#import "UpgradeMenu.h"
+#import "GameLayer.h"
 
 @interface Structure () {
     NSString* name;
@@ -18,6 +21,7 @@
     UIGestureRecognizer* pan;
     CCSprite* downArrows;
     CGSize structureSize;
+    CGSize winSize;
     CGPoint vert[4];
     BOOL checked;
     BOOL isValid;
@@ -26,6 +30,9 @@
     BOOL isRed;
     id uilayer;
     id info_panel;
+    id gamelayer;
+    id confirm_menu;
+    id menu;
 }
 @end
 
@@ -72,7 +79,7 @@ static NSMutableArray* threadArray;
     threadArray = [[NSMutableArray alloc]init];
     
     uilayer = [[[[self parent]parent]parent]getChildByTag:2];
-
+    winSize = [[CCDirector sharedDirector]winSize];
 }
 
 -(void)draw
@@ -134,6 +141,11 @@ static NSMutableArray* threadArray;
 
 -(void)handleTapGesture:(UITapGestureRecognizer*)gesture
 {
+    [self tap:gesture];
+}
+
+-(void)tap:(UITapGestureRecognizer*)gesture
+{
     if (canBeMoved) {
         if (isSelected) {
             [self unSelect];
@@ -153,6 +165,43 @@ static NSMutableArray* threadArray;
         }
     }
     else return;
+}
+
+-(void)createMenuAfterTouch
+{
+    if (!gamelayer) {
+        gamelayer = [[self parent] parent];
+    }
+    if (!uilayer) {
+        uilayer = [[gamelayer parent]getChildByTag:2];
+    }
+    CGPoint touchLocation = self.position;
+    //    NSLog(@"%@",NSStringFromCGPoint([IsometricOperator gridNumber:touchLocation]));
+    touchLocation = ccpAdd(touchLocation, ccp(0,11.31*2));
+    
+    menu = [[[gamelayer parent]getChildByTag:2]getChildByTag:1];
+    confirm_menu = [[[gamelayer parent]getChildByTag:2]getChildByTag:2];
+    if ([[[menu children]objectAtIndex:0] numberOfRunningActions]>0) {
+        return;
+    }
+    if ([confirm_menu isSelected]) {
+        return;
+    }
+    if ([gamelayer closeMenu]);
+    else {
+        if ([Structure isSelectedGlobally]) {
+            return;
+        }
+        UpgradeMenu* upgrademenu = [[UpgradeMenu alloc]initWithCurrent:self andStrings:@"FireTower2",nil ];
+        [uilayer addChild:upgrademenu z:3 tag:3];
+        CGPoint mid = [gamelayer convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
+        CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),[gamelayer getScale]);
+        float dist = ccpDistance(ccp(0,0), moveby);
+        id move = [CCMoveBy actionWithDuration:dist/700 position:moveby];
+        id ease = [CCEaseOut actionWithAction:move rate:0.5];
+        id popMenu = [CCCallFunc actionWithTarget:upgrademenu selector:@selector(arrangeCircle)];
+        [gamelayer runAction:[CCSequence actions:ease, popMenu, nil]];
+    }
 }
 
 -(void)handlePanGesture:(UIPanGestureRecognizer*)gesture
