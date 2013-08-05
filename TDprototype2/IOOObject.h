@@ -13,4 +13,5 @@
 -(void)sendData;
 -(void)exportStructureListFrom:(NSArray*)filledList;
 -(id)load;
+-(id)loadUnits;
 @end

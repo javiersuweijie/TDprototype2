@@ -662,6 +662,14 @@ CGPoint unitEndPoint;
     return sprite;
 }
 
+-(void)spawnUnit:(NSString*)unitName
+{
+    NSLog(@"%@",unitName);
+    Unit* unit = [[NSClassFromString(unitName) alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
+    [unitAndBoxLayer addChild:unit];
+    [unitList addObject:unit];
+}
+
 -(void)exportData
 {
     [ioObject exportStructureListFrom:filledList];
@@ -669,6 +677,7 @@ CGPoint unitEndPoint;
 
 -(void)loadData
 {
+    [self closeMenu];
     NSDictionary* towerD = [ioObject load];
     for (NSString* key in towerD) {
         NSString* tower = [towerD objectForKey:key];
@@ -680,6 +689,15 @@ CGPoint unitEndPoint;
         if (!([[sprite getName]isEqualToString:@"DummyTower"])) {
             [filledList addObject:sprite];
         }
+    }
+}
+
+-(void)loadUnit
+{
+    NSDictionary* loadUnits = [ioObject loadUnits];
+    for (NSNumber* time in loadUnits) {
+        NSString* unit = [loadUnits objectForKey:time];
+        [self performSelector:@selector(spawnUnit:) withObject:unit afterDelay:[time floatValue]];
     }
 }
 

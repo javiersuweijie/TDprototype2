@@ -32,7 +32,7 @@ id game_layer;
         game_layer = [[[self parent]parent]getChildByTag:1];
     }
 
-    [game_layer testSP];
+    [game_layer loadUnit];
 }
 
 @end

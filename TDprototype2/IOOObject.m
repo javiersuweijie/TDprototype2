@@ -76,6 +76,21 @@ NSString *documentsDirectory;
     return nil;
 }
 
+-(id)loadUnits
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:[[NSBundle mainBundle] pathForResource:@"load_wave" ofType:@""]]) {
+        NSLog(@"load game found");
+        NSData* data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"load_wave" ofType:@""]];
+        NSError*error = nil;
+        id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        NSLog(@"%@",result);
+        return result;
+    }
+    else NSLog(@"not found");
+    return nil;
+}
+
 -(void)sendData
 {
 //    NSString *post = [NSString stringWithFormat:@"api_key=%@&game_id=%@&response=%@&username=%@key=%@value=%@",

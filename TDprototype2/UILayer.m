@@ -34,11 +34,11 @@ ConfirmMenu* confirmMenu;
     
     [menu setConfirmMenu:confirmMenu];
     
-//    FightButton *fight_button = [FightButton node];
-//    [self addChild:fight_button];
+    FightButton *fight_button = [FightButton node];
+    [self addChild:fight_button];
 
-    UnitMenu* unit_menu = [UnitMenu node];
-    [self addChild:unit_menu];
+//    UnitMenu* unit_menu = [UnitMenu node];
+//    [self addChild:unit_menu];
 }
 
 -(id)addUpgradeMenuOf:(Structure*)prev to:(NSString*)string, ...
