@@ -16,7 +16,7 @@
         self.speed = 50;
         self.speedMultiplier = 1;
         self.color = ccc3(255, 0, 0);
-        self.hp = 200;
+        self.hp = 500;
         self.unitType=Normal;
         self.bounty = 10;
         [self setAnchorPoint:ccp(0.5,0)];

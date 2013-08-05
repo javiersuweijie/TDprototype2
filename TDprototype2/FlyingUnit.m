@@ -32,7 +32,8 @@
 {
     float timetaken=ccpDistance(self.position, target)/self.speed;
 	id moveAction = [CCMoveTo actionWithDuration:timetaken position:target];
-    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, nil] speed:self.speedMultiplier];
+    id moveCallback = [CCCallFunc actionWithTarget:self selector:@selector(reachEnd)]; // set the method itself as the callback
+    id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, moveCallback, nil] speed:self.speedMultiplier];
 	// Remove the step
 	[self runAction:speeding];
     return nil;
