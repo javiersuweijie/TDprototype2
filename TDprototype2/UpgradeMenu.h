@@ -11,7 +11,7 @@
 #import "CustomMenu.h"
 
 @interface UpgradeMenu : CustomMenu {
-    
 }
+@property id current;
 - (id) initWithCurrent:(id)current andStrings:(NSString*)string1, ...;
 @end

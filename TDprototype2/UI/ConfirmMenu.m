@@ -12,8 +12,7 @@
 
 @implementation ConfirmMenu
 id game_layer;
-id structure_;
-Structure* current_;
+@synthesize current,structure;
 -(id)init
 {
     float left_padding = 10;
@@ -46,48 +45,46 @@ Structure* current_;
     [self setPosition:ccp([[CCDirector sharedDirector]winSize].width/2, [[CCDirector sharedDirector]winSize].height/2)];
 }
 
--(void)openWithStructure:(Structure *)structure
+-(void)openWithStructure:(Structure *)structure_
 {
-    if (!structure) {
+    if (!structure_) {
         return;
     }
 //    NSLog(@"OPEN");
-    structure_ = structure;
+    self.structure = structure_;
     [self setVisible:YES];
     [self arrangeCircle];
 }
 
--(void)openWithStructure:(Structure *)structure andCurrent:(Structure *)currentStruct
+-(void)openWithStructure:(Structure *)structure_ andCurrent:(Structure *)currentStruct
 {
-    if (!currentStruct) {
-        current_ = currentStruct;
-        current_.visible = NO;
+    if (!self.current) {
+        NSLog(@"set current");
+        self.current = currentStruct;
+        self.current.visible = NO;
     }
-//    NSLog(@"%@",current_);
-    [self openWithStructure:structure];
+    [self openWithStructure:structure_];
 }
 
 -(void)confirm
 {
-    
-    if (current_) {
-//        NSLog(@"dummy removed");
-        [current_ unSelect];
-        [current_ removeFromParentAndCleanup:YES];
-        current_ = nil;
+    if (self.current) {
+        [self.current unSelect];
+        [self.current removeFromParentAndCleanup:YES];
+        self.current = nil;
     }
-    [structure_ unSelect];
+    [self.structure unSelect];
     [self keepCircle];
 }
 
 -(void)cancel
 {
-    if (!current_) {
-        current_.visible = YES;
+    if (!self.current) {
+        self.current.visible = YES;
     }
-    [structure_ unSelect];
-    [structure_ removeFromParentAndCleanup:YES];
-    structure_=nil;
+    [self.structure unSelect];
+    [self.structure removeFromParentAndCleanup:YES];
+    self.structure=nil;
     [self keepCircle];
 }
 @end

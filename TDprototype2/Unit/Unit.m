@@ -258,7 +258,7 @@
 {
     NSLog(@"last");
     shortestPath = nil;
-    [ResourceLabel subtractTechBy:1];
+    [ResourceLabel subtractLifeBy:1];
     [self removeFromParentAndCleanup:YES];
 }
 

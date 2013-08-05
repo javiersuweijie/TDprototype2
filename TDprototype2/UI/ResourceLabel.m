@@ -15,13 +15,17 @@
 @implementation ResourceLabel
 static int gold=1000;
 static CCLabelTTF* goldLabel;
-static CCSprite* emptyGoldBar;
-static CCSprite* filledGoldBar;
+static CCSprite* goldIcon;
 
 static int tech=10;
 static CCLabelTTF* techLabel;
-static CCSprite* emptyTechBar;
-static CCSprite* filledTechBar;
+static CCSprite* techIcon;
+
+static int life=20;
+static CCSprite* lifeIcon;
+static CCLabelTTF* lifeLabel;
+static CCSprite* emptyLifeBar;
+static CCSprite* filledLifeBar;
 
 -(id)init
 {
@@ -29,39 +33,49 @@ static CCSprite* filledTechBar;
         CGSize winSize =[[CCDirector sharedDirector]winSize];
         
         [self setAnchorPoint:ccp(0,0)];
-        emptyGoldBar = [CCSprite spriteWithFile:@"bar-01.png"];
-        [emptyGoldBar setAnchorPoint:ccp(0,1)];
-        [emptyGoldBar setColor:ccc3(52, 73, 94)];
-        [emptyGoldBar.texture setAntiAliasTexParameters];
-        [self addChild:emptyGoldBar];
         
-        goldLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"$%d",gold] fontName:@"Lato-Regular" fontSize:18];
+        goldIcon = [CCSprite spriteWithFile:@"treasure-icon.png"];
+        [goldIcon setAnchorPoint:ccp(0,1)];
+        [goldIcon setColor:ccc3(243, 156, 18)];
+        goldLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d",gold] fontName:@"Lato-Regular" fontSize:18];
+        [goldLabel setAnchorPoint:ccp(0,0.5)];
+        [goldLabel setPosition:ccp([goldIcon contentSize].width,[goldIcon contentSize].height/2)];
         
-        filledGoldBar = [CCSprite spriteWithFile:@"bar-01.png"];
-        [filledGoldBar setAnchorPoint:ccp(0,0)];
-        [filledGoldBar setColor:ccc3(241, 196, 15)];
-        [filledGoldBar.texture setAntiAliasTexParameters];
-        [emptyGoldBar addChild:filledGoldBar];
-        [emptyGoldBar addChild:goldLabel];
+        [goldIcon addChild:goldLabel];
+        [goldIcon setPosition:ccp(winSize.width/40, winSize.height/30*29)];
+        [self addChild:goldIcon];
         
-        [goldLabel setPosition:ccp([[goldLabel parent] contentSize].width/2,[[goldLabel parent] contentSize].height/2)];
-        [emptyGoldBar setPosition:ccp(winSize.width/40, winSize.height/30*29)];
+        techIcon = [CCSprite spriteWithFile:@"technology-icon.png"];
+        [techIcon setAnchorPoint:ccp(0,1)];
+        [techIcon setColor:ccc3(52, 152, 219)];
+        techLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d",tech] fontName:@"Lato-Regular" fontSize:18];
+        [techLabel setAnchorPoint:ccp(0,0.5)];
+        [techLabel setPosition:ccp([techIcon contentSize].width,[techIcon contentSize].height/2)];
         
-        emptyTechBar = [CCSprite spriteWithFile:@"bar-01.png"];
-        [emptyTechBar setAnchorPoint:ccp(0,1)];
-        [emptyTechBar setColor:ccc3(52, 73, 94)];
-        [self addChild:emptyTechBar];
+        [techIcon addChild:techLabel];
+        [techIcon setPosition:ccp(winSize.width/40*8, winSize.height/30*29)];
+        [self addChild:techIcon];
         
-        techLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"#%d",tech] fontName:@"Lato-Regular" fontSize:18];
         
-        filledTechBar = [CCSprite spriteWithFile:@"bar-01.png"];
-        [filledTechBar setAnchorPoint:ccp(0,0)];
-        [filledTechBar setColor:ccc3(26, 188, 156)];
-        [emptyTechBar addChild:filledTechBar];
-        [emptyTechBar addChild:techLabel];
+        lifeIcon = [CCSprite spriteWithFile:@"heart-icon.png"];
+        [lifeIcon setAnchorPoint:ccp(0,1)];
+        [lifeIcon setPosition:ccp(winSize.width/40*14, winSize.height/30*29)];
+        [lifeIcon setColor:ccc3(231, 76, 60)];
+        emptyLifeBar = [CCSprite spriteWithFile:@"bar-01.png"];
+        [emptyLifeBar setAnchorPoint:ccp(0,0.5)];
+        [emptyLifeBar setPosition:ccp([lifeIcon contentSize].width,[lifeIcon contentSize].height/2)];
+        [emptyLifeBar setColor:ccc3(52, 73, 94)];
+        [lifeIcon addChild:emptyLifeBar];
         
-        [techLabel setPosition:ccp([[techLabel parent] contentSize].width/2,[[techLabel parent] contentSize].height/2)];
-        [emptyTechBar setPosition:ccp(winSize.width/40, winSize.height/30*27)];
+        lifeLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"^%d",life] fontName:@"Lato-Regular" fontSize:18];
+        [lifeLabel setPosition:ccp([emptyLifeBar contentSize].width/2,[emptyLifeBar contentSize].height/2)];
+        
+        filledLifeBar = [CCSprite spriteWithFile:@"bar-01.png"];
+        [filledLifeBar setAnchorPoint:ccp(0,0)];
+        [filledLifeBar setColor:ccc3(231, 76, 60)];
+        [emptyLifeBar addChild:filledLifeBar];
+        [emptyLifeBar addChild:lifeLabel];
+        [self addChild:lifeIcon];
     }
     return self;
 }
@@ -77,20 +91,16 @@ static CCSprite* filledTechBar;
 +(void)addGoldBy:(int)addition
 {
     gold+=addition;
-    [filledGoldBar setScaleX:((float)gold/1000)];
-    [goldLabel setString:[NSString stringWithFormat:@"$%d",gold]];
+    [goldLabel setString:[NSString stringWithFormat:@"%d",gold]];
 }
 
 +(BOOL)subtractGoldBy:(int)cost
 {
-    [filledTechBar setScaleX:((float)tech/10)];
-    [techLabel setString:[NSString stringWithFormat:@"#%d",tech]];
     if (cost>gold) {
         return NO;
     }
     else {
         gold-=cost;
-        [filledGoldBar setScaleX:((float)gold/1000)];
         [goldLabel setString:[NSString stringWithFormat:@"$%d",gold]];
         return YES;
     }
@@ -99,6 +109,13 @@ static CCSprite* filledTechBar;
 {
     tech-=cost;
     [techLabel setString:[NSString stringWithFormat:@"#%d",tech]];
+}
+
++(void)subtractLifeBy:(int)cost
+{
+    life-=cost;
+    [filledLifeBar setScaleX:(float)life/20.0];
+    [lifeLabel setString:[NSString stringWithFormat:@"^%d",life]];
 }
 
 +(int)getGold

@@ -13,6 +13,8 @@
 @interface ConfirmMenu : CustomMenu {
     
 }
+@property Structure* structure;
+@property Structure* current;
 // confirmmenu is tagged to 2
 -(void)openWithStructure:(Structure*)structure;
 -(void)openWithStructure:(Structure *)structure andCurrent:(Structure *)currentStruct;

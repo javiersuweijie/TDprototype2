@@ -60,7 +60,7 @@ id structure_;
     [self smartSet:dps_title PositionWithGrid:ccp(11,11)];
     [info_base addChild:dps_title];
     
-    CCLabelTTF* dps = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d",[structure_ dps]] fontName:@"Lato-Regular" fontSize:f1];
+    CCLabelTTF* dps = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%2f",[structure_ dps]] fontName:@"Lato-Regular" fontSize:f1];
     [self smartSet:dps PositionWithGrid:ccp(11,10)];
     [info_base addChild:dps];
     

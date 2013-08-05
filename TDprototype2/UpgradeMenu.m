@@ -13,13 +13,13 @@
 #import "ConfirmMenu.h"
 
 @implementation UpgradeMenu
+@synthesize current;
 id game_layer;
 id confirm_menu;
-id current_;
 float left_padding = 10;
 NSMutableArray* stringArray;
 
-- (id) initWithCurrent:(id)current andStrings:(NSString*)string1, ... {
+- (id) initWithCurrent:(id)current_ andStrings:(NSString*)string1, ... {
     stringArray = [[NSMutableArray alloc]init];
     va_list args;
     va_start(args, string1);
@@ -31,7 +31,7 @@ NSMutableArray* stringArray;
     
     self = [super initWithArray:[NSArray arrayWithArray:buttonArray]];
     
-    current_ = current;
+    self.current = current_;
     return self;
 }
 
@@ -78,31 +78,31 @@ NSMutableArray* stringArray;
 
 -(void) do1Action
 {
-    NSLog(@"touched 1 by %@",current_);
+    NSLog(@"touched 1 by %@",self.current);
     [self keepCircle];
-    [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:0]]andCurrent:current_];
+    [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:0]]andCurrent:self.current];
 }
 -(void) do2Action
 {
     NSLog(@"touched 2");
     [self keepCircle];
-    [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:1]]andCurrent:current_];
+    [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:1]]andCurrent:self.current];
 }
 -(void) do3Action
 {
     NSLog(@"touched 3");
     [self keepCircle];
-    [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:2]]andCurrent:current_];
+    [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:2]]andCurrent:self.current];
 }
 -(void) do4Action
 {
     NSLog(@"touched 4");
     [self keepCircle];
-    [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:3]]andCurrent:current_];
+    [confirm_menu openWithStructure:[game_layer placeTower:[stringArray objectAtIndex:3]]andCurrent:self.current];
 }
 -(void) sell
 {
-    [current_ removeFromParentAndCleanup:YES];
+    [self.current removeFromParentAndCleanup:YES];
     [self keepCircle];
 }
 
