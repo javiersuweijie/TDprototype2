@@ -23,6 +23,7 @@ BOOL isShooting;
 CGPoint currentPoint;
 CGPoint prevPoint;
 float airTime; //air time of the projectile
+float dmg;
 static int cost = 500;
 
 -(id)initWithPosition:(CGPoint)point
@@ -51,6 +52,7 @@ static int cost = 500;
     coolDown = 0;
     isShooting = NO;
     airTime = 0.5;
+    dmg = 50;
 }
 
 -(void)update:(ccTime)dt
@@ -59,6 +61,9 @@ static int cost = 500;
     if ([array count]>0) {
         for (Unit* unitt in [array copy]) {
             if (ccpDistance(self.position,unitt.position)<75) {
+                if ([unitt unitType]==Flying) {
+                    continue;
+                }
                 unit = unitt;
                 currentPoint = unit.position;
                 break;
@@ -110,9 +115,9 @@ static int cost = 500;
 {
     if ([array count]>0) {
         for (Unit* unitt in array) {
-            if (ccpDistance(ccpAdd(projectile.position,self.position),unitt.position)<35) {
+            if (ccpDistance(ccpAdd(projectile.position,self.position),unitt.position)<15) {
 //                NSLog(@"hit");
-                unitt.hp -= 100;
+                unitt.hp -= dmg;
             }
         }
     }
@@ -126,13 +131,13 @@ static int cost = 500;
     return cost;
 }
 
--(int)dps
+-(float)dps
 {
-    return 100/k_cooldown;
+    return (float)dmg/k_cooldown;
 }
 
 -(NSString*)aoe
 {
-    return @"35";
+    return @"15";
 }
 @end

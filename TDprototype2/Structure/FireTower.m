@@ -87,7 +87,7 @@ CGSize winSize;
     return cost;
 }
 
--(int)dps
+-(float)dps
 {
     return 60*dmg;
 }

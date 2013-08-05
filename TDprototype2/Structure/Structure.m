@@ -137,6 +137,7 @@ static NSMutableArray* threadArray;
     isSelectedGlobal = NO;
     [pan setEnabled:NO];
     [info_panel removeFromParentAndCleanup:YES];
+    [confirm_menu keepCircle];
 }
 
 -(void)handleTapGesture:(UITapGestureRecognizer*)gesture

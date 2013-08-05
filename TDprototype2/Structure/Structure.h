@@ -26,7 +26,7 @@
 -(NSString*)getName;
 -(void)unSelect;
 +(int)cost;
--(int)dps;
+-(float)dps;
 -(NSString*)aoe;
 +(BOOL)isSelectedGlobally;
 -(void)createMenuAfterTouch;
