@@ -7,6 +7,7 @@
 //
 
 #import "GameLayer.h"
+#import "FightScene.h"
 #import "IsometricOperator.h"
 #import "ResourceLabel.h"
 #import "CustomMenu.h"
@@ -87,7 +88,6 @@ CGPoint unitEndPoint;
     [self addChild:unitAndBoxLayer];
     [self setAnchorPoint:ccp(0,0)];
     [self setPosition:ccp(0,-151)];
-//    [filledList addObject:tree]; //commented out else units cant find path
     
     float translate = 22.627*14;
     float tileHeight = 16;
@@ -101,7 +101,6 @@ CGPoint unitEndPoint;
     vert[2] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(winSize.width/2, winSize.height*0.75)]);
     vert[3] = ccpAdd(ccp(0,translate),[IsometricOperator coordTransform:ccp(0, winSize.height*0.75)]);
     
-    NSLog(@"width of map:%f",ccpDistance(vert[0], vert[2]));
     
     CCSprite* background = [CCSprite spriteWithFile:@"background2.png"];
     [background setPosition:vert[0]];
@@ -351,27 +350,8 @@ CGPoint unitEndPoint;
     return YES;
 }
 
-+(BOOL)isValidUnitGrid:(CGPoint)grid
-{
-    if (!CGPathContainsPoint(unitPath, NULL, [IsometricOperator gridToCoord:grid], NO) ) {
-        return NO;
-    }
-    for (Structure* structure in [filledList copy]) {
-        for (NSValue* value in structure.gridPosition) {
-            if (CGPointEqualToPoint(grid, [value CGPointValue])) {
-                return NO;
-            }
-            
-        }
-    }
-    return YES;
-}
-
-
 +(NSArray*)walkableAdjGrid:(CGPoint)grid
 {
-
-    
     NSMutableArray* tmpArray = [NSMutableArray arrayWithCapacity:8];
     
     // Top
@@ -435,73 +415,6 @@ CGPoint unitEndPoint;
 }
 
 
-+(NSArray*)walkableAdjUnitGrid:(CGPoint)grid
-{
-    
-    
-    NSMutableArray* tmpArray = [NSMutableArray arrayWithCapacity:8];
-    
-    // Top
-	CGPoint top = ccp(grid.x,grid.y+1);
-    
-    // Bottom
-    CGPoint bottom = ccp(grid.x,grid.y-1);
-    
-	// Left
-    CGPoint left = ccp(grid.x-1,grid.y);
-    if ([GameLayer isValidUnitGrid:left])
-    {
-        [tmpArray addObject:[NSValue valueWithCGPoint:left]];
-        if ([GameLayer isValidUnitGrid:top]) {
-            CGPoint topleft = ccp(grid.x-1,grid.y+1);
-            if ([GameLayer isValidUnitGrid:topleft]) {
-                [tmpArray addObject:[NSValue valueWithCGPoint:topleft]];
-            }
-        }
-        if ([GameLayer isValidUnitGrid:bottom]) {
-            CGPoint bottomleft = ccp(grid.x-1,grid.y-1);
-            if ([GameLayer isValidUnitGrid:bottomleft]) {
-                [tmpArray addObject:[NSValue valueWithCGPoint:bottomleft]];
-            }
-        }
-    }
-    
-    if ([GameLayer isValidUnitGrid:bottom])
-    {
-        [tmpArray addObject:[NSValue valueWithCGPoint:bottom]];
-        
-    }
-    
-    if ([GameLayer isValidUnitGrid:top])
-    {
-		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
-        
-    }
-    
-	// Right
-    CGPoint right = ccp(grid.x+1,grid.y);
-    if ([GameLayer isValidUnitGrid:right])
-    {
-        [tmpArray addObject:[NSValue valueWithCGPoint:right]];
-        if ([GameLayer isValidUnitGrid:top]) {
-            CGPoint topright = ccp(grid.x+1,grid.y+1);
-            if ([GameLayer isValidUnitGrid:topright]) {
-                [tmpArray addObject:[NSValue valueWithCGPoint:topright]];
-            }
-        }
-        if ([GameLayer isValidUnitGrid:bottom]) {
-            CGPoint bottomright = ccp(grid.x+1,grid.y-1);
-            if ([GameLayer isValidUnitGrid:bottomright]) {
-                [tmpArray addObject:[NSValue valueWithCGPoint:bottomright]];
-            }
-        }
-    }
-    
-	return [NSArray arrayWithArray:tmpArray];
-    
-}
-
-
 +(Byte)isConnected:(NSArray*)gridArray
 {
     BOOL exitNow = NO;
@@ -535,34 +448,6 @@ CGPoint unitEndPoint;
         }
     }
     return 0;
-}
-
--(void)testSP
-{
-    Unit* person = [[testPerson alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
-    [unitAndBoxLayer addChild:person];
-    [unitList addObject:person];
-}
-
--(void)spawnFastPaper
-{
-    Unit* person = [[FastPaper alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
-    [unitAndBoxLayer addChild:person];
-    [unitList addObject:person];
-}
-
--(void)spawnSlowThick
-{
-    Unit* person = [[SlowThick alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
-    [unitAndBoxLayer addChild:person];
-    [unitList addObject:person];
-}
-
--(void)spawnFlyingUnit
-{
-    Unit* person = [[FlyingUnit alloc]initWithPosition:unitEndPoint moveTo:targetPoint];
-    [unitAndBoxLayer addChild:person];
-    [unitList addObject:person];
 }
 
 -(void)placeBlueTileAt:(CGPoint)point
@@ -694,11 +579,14 @@ CGPoint unitEndPoint;
 
 -(void)loadUnit
 {
-    NSDictionary* loadUnits = [ioObject loadUnits];
-    for (NSNumber* time in loadUnits) {
-        NSString* unit = [loadUnits objectForKey:time];
-        [self performSelector:@selector(spawnUnit:) withObject:unit afterDelay:[time floatValue]];
-    }
+//    NSDictionary* loadUnits = [ioObject loadUnits];
+//    for (NSNumber* time in loadUnits) {
+//        NSString* unit = [loadUnits objectForKey:time];
+//        [self performSelector:@selector(spawnUnit:) withObject:unit afterDelay:[time floatValue]];
+//    }
+    NSLog(@"filled list 1: %@",filledList);
+    FightScene* scene = [FightScene sceneWith:unitAndBoxLayer And:[filledList copy]];
+    [[CCDirector sharedDirector]pushScene:scene];
 }
 
 +(NSMutableArray*)getUnitArray
@@ -726,5 +614,8 @@ CGPoint unitEndPoint;
     return self.scale;
 }
 
-
+-(id)getUnitArray
+{
+    return nil;
+}
 @end

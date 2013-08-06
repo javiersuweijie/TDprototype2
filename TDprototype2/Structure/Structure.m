@@ -69,11 +69,7 @@ static NSMutableArray* threadArray;
     vert[2] = [IsometricOperator gridToCoord:ccp(1,1)];
     vert[3] = [IsometricOperator gridToCoord:ccp(1,0)];
     
-    if (canBeMoved) {
-
-        [self setOpacity:100];
-        isSelected = YES;
-    }
+    isSelected = NO;
     checked = YES;
     isValid = YES;
     threadArray = [[NSMutableArray alloc]init];
@@ -323,7 +319,7 @@ static NSMutableArray* threadArray;
     mustOverride();
 }
 
--(int)dps
+-(float)dps
 {
     return 0;
 }

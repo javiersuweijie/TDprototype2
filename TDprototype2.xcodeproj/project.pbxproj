@@ -37,12 +37,14 @@
 		7DAAA02A17A6062A0081569D /* info-example.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02917A6062A0081569D /* info-example.png */; };
 		7DAAA02C17A60FC30081569D /* info-base.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02B17A60FC30081569D /* info-base.png */; };
 		7DAAA02E17A64B730081569D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA02D17A64B730081569D /* background.png */; };
-		7DAAA03117A7B94E0081569D /* UnitMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA03017A7B94C0081569D /* UnitMenu.m */; };
 		7DAAA03317A94A570081569D /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA03217A94A570081569D /* background2.png */; };
 		7DAAA03517AE518E0081569D /* treasure-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA03417AE518E0081569D /* treasure-icon.png */; };
 		7DAAA03717AE52CA0081569D /* technology-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA03617AE52C90081569D /* technology-icon.png */; };
 		7DAAA03917AE55D00081569D /* heart-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA03817AE55D00081569D /* heart-icon.png */; };
 		7DAAA03B17AFDA480081569D /* load_wave in Resources */ = {isa = PBXBuildFile; fileRef = 7DAAA03A17AFDA480081569D /* load_wave */; };
+		7DAAA03E17B0CBB20081569D /* FightLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA03D17B0CBAE0081569D /* FightLayer.m */; };
+		7DAAA04417B0D1950081569D /* ImportUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA04317B0D1910081569D /* ImportUnits.m */; };
+		7DAAA04717B0D23A0081569D /* FightScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA04617B0D2350081569D /* FightScene.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -187,7 +189,6 @@
 		7DE16AAE176387370095142F /* FireTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AAA176387370095142F /* FireTower.m */; };
 		7DE16AAF176387370095142F /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AAC176387370095142F /* Structure.m */; };
 		7DE16AB41763877B0095142F /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AB3176387680095142F /* MenuLayer.m */; };
-		7DE16AB7176387D70095142F /* MenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16AB6176387D70095142F /* MenuBar.m */; };
 		7DE16AB91763A0820095142F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16AB81763A0820095142F /* ball.png */; };
 		7DE16ABE1764E2420095142F /* WorldTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE16ABD1764E2420095142F /* WorldTree.m */; };
 		7DE16AC01764E3BB0095142F /* worldtree.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE16ABF1764E3BB0095142F /* worldtree.png */; };
@@ -244,13 +245,17 @@
 		7DAAA02917A6062A0081569D /* info-example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info-example.png"; path = "Resources/info-example.png"; sourceTree = "<group>"; };
 		7DAAA02B17A60FC30081569D /* info-base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info-base.png"; path = "Resources/info-base.png"; sourceTree = "<group>"; };
 		7DAAA02D17A64B730081569D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Resources/background.png; sourceTree = "<group>"; };
-		7DAAA02F17A7B94B0081569D /* UnitMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnitMenu.h; path = UI/UnitMenu.h; sourceTree = "<group>"; };
-		7DAAA03017A7B94C0081569D /* UnitMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitMenu.m; path = UI/UnitMenu.m; sourceTree = "<group>"; };
 		7DAAA03217A94A570081569D /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background2.png; path = Resources/background2.png; sourceTree = "<group>"; };
 		7DAAA03417AE518E0081569D /* treasure-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "treasure-icon.png"; path = "Resources/treasure-icon.png"; sourceTree = "<group>"; };
 		7DAAA03617AE52C90081569D /* technology-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "technology-icon.png"; path = "Resources/technology-icon.png"; sourceTree = "<group>"; };
 		7DAAA03817AE55D00081569D /* heart-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "heart-icon.png"; path = "Resources/heart-icon.png"; sourceTree = "<group>"; };
 		7DAAA03A17AFDA480081569D /* load_wave */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = load_wave; sourceTree = "<group>"; };
+		7DAAA03C17B0CBAC0081569D /* FightLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightLayer.h; sourceTree = "<group>"; };
+		7DAAA03D17B0CBAE0081569D /* FightLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FightLayer.m; sourceTree = "<group>"; };
+		7DAAA04217B0D18F0081569D /* ImportUnits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImportUnits.h; path = Unit/ImportUnits.h; sourceTree = "<group>"; };
+		7DAAA04317B0D1910081569D /* ImportUnits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportUnits.m; path = Unit/ImportUnits.m; sourceTree = "<group>"; };
+		7DAAA04517B0D2320081569D /* FightScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightScene.h; sourceTree = "<group>"; };
+		7DAAA04617B0D2350081569D /* FightScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FightScene.m; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -543,8 +548,6 @@
 		7DE16AAC176387370095142F /* Structure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Structure.m; path = Structure/Structure.m; sourceTree = "<group>"; };
 		7DE16AB2176387630095142F /* MenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuLayer.h; sourceTree = "<group>"; };
 		7DE16AB3176387680095142F /* MenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuLayer.m; sourceTree = "<group>"; };
-		7DE16AB5176387D70095142F /* MenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuBar.h; path = UI/MenuBar.h; sourceTree = "<group>"; };
-		7DE16AB6176387D70095142F /* MenuBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuBar.m; path = UI/MenuBar.m; sourceTree = "<group>"; };
 		7DE16AB81763A0820095142F /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ball.png; path = "../../../Desktop/Pixel Art/ball.png"; sourceTree = "<group>"; };
 		7DE16ABC1764E2410095142F /* WorldTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldTree.h; sourceTree = "<group>"; };
 		7DE16ABD1764E2420095142F /* WorldTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldTree.m; sourceTree = "<group>"; };
@@ -645,6 +648,10 @@
 				7DE16A41175F6DF30095142F /* AppDelegate.m */,
 				7DE16A4F175F6E370095142F /* GameLayer.h */,
 				7DE16A50175F6E370095142F /* GameLayer.m */,
+				7DAAA03C17B0CBAC0081569D /* FightLayer.h */,
+				7DAAA03D17B0CBAE0081569D /* FightLayer.m */,
+				7DAAA04517B0D2320081569D /* FightScene.h */,
+				7DAAA04617B0D2350081569D /* FightScene.m */,
 				7DE16A52175F73EC0095142F /* IsometricOperator.h */,
 				7DE16A53175F73EC0095142F /* IsometricOperator.m */,
 				7DE16A58175F77E30095142F /* UILayer.h */,
@@ -1090,10 +1097,10 @@
 			children = (
 				7DE16A9E1763871C0095142F /* ShortestPathStep.h */,
 				7DE16A9F1763871C0095142F /* ShortestPathStep.m */,
-				7DE16AA01763871C0095142F /* testPerson.h */,
-				7DE16AA11763871C0095142F /* testPerson.m */,
 				7DE16AA21763871C0095142F /* Unit.h */,
 				7DE16AA31763871C0095142F /* Unit.m */,
+				7DE16AA01763871C0095142F /* testPerson.h */,
+				7DE16AA11763871C0095142F /* testPerson.m */,
 				7D3C32371771F09000F052B4 /* HpBar.h */,
 				7D3C32381771F09000F052B4 /* HpBar.m */,
 				7D3C32431776D77600F052B4 /* FastPaper.h */,
@@ -1102,6 +1109,8 @@
 				7D3C32471776D86800F052B4 /* SlowThick.m */,
 				7D3C324C1776DD7D00F052B4 /* FlyingUnit.h */,
 				7D3C324D1776DD7E00F052B4 /* FlyingUnit.m */,
+				7DAAA04217B0D18F0081569D /* ImportUnits.h */,
+				7DAAA04317B0D1910081569D /* ImportUnits.m */,
 			);
 			name = Units;
 			sourceTree = "<group>";
@@ -1115,8 +1124,6 @@
 				7DAA9FFD1795A7690081569D /* ConfirmMenu.m */,
 				7DF310DB1787D0FA0099EEEF /* CustomMenuItem.h */,
 				7DF310DC1787D0FA0099EEEF /* CustomMenuItem.m */,
-				7DE16AB5176387D70095142F /* MenuBar.h */,
-				7DE16AB6176387D70095142F /* MenuBar.m */,
 				7DF310DE1787DA0C0099EEEF /* Structure Menu.h */,
 				7DF310DF1787DA0C0099EEEF /* Structure Menu.m */,
 				7DAAA002179C36470081569D /* UpgradeMenu.h */,
@@ -1125,8 +1132,6 @@
 				7D9224C4177FD36B001A7D9E /* ResourceLabel.m */,
 				7DAAA01217A397BC0081569D /* FightButton.h */,
 				7DAAA01317A397BC0081569D /* FightButton.m */,
-				7DAAA02F17A7B94B0081569D /* UnitMenu.h */,
-				7DAAA03017A7B94C0081569D /* UnitMenu.m */,
 				7DAAA02617A605A90081569D /* InfoPanel.h */,
 				7DAAA02717A605AA0081569D /* InfoPanel.m */,
 			);
@@ -1354,7 +1359,6 @@
 				7DE16AAE176387370095142F /* FireTower.m in Sources */,
 				7DE16AAF176387370095142F /* Structure.m in Sources */,
 				7DE16AB41763877B0095142F /* MenuLayer.m in Sources */,
-				7DE16AB7176387D70095142F /* MenuBar.m in Sources */,
 				7DE16ABE1764E2420095142F /* WorldTree.m in Sources */,
 				7DE16AC6176626300095142F /* CanonTower.m in Sources */,
 				7D57482617676E4700BAE638 /* IceBeamTower.m in Sources */,
@@ -1374,7 +1378,9 @@
 				7DAAA01417A397BC0081569D /* FightButton.m in Sources */,
 				7DAAA01F17A4BF270081569D /* Wall.m in Sources */,
 				7DAAA02817A605AA0081569D /* InfoPanel.m in Sources */,
-				7DAAA03117A7B94E0081569D /* UnitMenu.m in Sources */,
+				7DAAA03E17B0CBB20081569D /* FightLayer.m in Sources */,
+				7DAAA04417B0D1950081569D /* ImportUnits.m in Sources */,
+				7DAAA04717B0D23A0081569D /* FightScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,13 +10,14 @@
 #import "ConfirmMenu.h"
 #import "UpgradeMenu.h"
 #import "GameLayer.h"
+#import "FightLayer.h"
 
 @implementation FireTower
 @synthesize emitter;
 NSMutableArray* array;
 Unit* unit;
 static int cost = 100;
-id gamelayer;
+id fightlayer;
 id uilayer;
 id menu;
 id confirm_menu;
@@ -40,9 +41,11 @@ CGSize winSize;
 
 -(void)onEnter
 {
+    NSLog(@"entered again");
     [super onEnter];
     [self setPosition:self.tempPosition];
-    array = [GameLayer getUnitArray];
+    fightlayer = [[self parent]parent];
+    array = [fightlayer getUnitArray];
     emitter=[[CCParticleFire alloc]init];
     [emitter stopSystem];
     emitter.position = ccp(self.contentSize.width/2,self.contentSize.height/2);
@@ -59,6 +62,12 @@ CGSize winSize;
     winSize = [[CCDirector sharedDirector]winSize];
 }
 
+-(void)onExit
+{
+    [super onExit];
+    [self unscheduleUpdate];
+    [self removeAllChildrenWithCleanup:YES];
+}
 -(void)update:(ccTime)dt
 {
     if ([array count]>0) {

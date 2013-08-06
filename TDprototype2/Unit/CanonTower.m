@@ -7,7 +7,7 @@
 //
 
 #import "CanonTower.h"
-
+#import "FightLayer.h"
 #define k_cooldown 75
 
 @interface CanonTower ()
@@ -25,6 +25,7 @@ CGPoint prevPoint;
 float airTime; //air time of the projectile
 float dmg;
 static int cost = 500;
+id fightLayer;
 
 -(id)initWithPosition:(CGPoint)point
 {
@@ -38,7 +39,7 @@ static int cost = 500;
         [self setCanBeMoved:YES];
         projectile = [[CCSprite alloc]initWithFile:@"redbox.png"];
         [projectile setPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
-        [self scheduleUpdate];
+
 
     }
     return self;
@@ -48,11 +49,19 @@ static int cost = 500;
 {
     [super onEnter];
     [self setPosition:self.tempPosition];
-    array = [GameLayer getUnitArray];
+    [self scheduleUpdate];
+    fightLayer = [[self parent]parent];
+    array = [fightLayer getUnitArray];
     coolDown = 0;
     isShooting = NO;
     airTime = 0.5;
     dmg = 50;
+}
+
+-(void)onExit
+{
+    [super onExit];
+    [self unscheduleUpdate];
 }
 
 -(void)update:(ccTime)dt

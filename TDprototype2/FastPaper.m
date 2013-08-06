@@ -22,8 +22,8 @@
         self.bounty = 10;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setPosition:point];
-//        [self moveToward:pointTo];
-        [self performSelectorInBackground:@selector(moveToward:) withObject:[NSValue valueWithCGPoint:pointTo]];
+        [self setStartPoint:point];
+        [self setEndPoint:pointTo];
     }
     return self;
 }

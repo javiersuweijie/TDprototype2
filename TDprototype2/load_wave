@@ -1,8 +1,14 @@
-{
-	"0.5":"testPerson",
-	"1":"testPerson",
-	"1.5":"FlyingUnit",
-	"2":"SlowThick",
-	"2.5":"FastPaper",
-	"2.6":"FastPaper",
-}
+[
+	{ "name":"testPerson",
+	"delay":"0" },
+	{ "name":"testPerson",
+	"delay":"1" },
+	{ "name":"testPerson",
+	"delay":"1" },
+	{ "name":"SlowThick",
+	"delay":"1" },
+	{ "name":"FastPaper",
+	"delay":"1" },
+	{ "name":"end",
+	"delay":"1" },
+]

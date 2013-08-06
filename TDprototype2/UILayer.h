@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "MenuBar.h"
 
 @interface UILayer : CCLayer <UIGestureRecognizerDelegate>{
     

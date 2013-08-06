@@ -16,6 +16,7 @@
 NSArray* array;
 Unit* unit;
 static int cost = 300;
+id fightLayer;
 
 -(id)initWithPosition:(CGPoint)point
 {
@@ -37,7 +38,8 @@ static int cost = 300;
 -(void)onEnter
 {
     [super onEnter];
-    array = [GameLayer getUnitArray];
+    fightLayer = [[self parent]parent];
+    array = [fightLayer getUnitArray];
     [self setPosition:self.tempPosition];
     emitter=[[ParticlesIceBeam alloc]init];
     [emitter setPosition:ccp(self.contentSize.width/2,self.contentSize.height/2)];

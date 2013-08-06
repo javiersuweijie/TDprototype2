@@ -34,15 +34,12 @@
 +(NSMutableArray*)getUnitArray;
 +(NSMutableArray*)getFilledArray;
 
--(void)testSP;
--(void)spawnFastPaper;
--(void)spawnSlowThick;
--(void)spawnFlyingUnit;
-
 -(void)exportData;
 -(void)loadData;
 -(void)loadUnit;
 
 -(BOOL)closeMenu;
 -(float)getScale;
+
+-(id)getUnitArray;
 @end

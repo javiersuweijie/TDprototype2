@@ -10,7 +10,7 @@
 #import "ShortestPathStep.h"
 #import "IsometricOperator.h"
 #import "ResourceLabel.h"
-
+#import "FightLayer.h"
 #import "HpBar.h"
 
 
@@ -18,13 +18,14 @@
     NSMutableArray *spClosedSteps;
     NSMutableArray *spOpenSteps;
     NSMutableArray *shortestPath;
+    id fightLayer;
 }
 
 @end
 
 @implementation Unit
-@synthesize speed,hp,speedMultiplier,unitType,bounty;
-
+@synthesize speed,hp,speedMultiplier,unitType,bounty,fightLayer;
+@synthesize startPoint,endPoint;
 -(id)init
 {
     if (self = [super init]){
@@ -40,13 +41,15 @@
     self.speedMultiplier = 1;
     HpBar* hpBar = [[HpBar alloc]initWithChar:self];
     [self addChild:hpBar];
+    self.fightLayer = [[self parent]parent];
+    [self performSelectorInBackground:@selector(moveToward:) withObject:[NSValue valueWithCGPoint:self.endPoint]];
 }
 
 -(void)update:(ccTime)dt
 {
     [parent_ reorderChild:self z:-self.position.y];
     if (self.hp<0) {
-        [[GameLayer getUnitArray] removeObject:self];
+        [[fightLayer getUnitArray] removeObject:self];
         [self removeFromParentAndCleanup:YES];
 
     }
@@ -57,7 +60,7 @@
     NSDate *start = [NSDate date];
     CGPoint toGrid = [IsometricOperator gridNumber:[target CGPointValue]];
     CGPoint fromGrid = [IsometricOperator gridNumber:self.position];
-    if (![GameLayer isValidUnitGrid:toGrid]) {  //check if destination is valid
+    if (![fightLayer isValidUnitGrid:toGrid]) {  //check if destination is valid
         NSLog(@"Not valid point");
         return nil;
     }
@@ -88,7 +91,7 @@
         }
         
         // Get the adjacent tiles coord of the current step
-        NSArray *adjSteps = [GameLayer walkableAdjUnitGrid:currentStep.position];
+        NSArray *adjSteps = [fightLayer walkableAdjUnitGrid:currentStep.position];
         for (NSValue *v in adjSteps) {
             ShortestPathStep *step = [[ShortestPathStep alloc] initWithPosition:[v CGPointValue]];
             
@@ -256,7 +259,6 @@
 
 - (void)reachEnd
 {
-    NSLog(@"last");
     shortestPath = nil;
     [ResourceLabel subtractLifeBy:1];
     [self removeFromParentAndCleanup:YES];
@@ -277,7 +279,7 @@
     if (self.hp <= 0) {
         [ResourceLabel addGoldBy:self.bounty];
     }
-    [[GameLayer getUnitArray] removeObject:self];
+    [[fightLayer getUnitArray] removeObject:self];
     [super onExit];
 }
 @end
