@@ -12,7 +12,9 @@
 #import "InfoPanel.h"
 #import "ConfirmMenu.h"
 #import "UpgradeMenu.h"
-#import "GameLayer.h"
+//#import "GameLayer.h"
+#import "FightLayer.h"
+#import "BuildLayer.h"
 
 @interface Structure () {
     NSString* name;
@@ -37,19 +39,11 @@
 @end
 
 @implementation Structure
-@synthesize gridPosition,cost,spriteFile;
+@synthesize gridPosition,cost,spriteFile,array;
 
 static BOOL isSelectedGlobal;
 static NSMutableArray* threadArray;
-//-(id)initWithFile:(NSString *)filename {
-//    self=[super initWithFile:filename];
-//    if (![ResourceLabel subtractGoldBy:self.cost]) {
-//        return nil;
-//    }
-//    else {
-//        return self;
-//    }
-//}
+
 -(void)onEnter
 {
     [super onEnter];
@@ -68,14 +62,23 @@ static NSMutableArray* threadArray;
     vert[1] = [IsometricOperator gridToCoord:ccp(0,1)];
     vert[2] = [IsometricOperator gridToCoord:ccp(1,1)];
     vert[3] = [IsometricOperator gridToCoord:ccp(1,0)];
-    
+
     isSelected = NO;
-    checked = YES;
-    isValid = YES;
     threadArray = [[NSMutableArray alloc]init];
-    
-    uilayer = [[[[self parent]parent]parent]getChildByTag:2];
+
     winSize = [[CCDirector sharedDirector]winSize];
+    gamelayer = [[self parent] parent];
+    uilayer = [[gamelayer parent]getChildByTag:2];
+    if ([[gamelayer fightOrBuild] isEqualToString:@"fight"]) {
+        self.array = [gamelayer getUnitArray];
+        [self setCanBeMoved:NO];
+    }
+    else {
+        [self setCanBeMoved:YES];
+        if (!checked) {
+            [self performSelectorInBackground:@selector(checkValidPosition) withObject:nil];
+        }
+    }
 }
 
 -(void)draw
@@ -86,7 +89,6 @@ static NSMutableArray* threadArray;
         [self setColor:ccWHITE];
     }
     if (!isValid) {
-//        ccDrawSolidPoly(vert, 4, ccc4f(255, 0, 0, 0.1));
         [self setColor:ccc3(192, 57, 43)];
         isRed = YES;
     }
@@ -107,21 +109,21 @@ static NSMutableArray* threadArray;
     [threadArray addObject:threadDict];
     
     for (NSValue* points in gridPosition) {
-        if (![GameLayer isValidGrid:[points CGPointValue]]) {
+        if (![gamelayer isValidGrid:[points CGPointValue]]) {
             checked = YES;
             isValid = NO;
             return;
         }
     }
-        Byte test = [GameLayer isConnected:gridPosition];
-        if (test == 2) {
-            return;
-        }
-        if (test==0) {
-            checked = YES;
-            isValid = NO;
-            return;
-        }
+    Byte test = [gamelayer isConnected:gridPosition];
+    if (test == 2) {
+        return;
+    }
+    if (test==0) {
+        checked = YES;
+        isValid = NO;
+        return;
+    }
     checked = YES;
     isValid = YES;
 }
@@ -146,7 +148,7 @@ static NSMutableArray* threadArray;
     if (canBeMoved) {
         if (isSelected) {
             [self unSelect];
-            [[GameLayer getFilledArray]addObject:self];
+            [[gamelayer filledList]addObject:self];
         }
         else if (!isSelectedGlobal) {
             if (![[self getName]isEqual:@"Wall"]) {
@@ -158,7 +160,7 @@ static NSMutableArray* threadArray;
             isSelectedGlobal = YES;
             isSelected = YES;
             [pan setEnabled:YES];
-            [[GameLayer getFilledArray]removeObject:self];
+            [[gamelayer filledList]removeObject:self];
         }
     }
     else return;
@@ -166,12 +168,7 @@ static NSMutableArray* threadArray;
 
 -(void)createMenuAfterTouch
 {
-    if (!gamelayer) {
-        gamelayer = [[self parent] parent];
-    }
-    if (!uilayer) {
-        uilayer = [[gamelayer parent]getChildByTag:2];
-    }
+
     CGPoint touchLocation = self.position;
     //    NSLog(@"%@",NSStringFromCGPoint([IsometricOperator gridNumber:touchLocation]));
     touchLocation = ccpAdd(touchLocation, ccp(0,11.31*2));
@@ -192,7 +189,7 @@ static NSMutableArray* threadArray;
         UpgradeMenu* upgrademenu = [[UpgradeMenu alloc]initWithCurrent:self andStrings:@"FireTower2",nil ];
         [uilayer addChild:upgrademenu z:3 tag:3];
         CGPoint mid = [gamelayer convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
-        CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),[gamelayer getScale]);
+        CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),[gamelayer scaleX]);
         float dist = ccpDistance(ccp(0,0), moveby);
         id move = [CCMoveBy actionWithDuration:dist/700 position:moveby];
         id ease = [CCEaseOut actionWithAction:move rate:0.5];
@@ -307,11 +304,16 @@ static NSMutableArray* threadArray;
     else return -self.position.y;
 }
 
+-(void)sell
+{
+    [ResourceLabel addGoldBy:self.cost];
+    [[gamelayer filledList]removeObject:self];
+    [self removeFromParentAndCleanup:YES];
+}
+
 -(void)onExit
 {
     [super onExit];
-    [ResourceLabel addGoldBy:self.cost];
-    [[GameLayer getFilledArray]removeObject:self];
 }
 
 +(int)cost

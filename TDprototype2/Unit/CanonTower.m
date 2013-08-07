@@ -50,8 +50,9 @@ id fightLayer;
     [super onEnter];
     [self setPosition:self.tempPosition];
     [self scheduleUpdate];
-    fightLayer = [[self parent]parent];
-    array = [fightLayer getUnitArray];
+    if ([[fightLayer fightOrBuild] isEqualToString:@"fight"]) {
+        array = [fightLayer getUnitArray];
+    }
     coolDown = 0;
     isShooting = NO;
     airTime = 0.5;

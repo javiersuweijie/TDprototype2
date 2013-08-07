@@ -8,8 +8,9 @@
 
 #import "Structure Menu.h"
 #import "CustomMenuItem.h"
-#import "GameLayer.h"
+//#import "GameLayer.h"
 #import "ConfirmMenu.h"
+#import "BuildLayer.h"
 
 @implementation Structure_Menu
 id game_layer;
@@ -71,23 +72,19 @@ id confirm_menu;
 
 -(void) do1Action
 {
-    NSLog(@"touched 1");
-    [confirm_menu openWithStructure:[game_layer placeBlueTile]];
+    [confirm_menu openWithStructure:[game_layer placeTower:@"Wall"]];
 }
 -(void) do2Action
 {
-    NSLog(@"touched 2");
-    [confirm_menu openWithStructure:[game_layer placeCanon]];
+    [confirm_menu openWithStructure:[game_layer placeTower:@"CanonTower"]];
 }
 -(void) do3Action
 {
-    NSLog(@"touched 3");
-    [confirm_menu openWithStructure:[game_layer placeIce]];
+    [confirm_menu openWithStructure:[game_layer placeTower:@"IceBeamTower"]];
 }
 -(void) do4Action
 {
-    NSLog(@"touched 4");
-    [confirm_menu openWithStructure:[game_layer placeFireTower]];
+    [confirm_menu openWithStructure:[game_layer placeTower:@"FireTower"]];
 }
 -(void) do5Action
 {

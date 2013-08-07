@@ -30,16 +30,18 @@ id filledNode;
         [self setAnchorPoint:ccp(0.5,-0.25)];
         [self setSize:CGSizeMake(1, 1)];
         [self setCost:cost];
-        [self setPosition:point];
+        [self setTempPosition:point];
         [self setName:@"Wall"];
         [self setCanBeMoved:YES];
         [wallArray addObject:self];
+        cost = 10;
     }
     return self;
 }
 -(void)onEnter
 {
     [super onEnter];
+    [self setPosition:self.tempPosition];
     filledNode = [self parent];
 }
 
@@ -65,7 +67,6 @@ id filledNode;
             [midWallDict setObject:midWall forKey:[NSValue valueWithCGPoint:midWall.position]];
         }
         if (CGPointEqualToPoint([wall getGrid],ccpAdd(selfGrid, ccp(1,0)))) {
-            NSLog(@"found adj wall1");
             CCSprite* midWall = [CCSprite spriteWithFile:@"WallCLeft.png"];
             [midWall setPosition:ccpMidpoint(self.position, [IsometricOperator gridToCoord:ccpAdd(selfGrid, ccp(0,1))])];
             midWall.isTouchEnabled = NO;
@@ -73,7 +74,6 @@ id filledNode;
             [midWallDict setObject:midWall forKey:[NSValue valueWithCGPoint:midWall.position]];
         }
         if (CGPointEqualToPoint([wall getGrid],ccpAdd(selfGrid, ccp(-1,0)))) {
-            NSLog(@"found adj wall1");
             CCSprite* midWall = [CCSprite spriteWithFile:@"WallCLeft.png"];
             [midWall setPosition:ccpMidpoint(self.position, [IsometricOperator gridToCoord:ccpAdd(selfGrid, ccp(-2,1))])];
             midWall.isTouchEnabled = NO;
@@ -81,7 +81,6 @@ id filledNode;
             [midWallDict setObject:midWall forKey:[NSValue valueWithCGPoint:midWall.position]];
         }
         if (CGPointEqualToPoint([wall getGrid],ccpAdd(selfGrid, ccp(0,-1)))) {
-            NSLog(@"found adj wall1");
             CCSprite* midWall = [CCSprite spriteWithFile:@"WallCRight.png"];
             [midWall setPosition:ccpMidpoint(self.position, [IsometricOperator gridToCoord:ccpAdd(selfGrid, ccp(-1,0))])];
             midWall.isTouchEnabled = NO;
@@ -113,5 +112,10 @@ id filledNode;
             [midWall removeFromParentAndCleanup:YES];
         }
     }
+}
+
++(int)cost
+{
+    return cost;
 }
 @end

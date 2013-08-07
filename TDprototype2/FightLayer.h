@@ -17,4 +17,8 @@
 -(NSMutableArray*)getUnitArray;
 -(BOOL)isValidUnitGrid:(CGPoint)grid;
 -(NSArray*)walkableAdjUnitGrid:(CGPoint)grid;
+-(BOOL)closeMenu;
+-(float)getScale;
+
+-(NSString*)fightOrBuild;
 @end

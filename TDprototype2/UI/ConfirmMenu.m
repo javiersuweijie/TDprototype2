@@ -83,7 +83,7 @@ id game_layer;
         self.current.visible = YES;
     }
     [self.structure unSelect];
-    [self.structure removeFromParentAndCleanup:YES];
+    [self.structure sell];
     self.structure=nil;
     [self keepCircle];
 }

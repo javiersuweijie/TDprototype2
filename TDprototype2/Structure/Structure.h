@@ -19,6 +19,7 @@
 @property int cost;
 @property NSString* spriteFile;
 @property CGPoint tempPosition;
+@property NSMutableArray* array;
 
 -(void)setName:(NSString*)n;
 -(void)setCanBeMoved:(BOOL)b;
@@ -32,4 +33,5 @@
 -(void)createMenuAfterTouch;
 -(void)handleTapGesture:(UITapGestureRecognizer*)gesture;
 -(void)tap:(UITapGestureRecognizer*)gesture;
+-(void)sell;
 @end

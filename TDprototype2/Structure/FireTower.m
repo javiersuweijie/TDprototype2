@@ -14,7 +14,6 @@
 
 @implementation FireTower
 @synthesize emitter;
-NSMutableArray* array;
 Unit* unit;
 static int cost = 100;
 id fightlayer;
@@ -31,21 +30,17 @@ CGSize winSize;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
-        [self setTempPosition:point];
+        [self setTempPosition:point]; 
         [self setName:@"FireTower"];
-        [self setCanBeMoved:YES];
-        
+        [self setPosition:self.tempPosition];
     }
     return self;
 }
 
 -(void)onEnter
 {
-    NSLog(@"entered again");
     [super onEnter];
-    [self setPosition:self.tempPosition];
     fightlayer = [[self parent]parent];
-    array = [fightlayer getUnitArray];
     emitter=[[CCParticleFire alloc]init];
     [emitter stopSystem];
     emitter.position = ccp(self.contentSize.width/2,self.contentSize.height/2);
@@ -70,13 +65,13 @@ CGSize winSize;
 }
 -(void)update:(ccTime)dt
 {
-    if ([array count]>0) {
-        for (Unit* unitt in array) {
+    if ([self.array count]>0) {
+        for (Unit* unitt in self.array) {
             if (ccpDistance(self.position,unitt.position)<75) {
                 unit = unitt;
                 break;
             }
-            else if ([array indexOfObject:unitt]==[array count]-1) {
+            else if ([self.array indexOfObject:unitt]==[self.array count]-1) {
                 unit= nil;
                 [emitter stopSystem];
             }

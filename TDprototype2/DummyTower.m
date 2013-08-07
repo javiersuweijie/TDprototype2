@@ -65,7 +65,7 @@ CGSize winSize;
         UpgradeMenu* upgrademenu = [[UpgradeMenu alloc]initWithCurrent:self andStrings:@"FireTower", @"CanonTower", @"IceBeamTower", nil];
         [uilayer addChild:upgrademenu z:3 tag:3];
         CGPoint mid = [gamelayer convertToNodeSpace:ccp(winSize.width/2,winSize.height/2)];
-        CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),[gamelayer getScale]);
+        CGPoint moveby = ccpMult(ccpSub(mid, touchLocation),[gamelayer scaleX]);
         float dist = ccpDistance(ccp(0,0), moveby);
         id move = [CCMoveBy actionWithDuration:dist/700 position:moveby];
         id ease = [CCEaseOut actionWithAction:move rate:0.5];

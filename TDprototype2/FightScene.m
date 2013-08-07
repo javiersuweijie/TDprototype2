@@ -19,7 +19,6 @@
 {
     if (self=[super init]) {
         self.fight_layer = [[FightLayer alloc]initWith:boxLayer];
-        NSLog(@"filled list 2: %@",filledList);
         [self.fight_layer setFilledList:filledList];
         [self addChild:self.fight_layer];
     }

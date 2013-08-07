@@ -12,6 +12,6 @@
 -(id)initWithList:(NSArray*)list;
 -(void)sendData;
 -(void)exportStructureListFrom:(NSArray*)filledList;
--(id)load;
+-(id)loadTower;
 -(id)loadUnits;
 @end

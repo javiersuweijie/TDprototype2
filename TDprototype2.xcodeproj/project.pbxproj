@@ -45,6 +45,7 @@
 		7DAAA03E17B0CBB20081569D /* FightLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA03D17B0CBAE0081569D /* FightLayer.m */; };
 		7DAAA04417B0D1950081569D /* ImportUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA04317B0D1910081569D /* ImportUnits.m */; };
 		7DAAA04717B0D23A0081569D /* FightScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA04617B0D2350081569D /* FightScene.m */; };
+		7DAAA04A17B126250081569D /* BuildLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA04917B126200081569D /* BuildLayer.m */; };
 		7DE168B7175F6DEF0095142F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B6175F6DEF0095142F /* QuartzCore.framework */; };
 		7DE168B9175F6DEF0095142F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168B8175F6DEF0095142F /* OpenGLES.framework */; };
 		7DE168BB175F6DEF0095142F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE168BA175F6DEF0095142F /* OpenAL.framework */; };
@@ -256,6 +257,8 @@
 		7DAAA04317B0D1910081569D /* ImportUnits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportUnits.m; path = Unit/ImportUnits.m; sourceTree = "<group>"; };
 		7DAAA04517B0D2320081569D /* FightScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightScene.h; sourceTree = "<group>"; };
 		7DAAA04617B0D2350081569D /* FightScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FightScene.m; sourceTree = "<group>"; };
+		7DAAA04817B1261A0081569D /* BuildLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildLayer.h; sourceTree = "<group>"; };
+		7DAAA04917B126200081569D /* BuildLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildLayer.m; sourceTree = "<group>"; };
 		7DE168B3175F6DEF0095142F /* TDprototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDprototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE168B6175F6DEF0095142F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7DE168B8175F6DEF0095142F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -650,6 +653,8 @@
 				7DE16A50175F6E370095142F /* GameLayer.m */,
 				7DAAA03C17B0CBAC0081569D /* FightLayer.h */,
 				7DAAA03D17B0CBAE0081569D /* FightLayer.m */,
+				7DAAA04817B1261A0081569D /* BuildLayer.h */,
+				7DAAA04917B126200081569D /* BuildLayer.m */,
 				7DAAA04517B0D2320081569D /* FightScene.h */,
 				7DAAA04617B0D2350081569D /* FightScene.m */,
 				7DE16A52175F73EC0095142F /* IsometricOperator.h */,
@@ -1381,6 +1386,7 @@
 				7DAAA03E17B0CBB20081569D /* FightLayer.m in Sources */,
 				7DAAA04417B0D1950081569D /* ImportUnits.m in Sources */,
 				7DAAA04717B0D23A0081569D /* FightScene.m in Sources */,
+				7DAAA04A17B126250081569D /* BuildLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

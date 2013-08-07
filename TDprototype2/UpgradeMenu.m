@@ -102,7 +102,7 @@ NSMutableArray* stringArray;
 }
 -(void) sell
 {
-    [self.current removeFromParentAndCleanup:YES];
+    [self.current sell];
     [self keepCircle];
 }
 

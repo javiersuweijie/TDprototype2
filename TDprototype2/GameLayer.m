@@ -413,6 +413,87 @@ CGPoint unitEndPoint;
 	return [NSArray arrayWithArray:tmpArray];
     
 }
++(BOOL)isValidUnitGrid:(CGPoint)grid
+{
+    if (!CGPathContainsPoint(unitPath, NULL, [IsometricOperator gridToCoord:grid], NO) ) {
+        return NO;
+    }
+    for (Structure* structure in [filledList copy]) {
+        for (NSValue* value in structure.gridPosition) {
+            if (CGPointEqualToPoint(grid, [value CGPointValue])) {
+                return NO;
+            }
+            
+        }
+    }
+    return YES;
+}
+
++(NSArray*)walkableAdjUnitGrid:(CGPoint)grid
+{
+    
+    
+    NSMutableArray* tmpArray = [NSMutableArray arrayWithCapacity:8];
+    
+    // Top
+	CGPoint top = ccp(grid.x,grid.y+1);
+    
+    // Bottom
+    CGPoint bottom = ccp(grid.x,grid.y-1);
+    
+	// Left
+    CGPoint left = ccp(grid.x-1,grid.y);
+    if ([GameLayer isValidUnitGrid:left])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:left]];
+        if ([GameLayer isValidUnitGrid:top]) {
+            CGPoint topleft = ccp(grid.x-1,grid.y+1);
+            if ([GameLayer isValidUnitGrid:topleft]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:topleft]];
+            }
+        }
+        if ([GameLayer isValidUnitGrid:bottom]) {
+            CGPoint bottomleft = ccp(grid.x-1,grid.y-1);
+            if ([GameLayer isValidUnitGrid:bottomleft]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:bottomleft]];
+            }
+        }
+    }
+    
+    if ([GameLayer isValidUnitGrid:bottom])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:bottom]];
+        
+    }
+    
+    if ([GameLayer isValidUnitGrid:top])
+    {
+		[tmpArray addObject:[NSValue valueWithCGPoint:top]];
+        
+    }
+    
+	// Right
+    CGPoint right = ccp(grid.x+1,grid.y);
+    if ([GameLayer isValidUnitGrid:right])
+    {
+        [tmpArray addObject:[NSValue valueWithCGPoint:right]];
+        if ([GameLayer isValidUnitGrid:top]) {
+            CGPoint topright = ccp(grid.x+1,grid.y+1);
+            if ([GameLayer isValidUnitGrid:topright]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:topright]];
+            }
+        }
+        if ([GameLayer isValidUnitGrid:bottom]) {
+            CGPoint bottomright = ccp(grid.x+1,grid.y-1);
+            if ([GameLayer isValidUnitGrid:bottomright]) {
+                [tmpArray addObject:[NSValue valueWithCGPoint:bottomright]];
+            }
+        }
+    }
+    
+	return [NSArray arrayWithArray:tmpArray];
+    
+}
 
 
 +(Byte)isConnected:(NSArray*)gridArray
@@ -563,7 +644,7 @@ CGPoint unitEndPoint;
 -(void)loadData
 {
     [self closeMenu];
-    NSDictionary* towerD = [ioObject load];
+    NSDictionary* towerD = [ioObject loadTower];
     for (NSString* key in towerD) {
         NSString* tower = [towerD objectForKey:key];
         NSLog(@"%@",tower);
@@ -584,9 +665,8 @@ CGPoint unitEndPoint;
 //        NSString* unit = [loadUnits objectForKey:time];
 //        [self performSelector:@selector(spawnUnit:) withObject:unit afterDelay:[time floatValue]];
 //    }
-    NSLog(@"filled list 1: %@",filledList);
     FightScene* scene = [FightScene sceneWith:unitAndBoxLayer And:[filledList copy]];
-    [[CCDirector sharedDirector]pushScene:scene];
+    [[CCDirector sharedDirector]replaceScene:scene];
 }
 
 +(NSMutableArray*)getUnitArray

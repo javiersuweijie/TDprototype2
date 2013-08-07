@@ -12,6 +12,7 @@
 #import "IOOObject.h"
 #import "ImportUnits.h"
 #import "Structure.h"
+#import "GameScene.h"
 
 @implementation FightLayer
 static CGMutablePathRef path;
@@ -24,7 +25,7 @@ CGPoint unitEndPoint;
 CGPoint unitStartPoint;
 
 id unitAndBoxLayer;
-id unitList;
+NSMutableArray* unitList;
 id ioObject;
 
 @synthesize filledList;
@@ -65,10 +66,7 @@ id ioObject;
         [background setAnchorPoint:ccp(0,0.5)];
         [self addChild:background z:-1000];
         
-        [boxLayer removeFromParentAndCleanup:NO];
-        unitAndBoxLayer = boxLayer;
-        [unitAndBoxLayer setAnchorPoint:ccp(0,0)];
-        [self addChild:unitAndBoxLayer];
+        [self setContentSize:CGSizeMake(winSize.width*2, winSize.height*2)];
         [self setAnchorPoint:ccp(0,0)];
         [self setPosition:ccp(0,-151)];
         
@@ -77,6 +75,11 @@ id ioObject;
         
         unitEndPoint = [IsometricOperator gridToCoord:ccp(-6,29)];
         unitStartPoint = [IsometricOperator gridToCoord:ccp(-6,13)];
+        
+        [boxLayer removeFromParentAndCleanup:NO];
+        unitAndBoxLayer = boxLayer;
+        [unitAndBoxLayer setAnchorPoint:ccp(0,0)];
+        [self addChild:unitAndBoxLayer];
     }
     return self;
 }
@@ -84,7 +87,6 @@ id ioObject;
 -(void)onEnter
 {
     [super onEnter];
-    NSLog(@"filled list: %@",self.filledList);
     [self loadUnit];
    
 }
@@ -201,6 +203,7 @@ id ioObject;
     if ([unitList count]==0) {
         NSLog(@"last unit dead");
         [self unschedule:@selector(checkLastUnit)];
+        [[CCDirector sharedDirector]replaceScene:[GameScene sceneWith:unitAndBoxLayer and:[filledList mutableCopy]]];
     }
 }
 
@@ -209,5 +212,8 @@ id ioObject;
     return unitList;
 }
 
-
+-(NSString*)fightOrBuild
+{
+    return @"fight";
+}
 @end

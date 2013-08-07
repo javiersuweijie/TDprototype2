@@ -61,7 +61,7 @@ NSString *documentsDirectory;
     NSLog(@"saved@ %@",[documentsDirectory stringByAppendingPathComponent:@"save_game"]);
 }
 
--(id)load
+-(id)loadTower
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"save_game"]]) {
@@ -84,7 +84,6 @@ NSString *documentsDirectory;
         NSData* data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"load_wave" ofType:@""]];
         NSError*error = nil;
         id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        NSLog(@"%@",result);
         return result;
     }
     else NSLog(@"not found");

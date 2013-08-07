@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "UILayer.h"
-#import "GameLayer.h"
+
 
 @interface GameScene : CCLayer {
     
 }
-+(CCScene*)scene;
++(id)sceneWith:(id)boxLayer and:(id)filledList;
 @end

@@ -9,6 +9,7 @@
 #import "IceBeamTower.h"
 #import "GameLayer.h"
 #import "ParticlesIceBeam.h"
+#import "FightLayer.h"
 
 @implementation IceBeamTower
 @synthesize emitter;
@@ -38,8 +39,9 @@ id fightLayer;
 -(void)onEnter
 {
     [super onEnter];
-    fightLayer = [[self parent]parent];
-    array = [fightLayer getUnitArray];
+    if ([[fightLayer fightOrBuild] isEqualToString:@"fight"]) {
+        array = [fightLayer getUnitArray];
+    }
     [self setPosition:self.tempPosition];
     emitter=[[ParticlesIceBeam alloc]init];
     [emitter setPosition:ccp(self.contentSize.width/2,self.contentSize.height/2)];
