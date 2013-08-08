@@ -187,22 +187,19 @@ id ioObject;
     for (int i=0;i<[loadUnits count];i++) {
         NSDictionary * unitInfo = [loadUnits objectAtIndex:i];
         NSString* unit = [unitInfo objectForKey:@"name"];
-        if ([unit isEqualToString:@"end"]) {
-            NSLog(@"All Units are scheduled to spawn");
-            [self schedule:@selector(checkLastUnit)];
-            return;
-        }
         NSNumber* delay = [unitInfo objectForKey:@"delay"];
         time += [delay floatValue];
         [self performSelector:@selector(spawnUnit:) withObject:unit afterDelay:time];
     }
+    NSLog(@"All Units are scheduled to spawn");
+    [self schedule:@selector(checkLastUnit)];
 }
 
 -(void)checkLastUnit
 {
     if ([unitList count]==0) {
         NSLog(@"last unit dead");
-        [self unschedule:@selector(checkLastUnit)];
+        [self unscheduleAllSelectors];
         [[CCDirector sharedDirector]replaceScene:[GameScene sceneWith:unitAndBoxLayer and:[filledList mutableCopy]]];
     }
 }

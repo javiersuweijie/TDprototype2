@@ -51,7 +51,7 @@ id upgrade_menu;
         NSLog(@"%@",self.filledList);
         self.unitAndBoxLayer = boxLayer;
         [self.unitAndBoxLayer removeFromParentAndCleanup:NO];
-        [self addChild:unitAndBoxLayer];
+        [self addChild:self.unitAndBoxLayer];
     }
     return self;
 }
@@ -394,8 +394,8 @@ id upgrade_menu;
 
 -(void)loadUnit
 {
-    FightScene* scene = [FightScene sceneWith:unitAndBoxLayer And:[filledList copy]];
-    [[CCDirector sharedDirector]replaceScene:scene];
+    [[CCDirector sharedDirector]replaceScene:[FightScene loadSceneWith:unitAndBoxLayer And:[filledList copy]]];
+
 }
 
 -(id)placeTower:(NSString*)tower

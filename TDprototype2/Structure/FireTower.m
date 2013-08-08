@@ -26,7 +26,6 @@ CGSize winSize;
 {
     if ([super initWithFile:[NSString stringWithFormat:@"FireTower.png"]]) {
         [self setSpriteFile:@"FireTower.png"];
-//        [self setColor:ccc3(192, 57, 43)];
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
@@ -60,8 +59,6 @@ CGSize winSize;
 -(void)onExit
 {
     [super onExit];
-    [self unscheduleUpdate];
-    [self removeAllChildrenWithCleanup:YES];
 }
 -(void)update:(ccTime)dt
 {

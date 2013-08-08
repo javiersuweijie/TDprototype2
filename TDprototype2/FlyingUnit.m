@@ -28,13 +28,13 @@
     return self;
 }
 
--(NSMutableArray*)moveTowards:(CGPoint)target
+-(NSMutableArray*)moveToward:(NSValue*)target
 {
-    float timetaken=ccpDistance(self.position, target)/self.speed;
-	id moveAction = [CCMoveTo actionWithDuration:timetaken position:target];
+    CGPoint targetPoint = [target CGPointValue];
+    float timetaken=ccpDistance(self.position, targetPoint)/self.speed;
+	id moveAction = [CCMoveTo actionWithDuration:timetaken position:targetPoint];
     id moveCallback = [CCCallFunc actionWithTarget:self selector:@selector(reachEnd)]; // set the method itself as the callback
     id speeding = [CCSpeed actionWithAction:[CCSequence actions:moveAction, moveCallback, nil] speed:self.speedMultiplier];
-	// Remove the step
 	[self runAction:speeding];
     return nil;
 }

@@ -16,7 +16,6 @@
 
 @implementation CanonTower
 @synthesize projectile;
-NSMutableArray* array;
 Unit* unit;
 int coolDown;
 BOOL isShooting;
@@ -34,12 +33,9 @@ id fightLayer;
         [self setAnchorPoint:ccp(0.5,0)];
         [self setSize:CGSizeMake(2, 2)];
         [self setCost:cost];
-        [self setTempPosition:point];
         [self setName:@"CanonTower"];
-        [self setCanBeMoved:YES];
-        projectile = [[CCSprite alloc]initWithFile:@"redbox.png"];
-        [projectile setPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
-
+        [self setTempPosition:point];
+        [self setPosition:self.tempPosition];
 
     }
     return self;
@@ -48,11 +44,10 @@ id fightLayer;
 -(void)onEnter
 {
     [super onEnter];
-    [self setPosition:self.tempPosition];
+    projectile = [[CCSprite alloc]initWithFile:@"redbox.png"];
+    [projectile setPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
+    fightLayer = [[self parent]parent];
     [self scheduleUpdate];
-    if ([[fightLayer fightOrBuild] isEqualToString:@"fight"]) {
-        array = [fightLayer getUnitArray];
-    }
     coolDown = 0;
     isShooting = NO;
     airTime = 0.5;
@@ -62,14 +57,13 @@ id fightLayer;
 -(void)onExit
 {
     [super onExit];
-    [self unscheduleUpdate];
 }
 
 -(void)update:(ccTime)dt
 {   
     
-    if ([array count]>0) {
-        for (Unit* unitt in [array copy]) {
+    if ([self.array count]>0) {
+        for (Unit* unitt in [self.array copy]) {
             if (ccpDistance(self.position,unitt.position)<75) {
                 if ([unitt unitType]==Flying) {
                     continue;
@@ -78,7 +72,7 @@ id fightLayer;
                 currentPoint = unit.position;
                 break;
             }
-            else if ([array indexOfObject:unitt]==[array count]-1) {
+            else if ([self.array indexOfObject:unitt]==[self.array count]-1) {
                 unit= nil;
                 isShooting = NO;
             }
@@ -123,8 +117,8 @@ id fightLayer;
 
 -(void)setInvisible
 {
-    if ([array count]>0) {
-        for (Unit* unitt in array) {
+    if ([self.array count]>0) {
+        for (Unit* unitt in self.array) {
             if (ccpDistance(ccpAdd(projectile.position,self.position),unitt.position)<15) {
 //                NSLog(@"hit");
                 unitt.hp -= dmg;

@@ -14,7 +14,6 @@
 @implementation IceBeamTower
 @synthesize emitter;
 
-NSArray* array;
 Unit* unit;
 static int cost = 300;
 id fightLayer;
@@ -29,9 +28,7 @@ id fightLayer;
         [self setCost:cost];
         [self setTempPosition:point];
         [self setName:@"IceBeamTower"];
-        [self setCanBeMoved:YES];
-        [self scheduleUpdate];
-        
+        [self setPosition:point];
     }
     return self;
 }
@@ -39,26 +36,24 @@ id fightLayer;
 -(void)onEnter
 {
     [super onEnter];
-    if ([[fightLayer fightOrBuild] isEqualToString:@"fight"]) {
-        array = [fightLayer getUnitArray];
-    }
-    [self setPosition:self.tempPosition];
+    fightLayer = [[self parent]parent];
     emitter=[[ParticlesIceBeam alloc]init];
     [emitter setPosition:ccp(self.contentSize.width/2,self.contentSize.height/2)];
     [emitter stopSystem];
     [self addChild:emitter];
+    [self scheduleUpdate];
     unit=nil;
 }
 
 -(void)update:(ccTime)dt
 {
-    if ([array count]>0) {
-        for (Unit* unitt in array) {
+    if ([self.array count]>0) {
+        for (Unit* unitt in self.array) {
             if (ccpDistance(self.position,unitt.position)<75) {
                 unit = unitt;
                 break;
             }
-            else if ([array indexOfObject:unitt]==[array count]-1) {
+            else if ([self.array indexOfObject:unitt]==[self.array count]-1) {
                 unit= nil;
                 [emitter stopSystem];
             }
@@ -82,7 +77,7 @@ id fightLayer;
     return cost;
 }
 
--(int)dps
+-(float)dps
 {
     return (int)60;
 }

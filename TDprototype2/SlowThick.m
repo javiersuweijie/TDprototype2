@@ -14,7 +14,7 @@
 -(id)initWithPosition:(CGPoint)point moveTo:(CGPoint)pointTo
 {
     if (self = [super initWithFile:@"whiteball.png"]) {
-        self.speed = 20;
+        self.speed = 30;
         self.speedMultiplier = 1;
         self.color = ccc3(100, 120, 0);
         self.hp = 1000;

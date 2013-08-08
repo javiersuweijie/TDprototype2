@@ -15,4 +15,5 @@
 @property FightLayer* fight_layer;
 
 +(id)sceneWith:(id)boxLayer And:(id)filledList;
++(id)loadSceneWith:(id)boxLayer And:(id)filledList;
 @end

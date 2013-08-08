@@ -314,6 +314,8 @@ static NSMutableArray* threadArray;
 -(void)onExit
 {
     [super onExit];
+    [self unscheduleAllSelectors];
+    [self removeAllChildrenWithCleanup:YES];
 }
 
 +(int)cost

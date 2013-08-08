@@ -5,10 +5,10 @@
 	"delay":"1" },
 	{ "name":"testPerson",
 	"delay":"1" },
-	{ "name":"SlowThick",
+	{ "name":"FastPaper",
 	"delay":"1" },
 	{ "name":"FastPaper",
 	"delay":"1" },
-	{ "name":"end",
+	{ "name":"FlyingUnit",
 	"delay":"1" },
 ]
